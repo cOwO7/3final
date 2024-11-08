@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- header -->
+<div th:fragment="header" class="row border-bottom border-primary">
+	<div class="col-8">
+		<div class="row">
+			<div class="col">
+				<ul class="nav justify-content-end">
+					<!-- Modal Login Form -->
+					<li class="nav-item">
+					<th:block th:unless="${session.isLogin}">
+							<a class="nav-link" th:href="@{#}"
+								th:attrappend="data-bs-toggle='modal', data-bs-target='#loginModal'">
+								로그인-모달</a>
+						</th:block> 
+						<!-- Modal Logout Form -->
+						<th:block th:if="${session.isLogin}">
+							<a class="nav-link" th:href="@{logout}">로그아웃-모달</a>
+						</th:block>
+						</li>
+					<li class="nav-item">
+					<a class="nav-link" href="#">HOME</a>
+					</li>
+					<li class="nav-item">
+					<th:block th:unless="${session.isLogin}">
+							<a class="nav-link" href="joinForm">회원가입</a>
+					</th:block>
+						</li>
+					<li class="nav-item">
+					<th:block th:if="${session.isLogin}">
+							<a class="nav-link" href="#">정보 수정</a>
+					</th:block>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-end text-primary pe-5">
+				<div th:if="${session.isLogin}">[[${session.member !=
+					null} ? ${session.member.id}]]님 방문을 감사합니다.</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
