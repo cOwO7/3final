@@ -1,6 +1,8 @@
 package com.springbootfinal.app.service;
 
 import java.io.StringReader;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +32,14 @@ public class WeatherService {
 
 
 	// 기상청 데이터 조회
-	
-	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
+	/*public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
 	    String url = apiUrl + "?serviceKey=" + apiKey + "&base_date=" + date + "&base_time=" + time + "&nx=" + nx
-	            + "&ny=" + ny;
+	            + "&ny=" + ny + URLEncoder.encode(apiKey, StandardCharsets.UTF_8);
+	   
 
 	    // ResponseEntity로 API 요청 응답을 처리
 	    RestTemplate restTemplate = new RestTemplate();
-	    ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+	    ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, null, String.class);
 	    String response = responseEntity.getBody();  // 응답 본문
 
 	    System.out.println("API 연결 Response: " + response); // 로그 출력
@@ -51,14 +53,14 @@ public class WeatherService {
 	    Unmarshaller unmarshaller = context.createUnmarshaller();
 
 	    return (WeatherResponse) unmarshaller.unmarshal(new StringReader(response));
-	}
+	}*/
 
 	
 	
 	
 	
 	
-	/*public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
+	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
 		String url = apiUrl + "?serviceKey=" + apiKey + "&base_date=" + date + "&base_time=" + time + "&nx=" + nx
 				+ "&ny=" + ny;
 
@@ -69,9 +71,9 @@ public class WeatherService {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		return (WeatherResponse) unmarshaller.unmarshal(new StringReader(response));
-	}*/
+	}
 	
-	// 테스트
+	
 	// 기상청 데이터 저장
     public void saveWeatherData(WeatherResponse weatherResponse) {
         for (WeatherResponse.Item item : weatherResponse.getBody().getItems()) {
@@ -79,13 +81,5 @@ public class WeatherService {
         }
     }
 
-	
-	
-	
-	// 원본
-	/*public void saveWeatherData(WeatherResponse weatherResponse) {
-		for (WeatherResponse.Item item : weatherResponse.getBody().getItems()) {
-			weatherMapper.insertWeatherData(item);
-		}*/
 	
 }
