@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.springbootfinal.app.mapper.WeatherMapper">
 
-    <!-- 기상청 데이터 저장 -->
-<insert id="insertWeatherData" parameterType="WeatherResponse">
-    INSERT INTO weather_data (base_date, base_time, category, nx, ny, obsr_value)
-    VALUES (#{baseDate}, #{baseTime}, #{category}, #{nx}, #{ny}, #{obsrValue})
-</insert>
+	<!-- 기상청 데이터 저장 -->
+	<insert id="insertWeatherData">
+		INSERT INTO weather_data (base_date, base_time, category, nx, ny,
+		obsr_value)
+		VALUES (#{baseDate}, #{baseTime}, #{category}, #{nx}, #{ny}, #{obsrValue})
+	</insert>
 
-<!-- 기상청 데이터 조회 -->
-<select id="getWeatherDataByDate" resultType="WeatherResponse">
-    SELECT base_date, base_time, category, nx, ny, obsr_value
-    FROM weather_data
-    WHERE base_date = #{baseDate}
-    AND base_time = #{baseTime}
-    AND nx = #{nx}
-    AND ny = #{ny}
-</select>
-    
+	<!-- 기상청 데이터 조회 -->
+    <select id="selectWeatherData" resultType="com.springbootfinal.app.domain.WeatherResponse$Item">
+        SELECT base_date, base_time, category, nx, ny, obsr_value
+        FROM weather_data
+        WHERE base_date = #{baseDate}
+        AND base_time = #{baseTime}
+        AND nx = #{nx}
+        AND ny = #{ny}
+    </select>
+
+
+
+
+
+	<!-- 기상청 데이터 조회 -->
+	<!-- <select id="getWeatherDataByDate" resultType="WeatherResponse">
+		SELECT base_date, base_time, category, nx, ny, obsr_value
+		FROM weather_data
+		WHERE base_date = #{baseDate}
+		AND base_time = #{baseTime}
+		AND nx = #{nx}
+		AND ny = #{ny}
+	</select> -->
+	
+	
+
 </mapper>

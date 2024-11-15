@@ -1,6 +1,9 @@
 package com.springbootfinal.app.domain;
 
 import java.util.List;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
@@ -10,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = "response")
+@XmlRootElement(name = "OpenAPI_ServiceResponse")
 public class WeatherResponse {
 
     private Header header;
@@ -25,19 +28,32 @@ public class WeatherResponse {
 
     @Data
     @NoArgsConstructor
+    @XmlAccessorType(XmlAccessType.FIELD) // 필드 기반 접근 방식 설정
     public static class Body {
-        @XmlElement(name = "item")
+    		// 'item' 요소와 매핑
         private List<Item> items;
     }
 
     @Data
     @NoArgsConstructor
     public static class Item {
+        @XmlElement(name = "baseDate") // 'baseDate' 요소와 매핑
         private String baseDate;
+
+        @XmlElement(name = "baseTime") // 'baseTime' 요소와 매핑
         private String baseTime;
+
+        @XmlElement(name = "category") // 'category' 요소와 매핑
         private String category;
+
+        @XmlElement(name = "nx") // 'nx' 요소와 매핑
         private int nx;
+
+        @XmlElement(name = "ny") // 'ny' 요소와 매핑
         private int ny;
+
+        @XmlElement(name = "obsrValue") // 'obsrValue' 요소와 매핑
         private String obsrValue;
     }
 }
+
