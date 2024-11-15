@@ -5,13 +5,13 @@
 <mapper namespace="com.springbootfinal.app.mapper.WeatherMapper">
 
     <!-- 기상청 데이터 저장 -->
-<insert id="insertWeatherData" parameterType="WeatherResponse.Body.Item">
+<insert id="insertWeatherData" parameterType="WeatherResponse">
     INSERT INTO weather_data (base_date, base_time, category, nx, ny, obsr_value)
     VALUES (#{baseDate}, #{baseTime}, #{category}, #{nx}, #{ny}, #{obsrValue})
 </insert>
 
 <!-- 기상청 데이터 조회 -->
-<select id="getWeatherDataByDate" resultType="WeatherResponse.Body.Item">
+<select id="getWeatherDataByDate" resultType="WeatherResponse">
     SELECT base_date, base_time, category, nx, ny, obsr_value
     FROM weather_data
     WHERE base_date = #{baseDate}

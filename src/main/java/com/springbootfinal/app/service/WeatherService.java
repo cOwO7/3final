@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.springbootfinal.app.domain.WeatherResponse;
-
+import com.springbootfinal.app.domain.WeatherResponse.Item;
 import com.springbootfinal.app.mapper.WeatherMapper;
 
 import jakarta.xml.bind.JAXBContext;
@@ -54,7 +54,7 @@ public class WeatherService {
         WeatherResponse weatherResponse = (WeatherResponse) unmarshaller.unmarshal(new StringReader(response));
 
         // 각 아이템을 데이터베이스에 저장
-        for (WeatherResponse.Body.Item item : weatherResponse.getBody().getItems()) {
+        for (WeatherResponse.Item item : weatherResponse.getBody().getItems()) {
             weatherMapper.insertWeatherData(item);
         }
     }
