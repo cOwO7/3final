@@ -2,6 +2,8 @@ package com.springbootfinal.app.service;
 
 import java.io.StringReader;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,7 +30,35 @@ public class WeatherService {
 
 
 	// 기상청 데이터 조회
+	
 	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
+	    String url = apiUrl + "?serviceKey=" + apiKey + "&base_date=" + date + "&base_time=" + time + "&nx=" + nx
+	            + "&ny=" + ny;
+
+	    // ResponseEntity로 API 요청 응답을 처리
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+	    String response = responseEntity.getBody();  // 응답 본문
+
+	    System.out.println("API 연결 Response: " + response); // 로그 출력
+
+	    if (response == null) {
+	        throw new RuntimeException("Failed to fetch data from API.");
+	    }
+
+	    // 응답을 JAXB로 파싱
+	    JAXBContext context = JAXBContext.newInstance(WeatherResponse.class);
+	    Unmarshaller unmarshaller = context.createUnmarshaller();
+
+	    return (WeatherResponse) unmarshaller.unmarshal(new StringReader(response));
+	}
+
+	
+	
+	
+	
+	
+	/*public WeatherResponse getWeatherData(String date, String time, int nx, int ny) throws JAXBException {
 		String url = apiUrl + "?serviceKey=" + apiKey + "&base_date=" + date + "&base_time=" + time + "&nx=" + nx
 				+ "&ny=" + ny;
 
@@ -39,7 +69,7 @@ public class WeatherService {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		return (WeatherResponse) unmarshaller.unmarshal(new StringReader(response));
-	}
+	}*/
 	
 	// 테스트
 	// 기상청 데이터 저장

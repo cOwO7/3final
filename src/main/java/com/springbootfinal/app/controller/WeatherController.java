@@ -46,7 +46,6 @@ public class WeatherController {
                     .body("Unexpected error: " + e.getMessage());
         }
     }
-    
 
     @PostMapping("/save")
     public String saveWeatherData(
@@ -58,4 +57,49 @@ public class WeatherController {
         weatherService.saveWeatherData(weatherResponse);
         return "Weather data saved successfully!";
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*  @GetMapping("/fetch")
+    public ResponseEntity<?> fetchWeatherData(
+            @RequestParam("date") String date,
+            @RequestParam("time") String time,
+            @RequestParam("nx") int nx,
+            @RequestParam("ny") int ny) {
+    
+    	
+    	
+        try {
+            WeatherResponse weatherData = weatherService.getWeatherData(date, time, nx, ny);
+            return ResponseEntity.ok(weatherData);
+        } catch (JAXBException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error parsing weather data: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Unexpected error: " + e.getMessage());
+        }
+    }
+    
+
+    @PostMapping("/save")
+    public String saveWeatherData(
+            @RequestParam("date") String date,
+            @RequestParam("time") String time,
+            @RequestParam("nx") int nx,
+            @RequestParam("ny") int ny) throws JAXBException {
+        WeatherResponse weatherResponse = weatherService.getWeatherData(date, time, nx, ny);
+        weatherService.saveWeatherData(weatherResponse);
+        return "Weather data saved successfully!";
+    }*/
 }

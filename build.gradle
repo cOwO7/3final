@@ -46,6 +46,8 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.0'
 }
 
 dependencyManagement {
