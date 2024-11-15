@@ -30,7 +30,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberUpdateForm")
 	public String updateForm() {
-		
+		log.info("로그인페이지 이동 오류5");
 		return "member/memberUpdateForm";
 	}
 	
@@ -47,10 +47,9 @@ public class MemberController {
 		// 회원 정보를 수정
 		memberService.updateMember(member);
 		log.info(member.getName() + "님 회원 수정 완료...");
-		
 		model.addAttribute("member", member);
 		
-		return "redirect:main";
+		return "redirect:/main";
 	}
 	
 	
@@ -64,17 +63,17 @@ public class MemberController {
 		member.setPass(pass1);
 		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
 
-		
+		log.info("로그인페이지 이동 오류3");
 		// 회원정보를 등록
 		memberService.addMember(member);
 		log.info(member.getName() + "님 회원가입 완료...");
-		return "redirect:loginForm";
+		return "redirect:/loginForm";
 	}
 	
 	@RequestMapping("/overlapIdCheck")
 	public String overlapIdCheck(Model model, 
 			@RequestParam("id")String id) {
-		
+		log.info("로그인페이지 이동 오류2");
 		boolean overlap = memberService.overlapIdCheck(id);
 		
 		model.addAttribute("id", id);
@@ -85,6 +84,7 @@ public class MemberController {
 	@GetMapping("/memberLogout")
 	public String logout(HttpSession session) {
 		session.invalidate();
+		log.info("로그인페이지 이동 오류1");
 		return "redirect:/main";
 	}
 	
@@ -94,7 +94,7 @@ public class MemberController {
 			@RequestParam("pass") String pass,
 			HttpSession session, HttpServletResponse response) 
 					throws IOException {
-		
+		log.info("로그인페이지 이동 오류");
 		int result = memberService.login(id, pass);
 		
 		if(result == -1) {

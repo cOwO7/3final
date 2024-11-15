@@ -1,0 +1,41 @@
+package com.springbootfinal.app.configurations;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer{
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// 기존 핸들러
+		/*registry.addResourceHandler("/resources/files/**")
+			.addResourceLocations("file:./src/main/resources/static/files/")
+			.addResourceLocations("file:./src/main/resources/static/image1Files/")
+			.setCachePeriod(1);*/
+		
+		// CSS 및 다른 정적 리소스를 위한 기본 핸들러 추가
+	    registry.addResourceHandler("/css/**")
+	        .addResourceLocations("classpath:/static/css/");
+	    registry.addResourceHandler("/js/**")
+	        .addResourceLocations("classpath:/static/js/");
+	    registry.addResourceHandler("/images/**")
+	        .addResourceLocations("classpath:/static/images/");
+	}
+	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/writeForm").setViewName("views/writeForm");
+		registry.addViewController("/writeBoard").setViewName("views/writeForm");
+		
+		// 기본페이지 폼 뷰 전용 컨트롤러 설정
+		registry.addViewController("/").setViewName("main/main");
+		// 로그인 폼 뷰 전용 컨트롤러 설정
+		registry.addViewController("/loginForm").setViewName("member/loginForm");
+		// 회원가입 폼
+		registry.addViewController("/joinForm").setViewName("member/memberJoinForm");
+	}
+}

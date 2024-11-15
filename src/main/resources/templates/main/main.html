@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/main_layout}">
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-<head>
-<meta charset="UTF-8">
 <title>오늘 어때?</title>
-</head>
-<body>
-	<form class="default">
+<meta charset="UTF-8">
+<style>
+.button-container {
+	display: flex;
+	justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
+	gap: 10px; /* 버튼 간의 간격 조정 */
+}
+</style>
+<!-- content -->
+<th:block layout:fragment="content">
+	<div class="row my-5" id="global-content">
+		<div class="col-10 offset-1">
+			<div class="row text-center">
+				<div class="col">
+					<h2 class="fs-3 fw-bold">오늘 어때?</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form class="default text-center">
 		<div>
-			<img src="..." class="img-fluid" alt="...">
+			<!-- 날씨 이미지 -->
+			<img id="weatherImage" src="/images/weather/rain.gif"
+				alt="Weather Image" style="width: 500px; height: auto;">
 		</div>
-		<div class="row my-3">
-			<div class="col-3">
-				<input type="submit" id="weather" class="btn btn-primary" value="날씨">
-				<img>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-3">
-				<input type="submit" id="co" class="btn btn-warning" value="알림받기">
-				<img>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col-3">
-				<input type="submit" id="de" class="btn btn-danger" value="알람삭제" >
-				<img>
+		<div class="row my-12">
+			<div class="button-container text-center">
+				<input type="submit" id="weather" class="btn btn-primary" value="　날씨　">　　
+				<input type="submit" id="weather" class="btn btn-warning" value="알림받기">　　
+				<input type="submit" id="weather" class="btn btn-danger" value="알람삭제">
 			</div>
 		</div>
 	</form>
-</body>
+	</body>
 </html>

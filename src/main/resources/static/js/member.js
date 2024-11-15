@@ -58,7 +58,7 @@ $(function() {
 		return joinFormCheck(true);
 	});
 
-	/*$("#selectDomain").on("change", function() {
+	$("#selectDomain").on("change", function() {
 
 		let str = $(this).val();
 
@@ -87,7 +87,7 @@ $(function() {
 
 	});
 
-	$("#btnZipcode").click(findZipcode)*/
+	$("#btnZipcode").click(findZipcode)
 
 
 	// 중복확인 사용버튼 클릭시 값 이동
@@ -157,8 +157,8 @@ $(function() {
 
 	$("#pass1").on("keyup", inputCharReplace);
 	$("#pass2").on("keyup", inputCharReplace);
-	/*$("#emailId").on("keyup", inputCharReplace);
-	$("#emailDomain").on("keyup", inputEmailDomainReplace);*/
+	$("#emailId").on("keyup", inputCharReplace);
+	$("#emailDomain").on("keyup", inputEmailDomainReplace);
 
 
 
@@ -200,7 +200,7 @@ $(function() {
 	});
 }); // END $(function() {});
 
-/*function findZipcode() {
+function findZipcode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
 			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -239,7 +239,7 @@ $(function() {
 			$("#address2").focus();
 		}
 	}).open();
-}*/
+}
 
 function joinFormCheck(idJoinForm) {
 
@@ -247,6 +247,11 @@ function joinFormCheck(idJoinForm) {
 	let id = $("#id").val();
 	let pass1 = $("#pass1").val();
 	let pass2 = $("#pass2").val();
+	let zipcode = $("#zipcode").val();
+	let address1 = $("#address1").val();
+	let address2 = $("#address2").val();
+	let emailId = $("#emailId").val();
+	let emailDomain = $("#emailDomain").val();
 	let mobile2 = $("#mobile2").val();
 	let mobile3 = $("#mobile3").val();
 	let isIdCheck = $("#isIdCheck").val();
@@ -265,6 +270,27 @@ function joinFormCheck(idJoinForm) {
 		return false;
 	} else if (pass2.length == 0) {
 		alert("비밀번호를 확인해주세요.")
+		$("#pass2").focus();
+		return false;
+	} else if (zipcode.length == 0) {
+		alert("우편번호를 입력해주세요.")
+		$("#zipcode").focus();
+		return false;
+
+	} else if (address1.length == 0) {
+		alert("주소를 입력해주세요.")
+		$("#address1").focus();
+		return false;
+	} else if (address2.length == 0) {
+		alert("상세주소를 입력해주세요.")
+		$("#address2").focus();
+		return false;
+	} else if (emailId.length == 0) {
+		alert("이메일을 입력해주세요.")
+		$("#emailId").focus();
+		return false;
+	} else if (emailDomain.length == 0) {
+		alert("이메일을 확인해주세요.")
 		$("#pass2").focus();
 		return false;
 	} else if (mobile2.length == 0 || mobile3.length == 0) {
@@ -286,10 +312,10 @@ function inputCharReplace() {
 	}
 }
 
-/*function inputEmailDomainReplace() {
+function inputEmailDomainReplace() {
 	let regExp = /[^a-zA-Z0-9\.]/gi;
 	if (regExp.test($(this).val())) {
 		alert("영문자, 숫자, 특수문자만 입력할 수 있습니다.")
 		$(this).val($(this).val().replace(regExp, ""))
 	}
-}*/
+}

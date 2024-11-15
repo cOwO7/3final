@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"		
-		layout:decorate="~{/cOwO7/layouts/main_layout}">		
+<html xmlns:th="https://www.thymeleaf.org"
+		xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"		
+		layout:decorate="~{layouts/main_layout}">		
 	<!-- content -->
 	<div layout:fragment="content" class="row my-5" id="global-content">
 	<th:block>
-		<link th:href="@{css/bonomember.css}" rel="stylesheet" />
+		<link href="/css/member.css" rel="stylesheet" />
 	</th:block>
 		<div class="col">
 			<form class="my-5" id="loginForm" action="login" method="post">
-				<h2 class="fw-bold">오늘어때? 로그인</h2>
+				<h2 class="fw-bold">Member Login</h2>
 				<fieldset>	
 					<legend>Member Loin</legend>
 					<div id="login">
@@ -25,7 +25,7 @@
 						<input type="submit" value="로그인" id="btnLogin" />
 					<div id="searchBtn">
 						<p>
-							<span>비밀번호 찾기</span> | <span>아이디 찾기</span> | <span>회원가입</span>
+							<a href="javascript:void(0)" class="text-decoration-none link-dark" id="searchId">아이디 찾기</a> | 	<a href="" class="text-decoration-none link-dark" id="searchPass">비밀번호 찾기</a> | 	<a href="joinForm" class="text-decoration-none link-dark" id="Register">회원 가입</a>
 						</p>
 					</div>
 				</fieldset>
