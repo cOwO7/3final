@@ -57,5 +57,6 @@ public class WeatherResponse {
         @XmlElement(name = "obsrValue") // 'obsrValue' 요소와 매핑
         private String obsrValue;
     }
+    
 }
 

@@ -11,7 +11,18 @@
 	justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
 	gap: 10px; /* 버튼 간의 간격 조정 */
 }
-</style>
+		.button-container {
+			display: flex;
+			justify-content: center; /* 버튼들을 가운데 정렬 */
+			gap: 20px; /* 버튼 간의 간격 조정 */
+			margin-top: 20px;
+		}
+		#weatherImage {
+			width: 100%; /* 이미지 크기를 화면에 맞게 조정 */
+			max-width: 500px; /* 이미지 최대 크기 설정 */
+			margin: 20px 0; /* 이미지와 버튼 사이에 여백 추가 */
+		}
+	</style>
 <!-- content -->
 <th:block layout:fragment="content">
 	<div class="row my-5" id="global-content">
@@ -26,16 +37,16 @@
 	<form class="default text-center">
 		<div>
 			<!-- 날씨 이미지 -->
-			<img id="weatherImage" src="/images/weather/rain.gif"
-				alt="Weather Image" style="width: 500px; height: auto;">
+			<img id="weatherImage" src="/images/weather/rain.gif" alt="Weather Image">
 		</div>
 		<div class="row my-12">
-			<div class="button-container text-center">
-				<input type="submit" id="weather" class="btn btn-primary" value="　날씨　">　　
-				<input type="submit" id="weather" class="btn btn-warning" value="알림받기">　　
-				<input type="submit" id="weather" class="btn btn-danger" value="알람삭제">
+			<div class="button-container">
+				<!-- 날씨 버튼 클릭 시 페이지 이동 -->
+				<a href="views/weather" class="btn btn-primary btn-lg rounded">날씨</a>
+				<a href="/weather/alerts" class="btn btn-warning btn-lg rounded">알림받기</a>
+				<a href="/weather/remove-alert" class="btn btn-danger btn-lg rounded">알람삭제</a>
 			</div>
 		</div>
 	</form>
-	</body>
+</th:block>
 </html>
