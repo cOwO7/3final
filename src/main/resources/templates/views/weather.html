@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-<head>
-<meta charset="UTF-8">
-<title>오늘의 날씨</title>
-</head>
-<body>
-    <h1>오늘의 날씨</h1>
-    <div th:each="item : ${weatherData}">
-        <p th:text="'날짜: ' + ${item.fcstDate}"></p>
-        <p th:text="'시간: ' + ${item.fcstTime}"></p>
-        <p th:text="'기온: ' + ${item.tmp} + '℃'"></p>
-        <p th:text="'강수확률: ' + ${item.pop} + '%'"></p>
-        <p th:text="'풍속: ' + ${item.wsd} + 'm/s'"></p>
-    </div>
-</body>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/main_layout}">
+    <head>
+        <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <title>오늘의 날씨</title>
+    </head>
+	<th:block layout:fragment="content">
+    <body>
+        <h1>오늘의 날씨</h1>
+        
+        <!-- weatherData를 반복문으로 출력 -->
+        <div th:each="item : ${weatherData}">
+            <p th:text="'날짜: ' + ${item.fcstDate}"></p>
+            <p th:text="'시간: ' + ${item.fcstTime}"></p>
+            <p th:text="'기온: ' + ${item.tmp} + '℃'"></p>
+            <p th:text="'강수확률: ' + ${item.pop} + '%'"></p>
+            <p th:text="'풍속: ' + ${item.wsd} + 'm/s'"></p>
+        </div>
+		<div th:if="${weatherData == null}">
+		    <p>날씨 정보를 불러오는 데 실패했습니다.</p>
+		</div>
+
+    </body>
+	</th:block>
 </html>

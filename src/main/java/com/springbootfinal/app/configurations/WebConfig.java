@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/writeForm").setViewName("views/writeForm");
 		registry.addViewController("/writeBoard").setViewName("views/writeForm");
+		registry.addViewController("/weather").setViewName("views/weather");
 		
 		// 기본페이지 폼 뷰 전용 컨트롤러 설정
 		registry.addViewController("/").setViewName("main/main");

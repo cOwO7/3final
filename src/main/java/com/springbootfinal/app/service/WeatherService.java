@@ -38,9 +38,11 @@ public class WeatherService {
 
 
     public String getWeatherData(String apiUrl) {
+    	log.debug("Fetching weather data...");
         try {
             // API 호출
             String response = restTemplate.getForObject(apiUrl, String.class);
+            log.info("API 호출 응답: {}", response); 
             return response;  // 응답 리턴
         } catch (Exception e) {
             log.error("API 호출 오류: {}", e.getMessage(), e);
@@ -50,6 +52,7 @@ public class WeatherService {
    
 	// **특정 날짜, 시간, 좌표의 날씨 데이터를 가져오는 메서드**
 	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) {
+		log.debug("Fetching weather data...");
 		// API 요청 URL 생성
 		String url = String.format("%s?serviceKey=%s&base_date=%s&base_time=%s&nx=%d&ny=%d", API_URL, API_KEY, date,
 				time, nx, ny);

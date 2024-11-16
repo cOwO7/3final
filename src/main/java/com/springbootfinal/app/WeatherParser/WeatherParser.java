@@ -28,6 +28,19 @@ public class WeatherParser {
             data.setFcstValue(item.getString("fcstValue"));
             data.setFcstDate(item.getString("fcstDate"));
             data.setFcstTime(item.getString("fcstTime"));
+
+            // 예: 'category'가 'TMP'이면 'tmp'에 기온 값 할당
+            if ("TMP".equals(data.getCategory())) {
+                data.setTmp(item.getString("fcstValue"));
+            }
+            // 예: 'category'가 'POP'이면 'pop'에 강수확률 값 할당
+            if ("POP".equals(data.getCategory())) {
+                data.setPop(item.getString("fcstValue"));
+            }
+            // 예: 'category'가 'WSD'이면 'wsd'에 풍속 값 할당
+            if ("WSD".equals(data.getCategory())) {
+                data.setWsd(item.getString("fcstValue"));
+            }
             
             weatherList.add(data);
         }
@@ -35,3 +48,4 @@ public class WeatherParser {
         return weatherList;
     }
 }
+

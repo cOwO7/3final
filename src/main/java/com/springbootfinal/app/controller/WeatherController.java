@@ -20,11 +20,13 @@ import com.springbootfinal.app.service.WeatherService;
 import org.springframework.ui.Model;
 import jakarta.xml.bind.JAXBException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/api/weather")
+@Slf4j
 public class WeatherController {
     
 	private final WeatherService weatherService;  // weatherService 주입
@@ -36,6 +38,7 @@ public class WeatherController {
     // 생성자에서 의존성 주입
     @GetMapping("/weather")
     public String getWeather(Model model) {
+    	log.debug("Weather API called!");
         String date = "20241116";  // 예시 날짜
         String time = "0600";  // 예시 시간
         int nx = 60;  // 예시 x 좌표
@@ -58,11 +61,12 @@ public class WeatherController {
                 return data;
             })
             .collect(Collectors.toList());
-
+        
+        log.info("날씨 데이터: {}", weatherDataList);
         // 모델에 날씨 데이터를 추가
         model.addAttribute("weatherData", weatherDataList);
-        
-        // src/main/resources/templates/views/weather.html을 호출
+
+        // weather.html을 호출
         return "weather";
     }
 

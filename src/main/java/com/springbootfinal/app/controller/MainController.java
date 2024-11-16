@@ -25,7 +25,6 @@ public class MainController {
 	
 	@GetMapping("/main")
 	public String main() { 
-		log.info("main페이지 이동중 오류");
 		return "main/main";
 	}
 }
