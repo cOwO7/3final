@@ -1,11 +1,15 @@
 package com.springbootfinal.app.service;
 
 import java.io.StringReader;
+import java.util.List; // List 타입
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.type.TypeReference; // JSON 타입 참조
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springbootfinal.app.WeatherParser.WeatherParser;
+import com.springbootfinal.app.domain.WeatherData;
 import com.springbootfinal.app.domain.WeatherResponse;
 import com.springbootfinal.app.mapper.WeatherMapper;
 
@@ -35,9 +39,29 @@ public class WeatherService {
         this.restTemplate = restTemplate;
         this.weatherParser = weatherParser;
     }
+    public List<WeatherData> getWeatherData(String apiUrl) {
+        log.debug("Fetching weather data...");
+        try {
+            // API 호출
+            String response = restTemplate.getForObject(apiUrl, String.class);
+            log.info("API 호출 응답: {}", response);
+
+            // JSON 응답을 WeatherData 객체 리스트로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<WeatherData> weatherDataList = objectMapper.readValue(
+                response,
+                new TypeReference<List<WeatherData>>() {}
+            );
+
+            return weatherDataList; // 변환된 리스트 반환
+        } catch (Exception e) {
+            log.error("API 호출 오류: {}", e.getMessage(), e);
+            throw new RuntimeException("API 호출 중 오류가 발생했습니다.", e);
+        }
+    }
 
 
-    public String getWeatherData(String apiUrl) {
+   /* public String getWeatherData(String apiUrl) {
     	log.debug("Fetching weather data...");
         try {
             // API 호출
@@ -48,7 +72,7 @@ public class WeatherService {
             log.error("API 호출 오류: {}", e.getMessage(), e);
             throw new RuntimeException("API 호출 중 오류가 발생했습니다.", e);
         }
-    }
+    }*/
    
 	// **특정 날짜, 시간, 좌표의 날씨 데이터를 가져오는 메서드**
 	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) {

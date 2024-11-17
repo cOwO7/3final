@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,6 @@ import com.springbootfinal.app.domain.WeatherData;
 import com.springbootfinal.app.domain.WeatherResponse;
 import com.springbootfinal.app.service.WeatherService;
 
-import org.springframework.ui.Model;
 import jakarta.xml.bind.JAXBException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +33,41 @@ public class WeatherController {
     private final WeatherParser weatherParser;    // weatherParser 주입
 
     
+    private String buildApiUrl(String location) {
+  	  //  String baseUrl = "https://api.weather.com/v3/weather/forecast"; // 기상청 API 기본 URL
+  	    String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"; // 기상청 API 기본 URL
+  	    String apiKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D"; // 기상청 API 키
+  	    String format = "json"; // 응답 형식
+
+  	    // URL 생성
+  	    return String.format("%s?location=%s&apiKey=%s&format=%s", baseUrl, location, apiKey, format);
+  	}
+    
+    
+    @GetMapping("/api/weather/data")
+    public String getWeatherData(@RequestParam(required = false) String location, Model model) {
+        if (location == null || location.isEmpty()) {
+            location = "Seoul"; // 기본 위치 설정
+        }
+
+        String apiUrl = buildApiUrl(location); // URL 생성
+        try {
+            List<WeatherData> weatherData = weatherService.getWeatherData(apiUrl);
+            model.addAttribute("weatherData", weatherData);
+        } catch (Exception e) {
+            log.error("날씨 데이터 처리 중 오류 발생: {}", e.getMessage(), e);
+            model.addAttribute("weatherData", null);
+        }
+        return "weather"; // HTML 파일 이름
+    }
+
     
     
     // 생성자에서 의존성 주입
     @GetMapping("/weather")
     public String getWeather(Model model) {
     	log.debug("Weather API called!");
-        String date = "20241116";  // 예시 날짜
+        String date = "20241117";  // 예시 날짜
         String time = "0600";  // 예시 시간
         int nx = 60;  // 예시 x 좌표
         int ny = 127;  // 예시 y 좌표
@@ -71,7 +99,7 @@ public class WeatherController {
     }
 
     // API 호출 메서드
-    public String callWeatherApi() {
+    public List<WeatherData> callWeatherApi() {
         // weatherService를 사용하여 API 호출 처리
     	String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         return weatherService.getWeatherData(apiUrl); 
