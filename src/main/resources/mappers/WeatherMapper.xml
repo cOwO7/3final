@@ -20,21 +20,4 @@
         AND nx = #{nx}
         AND ny = #{ny}
     </select>
-
-
-
-
-
-	<!-- 기상청 데이터 조회 -->
-	<!-- <select id="getWeatherDataByDate" resultType="WeatherResponse">
-		SELECT base_date, base_time, category, nx, ny, obsr_value
-		FROM weather_data
-		WHERE base_date = #{baseDate}
-		AND base_time = #{baseTime}
-		AND nx = #{nx}
-		AND ny = #{ny}
-	</select> -->
-	
-	
-
 </mapper>

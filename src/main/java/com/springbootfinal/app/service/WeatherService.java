@@ -40,7 +40,7 @@ public class WeatherService {
         this.weatherParser = weatherParser;
     }
     public List<WeatherData> getWeatherData(String apiUrl) {
-        log.debug("Fetching weather data...");
+    	
         try {
             // API 호출
             String response = restTemplate.getForObject(apiUrl, String.class);
@@ -53,7 +53,7 @@ public class WeatherService {
                 new TypeReference<List<WeatherData>>() {}
             );
 
-            return weatherDataList; // 변환된 리스트 반환
+            return weatherDataList; // 변환된 리스트 반환 
         } catch (Exception e) {
             log.error("API 호출 오류: {}", e.getMessage(), e);
             throw new RuntimeException("API 호출 중 오류가 발생했습니다.", e);
@@ -76,7 +76,7 @@ public class WeatherService {
    
 	// **특정 날짜, 시간, 좌표의 날씨 데이터를 가져오는 메서드**
 	public WeatherResponse getWeatherData(String date, String time, int nx, int ny) {
-		log.debug("Fetching weather data...");
+		log.info("날씨 데이터를 요청합니다. 날짜: {}, 시간: {}, x: {}, y: {}", date, time, nx, ny);
 		// API 요청 URL 생성
 		String url = String.format("%s?serviceKey=%s&base_date=%s&base_time=%s&nx=%d&ny=%d", API_URL, API_KEY, date,
 				time, nx, ny);

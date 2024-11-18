@@ -1,7 +1,6 @@
 package com.springbootfinal.app.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import com.springbootfinal.app.domain.WeatherData;
 import com.springbootfinal.app.domain.WeatherResponse;
 import com.springbootfinal.app.service.WeatherService;
 
-import jakarta.xml.bind.JAXBException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,30 +26,24 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/weather")
 @Slf4j
 public class WeatherController {
-    
-	private final WeatherService weatherService;  // weatherService 주입
-    private final WeatherParser weatherParser;    // weatherParser 주입
-    private WeatherData weatherData;
-    
-    private String buildApiUrl(String location) {
-  	  //  String baseUrl = "https://api.weather.com/v3/weather/forecast"; // 기상청 API 기본 URL
-  	    String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"; // 기상청 API 기본 URL
-  	    String apiKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D"; // 기상청 API 키
-  	    String format = "json"; // 응답 형식
-  	    log.info("컨트롤러 날씨 데이터: {}", weatherData);
 
-  	    // URL 생성
-  	    return String.format("%s?location=%s&apiKey=%s&format=%s", baseUrl, location, apiKey, format);
-  	}
-    
-    
-    @GetMapping("/api/weather/data")
+    private final WeatherService weatherService;
+    private final WeatherParser weatherParser;
+
+    private String buildApiUrl(String location) {
+        String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
+        String apiKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D";
+        String format = "json";
+        return String.format("%s?location=%s&apiKey=%s&format=%s", baseUrl, location, apiKey, format);
+    }
+
+    @GetMapping("/data")
     public String getWeatherData(@RequestParam(required = false) String location, Model model) {
         if (location == null || location.isEmpty()) {
             location = "Seoul"; // 기본 위치 설정
         }
 
-        String apiUrl = buildApiUrl(location); // URL 생성
+        String apiUrl = buildApiUrl(location);
         try {
             List<WeatherData> weatherData = weatherService.getWeatherData(apiUrl);
             model.addAttribute("weatherData", weatherData);
@@ -60,82 +52,37 @@ public class WeatherController {
             model.addAttribute("weatherData", null);
             model.addAttribute("error", "날씨 데이터를 불러오는 데 실패했습니다.");
         }
-        return "weather"; // HTML 파일 이름
-    }
-
-    
-    
-    // 생성자에서 의존성 주입
-    @GetMapping("/weather")
-    public String getWeather(Model model) {
-    	log.debug("Weather API called!");
-        String date = "20241117";  // 예시 날짜
-        String time = "0600";  // 예시 시간
-        int nx = 60;  // 예시 x 좌표
-        int ny = 127;  // 예시 y 좌표
-
-        // 날씨 데이터를 가져옵니다.
-        WeatherResponse weatherResponse = weatherService.getWeatherData(date, time, nx, ny);
-
-        // 날씨 데이터를 DB에 저장합니다.
-        weatherService.saveWeatherData(weatherResponse);
-
-        // WeatherResponse.Item을 WeatherData로 변환하여 리스트에 저장
-        List<WeatherData> weatherDataList = weatherResponse.getBody().getItems().stream()
-            .map(item -> {
-                WeatherData data = new WeatherData();
-                data.setCategory(item.getCategory()); // WeatherResponse.Item의 category를 WeatherData에 설정
-                data.setFcstValue(item.getObsrValue()); // WeatherResponse.Item의 obsrValue를 WeatherData에 설정
-                data.setFcstDate(item.getBaseDate()); // WeatherResponse.Item의 baseDate를 WeatherData에 설정
-                data.setFcstTime(item.getBaseTime()); // WeatherResponse.Item의 baseTime을 WeatherData에 설정
-                return data;
-            })
-            .collect(Collectors.toList());
-        
-        log.info("날씨 데이터: {}", weatherDataList);
-        // 모델에 날씨 데이터를 추가
-        model.addAttribute("weatherData", weatherDataList);
-
-        // weather.html을 호출
         return "weather";
     }
 
-    // API 호출 메서드
-    public List<WeatherData> callWeatherApi() {
-        // weatherService를 사용하여 API 호출 처리
-    	String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
-        return weatherService.getWeatherData(apiUrl); 
-    }
-
-    // 날씨 데이터 파싱 메서드
-    public List<WeatherData> parseWeatherData(String apiResponse) {
-        return weatherParser.parseWeatherData(apiResponse);  // weatherParser를 사용하여 파싱
-    }
-
     @GetMapping("/fetch")
-    public ResponseEntity<?> fetchWeatherData(
-            @RequestParam("date") String date,
-            @RequestParam("time") String time,
-            @RequestParam("nx") int nx,
-            @RequestParam("ny") int ny) {
-    	try {
-    	    WeatherResponse weatherData = weatherService.getWeatherData(date, time, nx, ny);
-    	    return ResponseEntity.ok(weatherData);
-    	} catch (Exception e) {  // JAXBException 대신 일반 Exception을 처리
-    	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-    	            .body("Error fetching or parsing weather data: " + e.getMessage());
-    	}
+    public ResponseEntity<?> fetchWeatherData(@RequestParam("date") String date, 
+                                              @RequestParam("time") String time,
+                                              @RequestParam("nx") int nx, 
+                                              @RequestParam("ny") int ny) {
+        try {
+            WeatherResponse weatherData = weatherService.getWeatherData(date, time, nx, ny);
+            return ResponseEntity.ok(weatherData);
+        } catch (Exception e) {
+            log.error("날씨 데이터 호출 중 오류 발생: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error fetching weather data: " + e.getMessage());
+        }
     }
 
     @PostMapping("/save")
-    public String saveWeatherData(
-            @RequestParam("date") String date,
-            @RequestParam("time") String time,
-            @RequestParam("nx") int nx,
-            @RequestParam("ny") int ny) throws JAXBException {
-        WeatherResponse weatherResponse = weatherService.getWeatherData(date, time, nx, ny);
-        weatherService.saveWeatherData(weatherResponse);
-        return "Weather data saved successfully!";
+    public String saveWeatherData(@RequestParam("date") String date, 
+                                  @RequestParam("time") String time,
+                                  @RequestParam("nx") int nx, 
+                                  @RequestParam("ny") int ny) {
+        try {
+            WeatherResponse weatherResponse = weatherService.getWeatherData(date, time, nx, ny);
+            weatherService.saveWeatherData(weatherResponse);
+            return "Weather data saved successfully!";
+        } catch (Exception e) {
+            log.error("날씨 데이터 저장 중 오류 발생: {}", e.getMessage(), e);
+            return "Failed to save weather data.";
+        }
     }
-
 }
+

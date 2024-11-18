@@ -1,7 +1,11 @@
 package com.springbootfinal.app.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Data
 public class WeatherData {
     private String category;  // 예: "TMP" (온도), "POP" (강수확률)

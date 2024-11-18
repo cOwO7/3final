@@ -9,7 +9,9 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -37,6 +39,8 @@ public class WeatherResponse {
     }
 
     @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class Item {
         @XmlElement(name = "baseDate") // 'baseDate' 요소와 매핑
