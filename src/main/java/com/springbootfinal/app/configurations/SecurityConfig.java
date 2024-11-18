@@ -55,25 +55,27 @@ public class SecurityConfig {
 	        return http.build();
 	    }*/
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		http.authorizeHttpRequests(
-				authorizeHttpRequests ->
-				authorizeHttpRequests.requestMatchers(
-						new AntPathRequestMatcher("/**"))
-				.permitAll())
-				.csrf(csrf -> csrf.ignoringRequestMatchers(
-						new AntPathRequestMatcher("/h2-console/**")))
-		.csrf(csrf -> csrf.disable())
-		.logout(logout -> logout
-			//	.logoutUrl("/logout") 기본 값
-				.logoutSuccessUrl("/loginForm")
-				.invalidateHttpSession(true));
-		
-		return http.build();
-	}
-	
-	@Bean // 기상청 API
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                .requestMatchers(new AntPathRequestMatcher("/error")).permitAll() // /error 경로 허용
+                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll() // H2 콘솔 허용
+                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() // 기타 모든 요청 허용
+            )
+            .csrf(csrf -> csrf.ignoringRequestMatchers(
+                new AntPathRequestMatcher("/h2-console/**"),
+                new AntPathRequestMatcher("/error") // /error 경로 CSRF 비활성화
+            ))
+            .csrf(csrf -> csrf.disable()) // CSRF 전체 비활성화 (필요 시)
+            .logout(logout -> logout
+                .logoutSuccessUrl("/loginForm")
+                .invalidateHttpSession(true)
+            );
+
+        return http.build();
+    }
+
+    @Bean // 기상청 API 요청용
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }

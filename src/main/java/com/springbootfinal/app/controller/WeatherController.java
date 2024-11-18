@@ -31,13 +31,14 @@ public class WeatherController {
     
 	private final WeatherService weatherService;  // weatherService 주입
     private final WeatherParser weatherParser;    // weatherParser 주입
-
+    private WeatherData weatherData;
     
     private String buildApiUrl(String location) {
   	  //  String baseUrl = "https://api.weather.com/v3/weather/forecast"; // 기상청 API 기본 URL
   	    String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"; // 기상청 API 기본 URL
   	    String apiKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D"; // 기상청 API 키
   	    String format = "json"; // 응답 형식
+  	    log.info("컨트롤러 날씨 데이터: {}", weatherData);
 
   	    // URL 생성
   	    return String.format("%s?location=%s&apiKey=%s&format=%s", baseUrl, location, apiKey, format);
@@ -57,6 +58,7 @@ public class WeatherController {
         } catch (Exception e) {
             log.error("날씨 데이터 처리 중 오류 발생: {}", e.getMessage(), e);
             model.addAttribute("weatherData", null);
+            model.addAttribute("error", "날씨 데이터를 불러오는 데 실패했습니다.");
         }
         return "weather"; // HTML 파일 이름
     }

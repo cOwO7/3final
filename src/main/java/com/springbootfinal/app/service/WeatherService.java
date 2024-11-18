@@ -45,7 +45,7 @@ public class WeatherService {
             // API 호출
             String response = restTemplate.getForObject(apiUrl, String.class);
             log.info("API 호출 응답: {}", response);
-
+            
             // JSON 응답을 WeatherData 객체 리스트로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             List<WeatherData> weatherDataList = objectMapper.readValue(
