@@ -75,8 +75,4 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean // 기상청 API 요청용
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 }

@@ -1,52 +1,44 @@
 package com.springbootfinal.app.service;
 
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import com.springbootfinal.app.WeatherParser.WeatherParser;
-import com.springbootfinal.app.domain.WeatherResponse;
-import com.springbootfinal.app.mapper.WeatherMapper;
-
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j // 로깅을 위한 Lombok 어노테이션. 로그 출력을 간편하게 처리.
-@Service // Spring Service 어노테이션, 이 클래스가 서비스 계층의 컴포넌트임을 나타냄.
+@Service
 public class WeatherService {
 
-	// DB와 연동하기 위한 Mapper, REST API 호출을 위한 RestTemplate, JSON/XML 데이터 파싱을 위한
-	// WeatherParser
-	private final WeatherMapper weatherMapper;
-	private final RestTemplate restTemplate;
-	private final WeatherParser weatherParser;
-	
-	// 기상청 API 호출에 필요한 URL과 API 키
-	private static final String API_URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
-	private static final String API_KEY = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D";
+    private final RestTemplate restTemplate;
 
-	// 생성자에서 필드 초기화
-	public WeatherService(WeatherMapper weatherMapper, RestTemplate restTemplate, WeatherParser weatherParser) {
-        this.weatherMapper = weatherMapper;
+    public WeatherService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.weatherParser = weatherParser; // Spring이 주입
     }
 
-    
-	// **특정 날짜, 시간, 좌표의 날씨 데이터를 가져오는 메서드**
-    public WeatherResponse getWeatherData(String baseDate, String baseTime, int nx, int ny, int numOfRows, int pageNo) {
-        String url = String.format(
-                "%s?serviceKey=%s&base_date=%s&base_time=%s&nx=%d&ny=%d&numOfRows=%d&pageNo=%d&dataType=JSON",
-                API_URL, API_KEY, baseDate, baseTime, nx, ny, numOfRows, pageNo
-        );
+    public String getWeatherData(String baseDate, String baseTime, int nx, int ny) {
+    	// 요청 ApiUrl 
+        String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+        // API 서비스 키
+        String serviceKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D";
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); 
 
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(
-                url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {}
-        );
+        String url = UriComponentsBuilder.fromHttpUrl(apiUrl)
+                .queryParam("serviceKey", serviceKey)
+                .queryParam("pageNo", "1")
+                .queryParam("numOfRows", "1000")
+                .queryParam("dataType", "JSON") // JSON 형식으로 응답 받기
+                .queryParam("base_date", baseDate)
+                .queryParam("base_time", baseTime)
+                .queryParam("nx", nx)
+                .queryParam("ny", ny)
+                .toUriString();
 
-        return response.getBody();
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody(); // JSON 응답 반환
+        } else {
+            throw new RuntimeException("Failed to fetch weather data: " + response.getStatusCode());
+        }
     }
-	
-
 }
+
