@@ -8,12 +8,13 @@ import lombok.Setter;
 @Getter
 @Data
 public class WeatherData {
-    private String category;  // 예: "TMP" (온도), "POP" (강수확률)
-    private String fcstValue; // 예: "15" (온도 값)
-    private String fcstDate;  // 예: "20241116" (예보 날짜)
-    private String fcstTime;  // 예: "0600" (예보 시간)
-    
-    private String tmp;   // 기온
-    private String pop;   // 강수확률
-    private String wsd;   // 풍속
+    private String category;  // 자료구분코드 (예: TMP, POP 등)
+    private String fcstValue; // 예보 값 (실황 데이터)
+    private String fcstDate;  // 예보 날짜 (YYYYMMDD)
+    private String fcstTime;  // 예보 시간 (HHmm)
+
+    private String tmp; // 기온 (온도)
+    private String pop; // 강수확률
+    private String wsd; // 풍속
 }
+

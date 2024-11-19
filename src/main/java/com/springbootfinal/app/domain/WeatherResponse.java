@@ -1,6 +1,8 @@
 package com.springbootfinal.app.domain;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -13,14 +15,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+
 @AllArgsConstructor
 @XmlRootElement(name = "OpenAPI_ServiceResponse")
+@Data
+@NoArgsConstructor
 public class WeatherResponse {
 
-	private Header header;
-    private Body body;
+    private Response response;
+
+    @Data
+    @NoArgsConstructor
+    public static class Response {
+        private Header header;
+        private Body body;
+    }
 
     @Data
     @NoArgsConstructor
@@ -31,36 +40,35 @@ public class WeatherResponse {
 
     @Data
     @NoArgsConstructor
-    @XmlAccessorType(XmlAccessType.FIELD) // 필드 기반 접근 방식 설정
     public static class Body {
-        @XmlElementWrapper(name = "items")  // items 요소로 감싸서 매핑
-        @XmlElement(name = "item")  // 각 항목을 item 요소로 매핑
-        private List<Item> items;
+        private int totalCount;       // 총 데이터 개수
+        private int numOfRows;        // 한 페이지당 데이터 수
+        private int pageNo;           // 현재 페이지 번호
+        private List<Item> items;     // 데이터 항목
     }
 
     @Data
-    @Getter
-    @Setter
     @NoArgsConstructor
     public static class Item {
-        @XmlElement(name = "baseDate") // 'baseDate' 요소와 매핑
         private String baseDate;
-
-        @XmlElement(name = "baseTime") // 'baseTime' 요소와 매핑
         private String baseTime;
-
-        @XmlElement(name = "category") // 'category' 요소와 매핑
         private String category;
-
-        @XmlElement(name = "nx") // 'nx' 요소와 매핑
-        private int nx;
-
-        @XmlElement(name = "ny") // 'ny' 요소와 매핑
-        private int ny;
-
-        @XmlElement(name = "obsrValue") // 'obsrValue' 요소와 매핑
-        private String obsrValue;
+        private String fcstValue;
     }
-    
-}
 
+    public List<WeatherData> toWeatherDataList() {
+        if (response == null || response.getBody() == null || response.getBody().getItems() == null) {
+            return Collections.emptyList();
+        }
+        return response.getBody().getItems().stream()
+                .map(item -> {
+                    WeatherData data = new WeatherData();
+                    data.setFcstDate(item.getBaseDate());
+                    data.setFcstTime(item.getBaseTime());
+                    data.setCategory(item.getCategory());
+                    data.setFcstValue(item.getFcstValue());
+                    return data;
+                })
+                .collect(Collectors.toList());
+    }
+}

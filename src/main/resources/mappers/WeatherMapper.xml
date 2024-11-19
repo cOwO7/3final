@@ -6,18 +6,17 @@
 
 	<!-- 기상청 데이터 저장 -->
 	<insert id="insertWeatherData">
-		INSERT INTO weather_data (base_date, base_time, category, nx, ny,
-		obsr_value)
-		VALUES (#{baseDate}, #{baseTime}, #{category}, #{nx}, #{ny}, #{obsrValue})
-	</insert>
+        INSERT INTO weather_data (base_date, base_time, category, nx, ny, obsr_value)
+        VALUES (#{fcstDate}, #{fcstTime}, #{category}, #{nx}, #{ny}, #{fcstValue})
+    </insert>
 
 	<!-- 기상청 데이터 조회 -->
-    <select id="selectWeatherData" resultType="com.springbootfinal.app.domain.WeatherResponse$Item">
-        SELECT base_date, base_time, category, nx, ny, obsr_value
+    <select id="selectWeatherData" resultType="com.springbootfinal.app.domain.WeatherData">
+        SELECT base_date AS fcstDate, base_time AS fcstTime, category, nx, ny, obsr_value AS fcstValue
         FROM weather_data
         WHERE base_date = #{baseDate}
-        AND base_time = #{baseTime}
-        AND nx = #{nx}
-        AND ny = #{ny}
+          AND base_time = #{baseTime}
+          AND nx = #{nx}
+          AND ny = #{ny}
     </select>
 </mapper>
