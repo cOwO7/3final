@@ -1,6 +1,7 @@
 package com.springbootfinal.app.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class WeatherController {
      * @return
      * @throws IOException
      */
-    @PostMapping(value = "/getWeather")
+   /* @PostMapping(value = "/getWeather")
     @ResponseBody
     public ResponseEntity getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
         ResultDto result = new ResultDto();
@@ -50,6 +51,20 @@ public class WeatherController {
                 .build();
         
         return new ResponseEntity(result, HttpStatus.OK);
+    }*/
+    @PostMapping(value = "/getWeather")
+    @ResponseBody
+    public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
+        Map<String, Map<String, String>> groupedWeatherData = weatherService.getWeatherGroupedByTime(weatherDto);
+
+        ResultDto result = ResultDto.builder()
+                .resultCode("SUCCESS")
+                .message("조회가 완료되었습니다.")
+                .resultData(groupedWeatherData) // 가공된 데이터 전달
+                .url(null)
+                .build();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
     
 }

@@ -2,311 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layouts/main_layout}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>메인 페이지</title>
-        <style>
-            .container {
-                width: 800px !important;
-            }
-            input {
-                width: 100px;
-            }
-            th {
-                background-color: #f8f8f8 !important;
-                text-align: center !important;
-            }
-            td {
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-    	<th:block layout:fragment="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 pt-5">
-                    <div class="card mb-4">
-                        <h5 class="card-header text-center">메인 페이지</h5>
-                        <div class="card-body">
-                            <div class="col-md-12 text-center">
-                                <table width="80%" style="margin: auto; text-align: center;">
-                                    <tr>
-                                        <td>예보지점 x값(nx)</td>
-                                        <td><input type="text" id="nx" name="nx" value="" /></td>
-                                        <td>예보지점 y값(ny)</td>
-                                        <td><input type="text" id="ny" name="ny" value="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>날짜(baseDate)</td>
-                                        <td><input type="text" id="baseDate" name="baseDate" value="" /></td>
-                                        <td>시간(baseTime)</td>
-                                        <td><input type="text" id="baseTime" name="baseTime" value="" /></td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <button type="button" class="btn btn-outline-success" id="btn_weather">날씨 예보 조회</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" id="result">
-                <div class="col-md-12">
-                    <table class="table table-bordered" id="resultTable" style="display: none;">
-                        <colgroup>
-                            <col width="150px">
-                            <col width="150px">
-                            <col width="150px">
-                            <col width="150px">
-                            <col width="150px">
-                            <col width="150px">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>일자</th>
-                                <th>시간</th>
-                                <th>날씨</th>
-                                <th>강수형태</th>
-                                <th>기온</th>
-                                <th>습도</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-        <script th:src="@{js/jquery-3.7.1.min.js}"></script>
-        
-        <script>
-        $(document).ready(function () {
-            $("#btn_weather").click(function () {
-                // 입력 값 유효성 검사
-                if ($("#nx").val() === "" || $("#ny").val() === "" || $("#baseDate").val() === "" || $("#baseTime").val() === "") {
-                    alert("모든 필수 값을 입력하세요.");
-                    return;
-                }
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>오늘의 날씨</title>
+<style>
+.container {
+	width: 800px !important;
+}
 
-                // 파라미터 설정
-                let serviceKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D";
-                let nx = $("#nx").val();
-                let ny = $("#ny").val();
-                let baseDate = $("#baseDate").val();
-                let baseTime = $("#baseTime").val();
-                let pageNo = 1;
-                let numOfRows = 10;
-                let dataType = "JSON";
+input {
+	width: 100px;
+}
 
-                // URL 동적 생성
-                let apiUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=${dataType}&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+th {
+	background-color: #f8f8f8 !important;
+	text-align: center !important;
+}
 
-                console.log("API 호출 URL:", apiUrl);
-
-                // Ajax 호출
-                $.ajax({
-                    url: apiUrl,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response); // API 응답 확인
-
-                        if (response.response.header.resultCode === "00") {
-                            let items = response.response.body.items.item;
-                            if (items && items.length > 0) {
-                                let resultTable = $("#resultTable tbody");
-                                resultTable.empty(); // 기존 테이블 초기화
-
-                                // 시간대별로 데이터를 묶기 위한 객체
-                                let weatherDataByTime = {};
-
-                                // 각 항목 처리
-                                items.forEach(function(item) {
-                                    let weather = getWeatherData(item);
-
-                                    // fcstTime을 기준으로 시간대별로 데이터를 묶기
-                                    let timeKey = weather.time;
-                                    if (!weatherDataByTime[timeKey]) {
-                                        weatherDataByTime[timeKey] = [];
-                                    }
-                                    weatherDataByTime[timeKey].push(weather);
-                                });
-
-                                // 시간대별로 출력
-                                for (let time in weatherDataByTime) {
-                                    let timeData = weatherDataByTime[time];
-                                    timeData.forEach(function(weather) {
-                                        let row = $("<tr></tr>");
-                                        row.append(`<td>${weather.date}</td>`);
-                                        row.append(`<td>${weather.time}</td>`);
-                                        row.append(`<td>${weather.sky}</td>`);
-                                        row.append(`<td>${weather.pty}</td>`);
-                                        row.append(`<td>${weather.temp}</td>`);
-                                        row.append(`<td>${weather.humidity}</td>`);
-                                        resultTable.append(row);
-                                    });
-                                }
-
-                                // 테이블 표시
-                                $("#resultTable").show();
-                            } else {
-                                alert("예보 데이터가 없습니다.");
-                            }
-                        } else {
-                            alert("에러 발생: " + response.response.header.resultMsg);
-                        }
-                    },
-                    error: function(error) {
-                        console.error("API 호출 오류:", error);
-                        alert("API 호출 중 오류가 발생했습니다.");
-                    }
-                });
-
-                function getWeatherData(item) {
-                    let weather = {
-                        date: item.fcstDate,
-                        time: item.fcstTime,
-                        sky: "-",
-                        pty: "-",
-                        temp: "-",
-                        humidity: "-"
-                    };
-
-                    if (item.category === "TMP") {
-                        weather.temp = item.fcstValue + "℃";
-                        console.log("기온:", weather.temp);  // 기온 확인
-                    }
-
-                    if (item.category === "SKY") {
-                        weather.sky = code_value("SKY", item.fcstValue);
-                        console.log("날씨 상태:", weather.sky);  // 날씨 상태 확인
-                    }
-
-                    if (item.category === "PTY") {
-                        weather.pty = code_value("PTY", item.fcstValue);
-                        console.log("강수형태:", weather.pty);  // 강수형태 확인
-                    }
-
-                    if (item.category === "REH") {
-                        weather.humidity = item.fcstValue + "%";
-                        console.log("습도:", weather.humidity);  // 습도 확인
-                    }
-
-                    return weather;
-                }
-
-                
-                
-                
-                
-              /*  function getWeatherData(item) {
-                    let weather = {
-                        date: item.fcstDate,
-                        time: item.fcstTime,
-                        sky: "-",
-                        pty: "-",
-                        temp: "-",
-                        humidity: "-"
-                    };
-
-                    // 기온 처리
-                    if (item.category === "TMP") {
-                        weather.temp = item.fcstValue + "℃";
-                    }
-
-                    // 날씨 상태 처리
-                    if (item.category === "SKY") {
-                        weather.sky = code_value("SKY", item.fcstValue);
-                    }
-
-                    // 강수형태 처리
-                    if (item.category === "PTY") {
-                        weather.pty = code_value("PTY", item.fcstValue);
-                    }
-
-                    // 습도 처리
-                    if (item.category === "REH") {
-                        weather.humidity = item.fcstValue + "%";
-                    }
-
-                    return weather;
-                }*/
-
-                function code_value(category, code) {
-                    let value = "-";
-                    if (code) {
-                        if (category === "SKY") {
-                            if (code === "1") value = "맑음";
-                            else if (code === "3") value = "구름 많음";
-                            else if (code === "4") value = "흐림";
-                        } else if (category === "PTY") {
-                            if (code === "1") value = "비";
-                            else if (code === "2") value = "비/눈";
-                            else if (code === "3") value = "눈";
-                            else if (code === "5") value = "빗방울";
-                            else if (code === "6") value = "빗방울눈날림";
-                            else if (code === "7") value = "눈날림";
-                        }
-                    }
-                    return value;
-                }
-            });
-        });
-
-               /* $.ajax({
-                    url: apiUrl,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log("응답 데이터:", response);
-
-                        // API 호출 성공 여부 확인
-                        if (response.response.header.resultCode === "00") {
-                            alert("정상적으로 조회되었습니다.");
-                            
-                            // 기존 테이블 내용 초기화
-                            $("#resultTable tbody").empty();
-
-                            // 데이터 추가
-                            let items = response.response.body.items.item;
-                            items.forEach(item => {
-                                let date = date_format(item.fcstDate);
-                                let time = time_format(item.fcstTime);
-                                let weather = code_value(item.category, item.fcstValue);
-
-                                // 행 생성
-                                let row = `
-                                    <tr>
-                                        <td>${date}</td>
-                                        <td>${time}</td>
-                                        <td>${weather}</td>
-                                        <td>${item.category === "PTY" ? code_value("PTY", item.fcstValue) : "-"}</td>
-                                        <td>${item.category === "T1H" ? code_value("T1H", item.fcstValue) : "-"}</td>
-                                        <td>${item.category === "REH" ? code_value("REH", item.fcstValue) : "-"}</td>
-                                    </tr>
-                                `;
-                                $("#resultTable tbody").append(row);
-                            });
-
-                            // 테이블 보이기
-                            $("#resultTable").show();
-                        } else {
-                            alert("에러 발생: " + response.response.header.resultMsg);
-                        }
-                    },
-                    error: function (error) {
-                        console.error("API 호출 오류:", error);
-                        alert("API 호출 중 오류가 발생했습니다.");
-                    }
-                });
-            }); // 출력은 됨 하지만 개선 필수 */ 
-
-        </script>
-    </body>
-        	</th:block>
+td {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 pt-5">
+					<div class="card mb-4">
+						<h5 class="card-header text-center">오늘의 날씨</h5>
+						<div class="card-body">
+							<div class="col-md-12 text-center">
+								<table width="80%" style="margin: auto; text-align: center;">
+									<tr>
+										<td>예보지점 x값(nx)</td>
+										<td><input type="text" id="nx" name="nx" value="" /></td>
+										<td>예보지점 y값(ny)</td>
+										<td><input type="text" id="ny" name="ny" value="" /></td>
+									</tr>
+									<tr>
+										<td>날짜(baseDate)</td>
+										<td><input type="text" id="baseDate" name="baseDate"
+											value="" /></td>
+										<td>시간(baseTime)</td>
+										<td><input type="text" id="baseTime" name="baseTime"
+											value="" /></td>
+									</tr>
+								</table>
+								<br />
+								<button type="button" class="btn btn-outline-success"
+									id="btn_weather">날씨 예보 조회</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="result">
+				<div class="col-md-12">
+					<table class="table table-bordered" id="resultTable"
+						style="display: none;">
+						<colgroup>
+							<col width="150px">
+							<col width="150px">
+							<col width="150px">
+							<col width="150px">
+							<col width="150px">
+							<col width="150px">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>일자</th>
+								<th>시간</th>
+								<th>날씨</th>
+								<th>강수형태</th>
+								<th>기온</th>
+								<th>습도</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+		<script th:src="@{js/jquery-3.7.1.min.js}"></script>
+		<script th:src="@{js/weather.js}"></script>
+</body>
+</th:block>
 </html>
