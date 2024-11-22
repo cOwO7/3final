@@ -38,6 +38,7 @@ td {
 							<div class="col-md-12 text-center">
 								<table width="80%" style="margin: auto; text-align: center;">
 									<tr>
+									<p>조회 시간: <strong th:text="${fullBaseTime}"></strong></p> <!-- base_time 출력 -->
 										<td>예보지점 x값(nx)</td>
 										<td><input type="text" id="nx" name="nx" value="" /></td>
 										<td>예보지점 y값(ny)</td>
@@ -45,11 +46,11 @@ td {
 									</tr>
 									<tr>
 										<td>날짜(baseDate)</td>
-										<td><input type="text" id="baseDate" name="baseDate"
-											value="" /></td>
+										<td><input type="hidden" id="baseDate" name="baseDate"
+											th:value="${baseDate}" /></td>
 										<td>시간(baseTime)</td>
-										<td><input type="text" id="baseTime" name="baseTime"
-											value="" /></td>
+										<td><input type="hidden" id="baseTime" name="baseTime"
+											th:value="${baseTime}" /></td>
 									</tr>
 								</table>
 								<br />
