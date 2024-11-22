@@ -1,44 +1,83 @@
+
 package com.springbootfinal.app.service;
 
-import org.springframework.http.ResponseEntity;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.springbootfinal.app.domain.WeatherDto;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class WeatherService {
-
-    private final RestTemplate restTemplate;
-
-    public WeatherService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    public String getWeatherData(String baseDate, String baseTime, int nx, int ny) {
-    	// 요청 ApiUrl 
-        String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
-        // API 서비스 키
-        String serviceKey = "Gow%2FB%2BpvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT%2BfYSDLtu0o9k6WY%2BRp7E00ZA%3D%3D";
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); 
-
-        String url = UriComponentsBuilder.fromHttpUrl(apiUrl)
-                .queryParam("serviceKey", serviceKey)
-                .queryParam("pageNo", "1")
-                .queryParam("numOfRows", "1000")
-                .queryParam("dataType", "JSON") // JSON 형식으로 응답 받기
-                .queryParam("base_date", baseDate)
-                .queryParam("base_time", baseTime)
-                .queryParam("nx", nx)
-                .queryParam("ny", ny)
-                .toUriString();
-
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody(); // JSON 응답 반환
-        } else {
-            throw new RuntimeException("Failed to fetch weather data: " + response.getStatusCode());
+ 
+    @Value("${apiUrl}")
+    private String apiUrl;
+    
+    @Value("${apiKey}")
+    private String apiKey;
+ 
+    /**
+     * 초단기예보조회
+     * @param weatherDto
+     * @return
+     * @throws IOException
+     */
+    public String getWeather(WeatherDto weatherDto) throws IOException {
+        
+        UriComponents uriBuilder = UriComponentsBuilder
+                .fromHttpUrl(apiUrl)                                // api url
+                .queryParam("serviceKey", apiKey)                   // 인증키
+                .queryParam("dataType", "JSON")                     // 응답자료형식 (XML or JSON)
+                .queryParam("numOfRows", 60)                        // 한 페이지 결과 수
+                .queryParam("pageNo", 1)                            // 페이지 번호
+                .queryParam("base_date", weatherDto.getBaseDate())  // 발표일자
+                .queryParam("base_time", weatherDto.getBaseTime())  // 발표시간 (매시간 30분, API 제공은 매시간 45분 이후)
+                .queryParam("nx", weatherDto.getNx())               // 예보지점 X 좌표
+                .queryParam("ny", weatherDto.getNy())               // 예보지점 Y 좌표
+                .build();
+        
+        System.out.println("api 요청 URL : " + uriBuilder.toUriString());
+ 
+        URL url                 = new URL(uriBuilder.toUriString());
+        HttpURLConnection conn  = (HttpURLConnection) url.openConnection();
+        
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        
+        System.out.println("Response code: " + conn.getResponseCode());
+        
+        BufferedReader rd;
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         }
+        else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+ 
+        String result = sb.toString();
+        
+        System.out.println("result : " + result);
+        
+        return result;
     }
+    
 }
-

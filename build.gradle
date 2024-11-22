@@ -40,6 +40,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     
     // JSON 관련 의존성
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'org.json:json:20240303'
     
@@ -83,3 +84,4 @@ tasks.named('test') {
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-parameters"
 }
+

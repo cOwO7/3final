@@ -1,27 +1,55 @@
 package com.springbootfinal.app.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import java.io.IOException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.springbootfinal.app.domain.ResultDto;
+import com.springbootfinal.app.domain.WeatherDto;
 import com.springbootfinal.app.service.WeatherService;
 
-
-@RestController
+import lombok.RequiredArgsConstructor;
+ 
+@RequiredArgsConstructor
+@Controller
 public class WeatherController {
-
+    
     private final WeatherService weatherService;
-
-    public WeatherController(WeatherService weatherService) {
-        this.weatherService = weatherService;
-    }
-
+ 
+    /**
+     * 메인 페이지
+     * @return
+     */
     @GetMapping("/weather")
-    public String getWeatherData(
-    		@RequestParam(value = "baseDate", required = false, defaultValue = "20241119") String baseDate,
-            @RequestParam(value = "baseTime", required = false, defaultValue = "0600") String baseTime,
-            @RequestParam(value = "nx", required = false, defaultValue = "55") int nx,
-            @RequestParam(value = "ny", required = false, defaultValue = "127") int ny) {
-        return weatherService.getWeatherData(baseDate, baseTime, nx, ny);
+    public String index() {
+        return "index";
     }
+ 
+    /**
+     * 초단기예보조회
+     * @param weatherDto
+     * @return
+     * @throws IOException
+     */
+    @PostMapping(value = "/getWeather")
+    @ResponseBody
+    public ResponseEntity getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
+        ResultDto result = new ResultDto();
+ 
+        result = ResultDto.builder()
+                .resultCode("SUCCESS")
+                .message("조회가 완료되었습니다.")
+                .resultData(weatherService.getWeather(weatherDto))
+                .url(null)
+                .build();
+        
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+    
 }

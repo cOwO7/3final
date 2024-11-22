@@ -1,0 +1,132 @@
+2024-11-22T09:20:40.025+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11780 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-22T09:20:40.036+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-22T09:20:40.037+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-22T09:20:40.349+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-22T09:20:40.349+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-22T09:20:41.326+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-22T09:20:41.348+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 JPA repository interfaces.
+2024-11-22T09:20:41.557+09:00  WARN 11780 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-22T09:20:42.715+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-22T09:20:42.735+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-22T09:20:42.736+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-22T09:20:42.826+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-22T09:20:42.827+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2477 ms
+2024-11-22T09:20:43.002+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-22T09:20:43.175+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2a6dae44
+2024-11-22T09:20:43.178+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-22T09:20:43.300+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-22T09:20:43.478+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-22T09:20:43.584+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-22T09:20:44.148+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-22T09:20:44.239+09:00  WARN 11780 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-22T09:20:44.658+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-22T09:20:44.666+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-22T09:20:44.949+09:00  WARN 11780 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-22T09:20:44.981+09:00  WARN 11780 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 325bb8cf-59ef-488a-891d-c71aac89a575
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-22T09:20:44.992+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-22T09:20:45.086+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-22T09:20:45.160+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2024-11-22T09:20:45.166+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-22T09:20:45.264+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-22T09:20:45.413+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-22T09:20:45.455+09:00 DEBUG 11780 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-22T09:20:45.725+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-22T09:20:45.872+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-22T09:20:45.882+09:00  INFO 11780 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 6.354 seconds (process running for 7.427)
+2024-11-22T09:20:53.204+09:00  INFO 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-22T09:20:53.205+09:00  INFO 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-22T09:20:53.205+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-11-22T09:20:53.205+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-11-22T09:20:53.206+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-11-22T09:20:53.207+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@fd12f6e
+2024-11-22T09:20:53.208+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@65f210f8
+2024-11-22T09:20:53.208+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-11-22T09:20:53.208+09:00  INFO 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-11-22T09:20:53.247+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2024-11-22T09:20:53.249+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#home()
+2024-11-22T09:20:53.319+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.view.RedirectView        : View name [redirect:], model {}
+2024-11-22T09:20:53.323+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2024-11-22T09:20:53.331+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/main", parameters={}
+2024-11-22T09:20:53.332+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#main()
+2024-11-22T09:20:53.335+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-22T09:20:54.327+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.343+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-22T09:20:54.344+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-22T09:20:54.346+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:20:54.349+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-22T09:20:54.349+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/rain.gif", parameters={}
+2024-11-22T09:20:54.343+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-22T09:20:54.351+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-22T09:20:54.351+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-22T09:20:54.352+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-22T09:20:54.351+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-22T09:20:54.361+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.376+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.370+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.370+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.380+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:54.387+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-22T09:20:54.388+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:20:54.395+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.636+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/weather", parameters={}
+2024-11-22T09:20:56.637+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#index()
+2024-11-22T09:20:56.640+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-22T09:20:56.703+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.715+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-22T09:20:56.716+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-22T09:20:56.716+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-22T09:20:56.717+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-22T09:20:56.717+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-22T09:20:56.717+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:20:56.717+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-22T09:20:56.717+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-22T09:20:56.720+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.721+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.723+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.725+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.737+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-22T09:20:56.738+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:20:56.743+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.748+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-22T09:20:56.749+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:20:56.756+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:20:56.762+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-22T09:20:56.763+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-22T09:20:56.766+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:21:01.322+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-22T09:21:01.323+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:21:01.331+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-22T09:21:01.368+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js.map", parameters={}
+2024-11-22T09:21:01.368+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:21:01.372+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-22T09:21:01.376+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.bundle.min.js.map.]
+2024-11-22T09:21:01.377+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-22T09:21:01.383+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-22T09:21:01.384+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-22T09:21:01.395+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-22T09:21:01.395+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css.map", parameters={}
+2024-11-22T09:21:01.397+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:21:01.402+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-22T09:21:01.404+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.min.css.map.]
+2024-11-22T09:21:01.404+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-22T09:21:01.405+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2024-11-22T09:21:01.405+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-22T09:21:01.406+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-22T09:21:01.407+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-22T09:21:01.409+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2024-11-22T09:21:01.411+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css.map", parameters={}
+2024-11-22T09:21:01.412+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-22T09:21:01.413+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-22T09:21:01.413+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.min.css.map.]
+2024-11-22T09:21:01.414+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-22T09:21:01.414+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-22T09:21:01.415+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-22T09:21:01.415+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-22T09:21:01.418+09:00 DEBUG 11780 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
