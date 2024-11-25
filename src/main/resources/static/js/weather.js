@@ -54,7 +54,8 @@ $(function() {
 	                                    sky: "-",
 	                                    pty: "-",
 	                                    temp: "-",
-	                                    humidity: "-"
+	                                    humidity: "-",
+										lgt: "-"
 	                                };
 	                            }
 
@@ -70,7 +71,13 @@ $(function() {
 	                            }
 	                            if (item.category === "REH") {
 	                                weatherDataByTime[timeKey].humidity = `${item.fcstValue}%`;
-	                            }
+	                            }								
+								if (item.category === "VEC") {
+									weatherDataByTime[timeKey].vec = `${item.fcstValue}deg`;
+								}
+								if (item.category === "WSD") {
+									weatherDataByTime[timeKey].wsd = `${item.fcstValue}m/s`;
+								}
 	                        });
 
 	                        // 시간대별로 테이블에 출력
@@ -83,6 +90,8 @@ $(function() {
 	                            row.append(`<td>${weather.pty}</td>`);
 	                            row.append(`<td>${weather.temp}</td>`);
 	                            row.append(`<td>${weather.humidity}</td>`);
+	                            row.append(`<td>${weather.vec}\n${weather.wsd}</td>`);
+	                            row.append(`<td>${weather.lgt}</td>`);
 	                            resultTable.append(row);
 	                        }
 
@@ -116,7 +125,15 @@ $(function() {
 	                    else if (code === "5") value = "빗방울";
 	                    else if (code === "6") value = "빗방울눈날림";
 	                    else if (code === "7") value = "눈날림";
-	                }
+	                } else if (category === "LGT") {
+						if (code === "0") value = "없음"
+						else if (code === "1") value = "쾅!"
+						else if (code === "2") value = "우르쾅!"
+						else if (code === "3") value = "우르르쾅쾅!"
+						else if (code === "4") value = "거의 제우스 강림!"
+					} 
+						
+					
 	            }
 	            return value;
 	        }

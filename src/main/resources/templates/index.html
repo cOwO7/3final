@@ -35,6 +35,9 @@ td {
 					<div class="card mb-4">
 						<h5 class="card-header text-center">오늘의 날씨</h5>
 						<div class="card-body">
+							<div>
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36a75517ce82693ff837cc79c740e197&libraries=LIBRARY"></script>
+							</div>
 							<div class="col-md-12 text-center">
 								<table width="80%" style="margin: auto; text-align: center;">
 									<tr>
@@ -42,9 +45,13 @@ td {
 									
 									
 										<td>예보지점 x값(nx)</td>
-										<td><input type="text" id="nx" name="nx" value="" /></td>
+										<td>
+										<input type="text" id="nx" name="nx" value="" />
+										</td>
 										<td>예보지점 y값(ny)</td>
-										<td><input type="text" id="ny" name="ny" value="" /></td>
+										<td>
+										<input type="text" id="ny" name="ny" value="" />
+										</td>
 									</tr>
 									<tr>
 										<td>날짜(baseDate)</td>
@@ -62,6 +69,7 @@ td {
 								<br />
 								<button type="button" class="btn btn-outline-success"
 									id="btn_weather">날씨 예보 조회</button>
+									<div class="text-end">자료 제공: 기상청,공공데이터 포털</div>
 							</div>
 						</div>
 					</div>
@@ -87,6 +95,9 @@ td {
 								<th>강수형태</th>
 								<th>기온</th>
 								<th>습도</th>
+								<th>풍향<br>
+									풍속</th>
+								<th>낙뢰</th>
 							</tr>
 						</thead>
 						<tbody>

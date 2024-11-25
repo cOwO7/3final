@@ -20,12 +20,32 @@ import com.springbootfinal.app.service.WeatherService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
 public class WeatherController {
     
     private final WeatherService weatherService;
+    
+    
+    @GetMapping("/api/weather/status")
+    public ResponseEntity<String> getWeatherStatus() {
+        try {
+            // 날씨 상태를 동적으로 가져오는 로직 (예: WeatherService를 통해 API 호출)
+            String status = weatherService.getCurrentWeatherStatus();
+
+            // 로그로 상태 확인
+            log.info("날씨 상태 호출: {}", status);
+
+            // 상태값 반환
+            return ResponseEntity.ok(status);
+        } catch (Exception e) {
+            log.error("날씨 상태를 가져오는 중 오류 발생", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ERROR");
+        }
+    }
+
  
     /**
      * 메인 페이지
