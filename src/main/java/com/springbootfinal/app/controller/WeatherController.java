@@ -19,7 +19,8 @@ import com.springbootfinal.app.domain.WeatherDto;
 import com.springbootfinal.app.service.WeatherService;
 
 import lombok.RequiredArgsConstructor;
- 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class WeatherController {
@@ -84,6 +85,27 @@ public class WeatherController {
     @PostMapping(value = "/getWeather")
     @ResponseBody
     public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
+        try {
+            Map<String, Map<String, String>> groupedWeatherData = weatherService.getWeatherGroupedByTime(weatherDto);
+            
+            ResultDto result = ResultDto.builder()
+                .resultCode("SUCCESS")
+                .message("조회가 완료되었습니다.")
+                .resultData(groupedWeatherData)
+                .url(null)
+                .build();
+            
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Weather data retrieval failed", e);  // 로그로 예외 메시지 출력
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    
+    
+    
+   /* @PostMapping(value = "/getWeather")
+    @ResponseBody
+    public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
     	Map<String, Map<String, String>> groupedWeatherData = weatherService.getWeatherGroupedByTime(weatherDto);
     	
     	ResultDto result = ResultDto.builder()
@@ -94,6 +116,7 @@ public class WeatherController {
     			.build();
     	
     	return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+    }*/
     
 }
+    }
