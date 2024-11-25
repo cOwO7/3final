@@ -55,7 +55,12 @@ $(function() {
 	                                    pty: "-",
 	                                    temp: "-",
 	                                    humidity: "-",
-										lgt: "-"
+										lgt: "-",
+										vvv: "-",
+										uuu: "-",
+										rn1: "-",
+										vec: "-",
+										wsd: "-",
 	                                };
 	                            }
 
@@ -78,20 +83,45 @@ $(function() {
 								if (item.category === "WSD") {
 									weatherDataByTime[timeKey].wsd = `${item.fcstValue}m/s`;
 								}
+								if (item.category === "UUU") {
+									weatherDataByTime[timeKey].uuu = `${item.fcstValue}m/s`;
+								}
+								if (item.category === "VVV") {
+									weatherDataByTime[timeKey].vvv = `${item.fcstValue}m/s`;
+								}
+								if (item.category === "RN1") {
+									weatherDataByTime[timeKey].rn1 = `${item.fcstValue}mm`;
+								}
+								
+								/*
+								// 낙뢰
+								if (item.category === "LGT") {
+									weatherDataByTime[timeKey].lgt = code_value("LGT", item.fcstValue);
+								}
+								// 최저, 최고기온
+								if (item.category === "TMN") {
+									weatherDataByTime[timeKey].tmn = `${item.fcstValue}℃`;
+								}
+								if (item.category === "TMX") {
+									weatherDataByTime[timeKey].tmx = `${item.fcstValue}℃`;
+								}*/
 	                        });
 
 	                        // 시간대별로 테이블에 출력
 	                        for (let time in weatherDataByTime) {
 	                            let weather = weatherDataByTime[time];
 	                            let row = $("<tr></tr>");
-	                            row.append(`<td>${weather.date}</td>`);
-	                            row.append(`<td>${weather.time}</td>`);
-	                            row.append(`<td>${weather.sky}</td>`);
-	                            row.append(`<td>${weather.pty}</td>`);
-	                            row.append(`<td>${weather.temp}</td>`);
-	                            row.append(`<td>${weather.humidity}</td>`);
-	                            row.append(`<td>${weather.vec}\n${weather.wsd}</td>`);
-	                            row.append(`<td>${weather.lgt}</td>`);
+	                            row.append(`<td>${weather.date}</td>`);	//날짜
+	                            row.append(`<td>${weather.time}</td>`);	//시간
+	                            row.append(`<td>${weather.sky}</td>`);	//하늘
+	                            row.append(`<td>${weather.temp}</td>`); //기온
+	                            row.append(`<td>${weather.pty}</td>`);	//강수형태
+	                            row.append(`<td>${weather.rn1}</td>`);	//1시간 강수량
+	                            row.append(`<td>${weather.humidity}</td>`);	//
+	                            row.append(`<td>${weather.vec}\n${weather.wsd}</td>`);	//풍향,풍속
+	                            row.append(`<td>${weather.uuu}\n${weather.vvv}</td>`);	//동서풍,남북풍
+	                            /*row.append(`<td>${weather.tmn}\n${weather.tmx}</td>`);	//최저,최고기온
+	                            row.append(`<td>${weather.lgt}</td>`);	*///낙뢰
 	                            resultTable.append(row);
 	                        }
 

@@ -59,45 +59,6 @@ public class WeatherService {
 	 * @return
 	 * @throws IOException
 	 */
-	/*
-	 * public String getWeather(WeatherDto weatherDto) throws IOException {
-	 * 
-	 * UriComponents uriBuilder = UriComponentsBuilder .fromHttpUrl(apiUrl) // api
-	 * url .queryParam("serviceKey", apiKey) // 인증키 .queryParam("dataType", "JSON")
-	 * // 응답자료형식 (XML or JSON) .queryParam("numOfRows", 60) // 한 페이지 결과 수
-	 * .queryParam("pageNo", 1) // 페이지 번호 .queryParam("base_date",
-	 * weatherDto.getBaseDate()) // 발표일자 .queryParam("base_time",
-	 * weatherDto.getBaseTime()) // 발표시간 (매시간 30분, API 제공은 매시간 45분 이후)
-	 * .queryParam("nx", weatherDto.getNx()) // 예보지점 X 좌표 .queryParam("ny",
-	 * weatherDto.getNy()) // 예보지점 Y 좌표 .build();
-	 * 
-	 * System.out.println("api 요청 URL : " + uriBuilder.toUriString());
-	 * 
-	 * URL url = new URL(uriBuilder.toUriString()); HttpURLConnection conn =
-	 * (HttpURLConnection) url.openConnection();
-	 * 
-	 * conn.setRequestMethod("GET"); conn.setRequestProperty("Content-type",
-	 * "application/json");
-	 * 
-	 * System.out.println("Response code: " + conn.getResponseCode());
-	 * 
-	 * BufferedReader rd; if (conn.getResponseCode() >= 200 &&
-	 * conn.getResponseCode() <= 300) { rd = new BufferedReader(new
-	 * InputStreamReader(conn.getInputStream())); } else { rd = new
-	 * BufferedReader(new InputStreamReader(conn.getErrorStream())); }
-	 * 
-	 * StringBuilder sb = new StringBuilder();
-	 * 
-	 * String line; while ((line = rd.readLine()) != null) { sb.append(line); }
-	 * rd.close(); conn.disconnect();
-	 * 
-	 * String result = sb.toString();
-	 * 
-	 * System.out.println("result : " + result);
-	 * 
-	 * return result; }
-	 */
-
 	public String getWeatherData(String url) {
 		// HttpHeaders 설정
 		HttpHeaders headers = new HttpHeaders();
@@ -115,12 +76,118 @@ public class WeatherService {
 		// 응답 내용 반환
 		return response.getBody();
 	}
-
+	
 	public Map<String, Map<String, String>> getWeatherGroupedByTime(WeatherDto weatherDto) throws IOException {
-		UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl).queryParam("serviceKey", apiKey)
-				.queryParam("dataType", "JSON").queryParam("numOfRows", 60).queryParam("pageNo", 1)
-				.queryParam("base_date", weatherDto.getBaseDate()).queryParam("base_time", weatherDto.getBaseTime())
-				.queryParam("nx", weatherDto.getNx()).queryParam("ny", weatherDto.getNy()).build();
+	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+	            .queryParam("serviceKey", apiKey)
+	            .queryParam("dataType", "JSON")
+	            .queryParam("numOfRows", 60)
+	            .queryParam("pageNo", 1)
+	            .queryParam("base_date", weatherDto.getBaseDate())
+	            .queryParam("base_time", weatherDto.getBaseTime())
+	            .queryParam("nx", weatherDto.getNx())
+	            .queryParam("ny", weatherDto.getNy())
+	            .build();
+
+	    // RestTemplate 사용하여 요청 보내기
+	    ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, null, String.class);
+
+	    // 응답 상태 코드 확인
+	    if (!response.getStatusCode().is2xxSuccessful()) {
+	        throw new IOException("Failed to fetch weather data, HTTP Status: " + response.getStatusCode());
+	    }
+
+	    // 응답 내용 로깅 (디버깅을 위한 출력)
+	    log.info("API Response: {}", response.getBody());
+
+	    // JSON 응답 파싱
+	    ObjectMapper mapper = new ObjectMapper();
+	    JsonNode root = mapper.readTree(response.getBody());
+	    JsonNode items = root.path("response").path("body").path("items").path("item");
+
+	    Map<String, Map<String, String>> groupedData = new HashMap<>();
+
+	    // 시간별 데이터 그룹화
+	    for (JsonNode item : items) {
+	        String timeKey = item.get("fcstDate").asText() + item.get("fcstTime").asText(); // 날짜+시간 키
+	        String category = item.get("category").asText();
+	        String value = item.get("fcstValue").asText();
+
+	        groupedData.computeIfAbsent(timeKey, k -> new HashMap<>()).put(category, value);
+	    }
+
+	    return groupedData;
+	}
+
+	
+	// 추가 api호출 
+	public Map<String, Map<String, String>> getShortTermForecast(WeatherDto weatherDto) throws IOException {
+	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+	            .queryParam("serviceKey", apiKey)
+	            .queryParam("dataType", "JSON")
+	            .queryParam("numOfRows", 10)
+	            .queryParam("pageNo", 1)
+	            .queryParam("base_date", weatherDto.getBaseDate())
+	            .queryParam("base_time", weatherDto.getBaseTime())
+	            .queryParam("nx", weatherDto.getNx())
+	            .queryParam("ny", weatherDto.getNy())
+	            .build();
+
+	    ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, null, String.class);
+
+	    // JSON 응답 파싱
+	    ObjectMapper mapper = new ObjectMapper();
+	    JsonNode root = mapper.readTree(response.getBody());
+	    JsonNode items = root.path("response").path("body").path("items").path("item");
+
+	    Map<String, Map<String, String>> shortTermData = new HashMap<>();
+	    for (JsonNode item : items) {
+	        String category = item.get("category").asText();
+	        String value = item.get("fcstValue").asText();
+
+	        // 시간대를 키로 그룹화
+	        String timeKey = item.get("fcstDate").asText() + item.get("fcstTime").asText();
+	        shortTermData.computeIfAbsent(timeKey, k -> new HashMap<>()).put(category, value);
+	    }
+
+	    return shortTermData;
+	}
+
+	// api 병합
+	public Map<String, Map<String, String>> getMergedWeatherData(WeatherDto weatherDto) throws IOException {
+	    // 초단기예보 데이터 가져오기
+	    Map<String, Map<String, String>> groupedData = getWeatherGroupedByTime(weatherDto);
+
+	    // 단기예보 데이터 가져오기
+	    Map<String, Map<String, String>> shortTermData = getShortTermForecast(weatherDto);
+
+	    // 병합 로직
+	    for (String timeKey : shortTermData.keySet()) {
+	        groupedData.computeIfAbsent(timeKey, k -> new HashMap<>()).putAll(shortTermData.get(timeKey));
+	    }
+
+	    return groupedData;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+
+	/*public Map<String, Map<String, String>> getWeatherGroupedByTime(WeatherDto weatherDto) throws IOException {
+		UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+				.queryParam("serviceKey", apiKey)
+				.queryParam("dataType", "JSON")
+				.queryParam("numOfRows", 60)
+				.queryParam("pageNo", 1)
+				.queryParam("base_date", weatherDto.getBaseDate())
+				.queryParam("base_time", weatherDto.getBaseTime())
+				.queryParam("nx", weatherDto.getNx())
+				.queryParam("ny", weatherDto.getNy())
+				.build();
 
 		URL url = new URL(uriBuilder.toUriString());
 		URI uri = uriBuilder.toUri();
@@ -156,6 +223,6 @@ public class WeatherService {
 		}
 
 		return groupedData;
-	}
+	}*/
 
 }

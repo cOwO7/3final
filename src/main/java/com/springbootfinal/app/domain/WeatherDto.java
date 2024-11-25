@@ -7,8 +7,10 @@ import lombok.Setter;
 @Getter
 public class WeatherDto {
  
-    String nx;
-    String ny;
+    /*String nx;
+    String ny;*/
+	Integer nx;
+	Integer ny;
     String baseDate;
     String baseTime;
  
