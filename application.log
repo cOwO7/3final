@@ -4010,3 +4010,593 @@ java.lang.NoSuchMethodError: 'void jakarta.servlet.http.Cookie.setAttribute(java
 2024-11-26T18:05:51.996+09:00  INFO 9524 --- [springbootfinal-app03] [RMI TCP Connection(9)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-26T18:05:51.999+09:00  INFO 9524 --- [springbootfinal-app03] [RMI TCP Connection(9)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-11-26T18:05:52.005+09:00  INFO 9524 --- [springbootfinal-app03] [RMI TCP Connection(9)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-11-26T18:11:37.401+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:11:37.403+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:11:37.403+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:11:37.643+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-26T18:11:37.644+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-26T18:11:38.391+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:11:38.409+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:11:38.576+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:11:39.498+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:11:39.514+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:11:39.515+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:11:39.598+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:11:39.599+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1955 ms
+2024-11-26T18:11:39.745+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-26T18:11:39.894+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3628d01f
+2024-11-26T18:11:39.897+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-26T18:11:39.946+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:11:40.005+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-26T18:11:40.046+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:11:40.401+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:11:40.476+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:11:40.815+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:11:40.822+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:11:41.071+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:11:41.094+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7edf2e97-d4af-4181-801a-ca82b08640ac
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:11:41.102+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:11:41.179+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:11:41.232+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:11:41.237+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:11:41.326+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:11:41.440+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:11:41.473+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:11:41.697+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:11:41.822+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:11:41.831+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 4.853 seconds (process running for 5.761)
+2024-11-26T18:11:52.342+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-26T18:11:52.342+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-11-26T18:11:52.343+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-11-26T18:11:52.343+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-11-26T18:11:52.343+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-11-26T18:11:52.346+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3cd9d9e7
+2024-11-26T18:11:52.348+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@5e1749e8
+2024-11-26T18:11:52.349+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-11-26T18:11:52.349+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2024-11-26T18:11:52.393+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2024-11-26T18:11:52.395+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#home()
+2024-11-26T18:11:52.473+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.view.RedirectView        : View name [redirect:], model {}
+2024-11-26T18:11:52.476+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2024-11-26T18:11:52.482+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/main", parameters={}
+2024-11-26T18:11:52.483+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#main()
+2024-11-26T18:11:52.487+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-26T18:11:53.475+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.496+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/default.gif", parameters={}
+2024-11-26T18:11:53.496+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-26T18:11:53.497+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:11:53.497+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:11:53.497+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:11:53.498+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-26T18:11:53.498+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:11:53.499+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:11:53.499+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:11:53.499+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:11:53.510+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.512+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.514+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.517+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.517+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.531+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-26T18:11:53.531+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:11:53.538+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.571+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/weather/status", parameters={}
+2024-11-26T18:11:53.572+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#getWeatherStatus()
+2024-11-26T18:11:53.573+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] c.s.app.controller.WeatherController     : 날씨 상태 호출: 함박눈
+2024-11-26T18:11:53.586+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-11-26T18:11:53.586+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["함박눈"]
+2024-11-26T18:11:53.589+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:11:53.597+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/%ED%95%A8%EB%B0%95%EB%88%88.gif", parameters={}
+2024-11-26T18:11:53.597+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:11:53.609+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.163+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/memberLogout", parameters={}
+2024-11-26T18:12:03.163+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MemberController#logout(HttpSession)
+2024-11-26T18:12:03.170+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] c.s.app.controller.MemberController      : 로그인페이지 이동 오류1
+2024-11-26T18:12:03.171+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.view.RedirectView        : View name [redirect:], model {}
+2024-11-26T18:12:03.172+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2024-11-26T18:12:03.176+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/main", parameters={}
+2024-11-26T18:12:03.176+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#main()
+2024-11-26T18:12:03.177+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-26T18:12:03.208+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.221+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:03.221+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:03.227+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:12:03.227+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:03.229+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-26T18:12:03.229+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-26T18:12:03.229+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:03.229+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.230+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.233+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.235+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/default.gif", parameters={}
+2024-11-26T18:12:03.236+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.237+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.239+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.244+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-26T18:12:03.245+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:03.250+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.265+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/weather/status", parameters={}
+2024-11-26T18:12:03.266+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#getWeatherStatus()
+2024-11-26T18:12:03.267+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] c.s.app.controller.WeatherController     : 날씨 상태 호출: 이슬비
+2024-11-26T18:12:03.269+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-11-26T18:12:03.269+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["이슬비"]
+2024-11-26T18:12:03.272+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.276+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/%EC%9D%B4%EC%8A%AC%EB%B9%84.gif", parameters={}
+2024-11-26T18:12:03.277+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.278+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.284+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.891+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/loginForm", parameters={}
+2024-11-26T18:12:03.892+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ParameterizableViewController [view="member/loginForm"]
+2024-11-26T18:12:03.895+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-26T18:12:03.925+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.939+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:03.939+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:03.943+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-26T18:12:03.943+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:12:03.944+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:03.944+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:03.946+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.948+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/css/member.css", parameters={}
+2024-11-26T18:12:03.948+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/css/]]
+2024-11-26T18:12:03.948+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-26T18:12:03.949+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.952+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.955+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.957+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.958+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.966+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/images/login/kakao_login.png", parameters={}
+2024-11-26T18:12:03.967+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.969+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/images/login/naver_login.png", parameters={}
+2024-11-26T18:12:03.969+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:03.970+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.974+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-26T18:12:03.975+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:03.981+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:03.986+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.568+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : POST "/login", parameters={masked}
+2024-11-26T18:12:06.568+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MemberController#login(Model, String, String, HttpSession, HttpServletResponse)
+2024-11-26T18:12:06.607+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.controller.MemberController      : 로그인페이지 이동 오류
+2024-11-26T18:12:06.630+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : ==>  Preparing: SELECT * FROM member WHERE id = ?
+2024-11-26T18:12:06.651+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : ==> Parameters: admin(String)
+2024-11-26T18:12:06.676+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : <==      Total: 1
+2024-11-26T18:12:06.772+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : ==>  Preparing: SELECT * FROM member WHERE id = ?
+2024-11-26T18:12:06.772+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : ==> Parameters: admin(String)
+2024-11-26T18:12:06.774+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.mapper.MemberMapper.getMember    : <==      Total: 1
+2024-11-26T18:12:06.775+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.view.RedirectView        : View name [redirect:], model {}
+2024-11-26T18:12:06.777+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2024-11-26T18:12:06.781+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/main", parameters={}
+2024-11-26T18:12:06.781+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.MainController#main()
+2024-11-26T18:12:06.783+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-26T18:12:06.809+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.827+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-26T18:12:06.827+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:06.827+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:12:06.829+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:06.829+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:06.829+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.831+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:06.833+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-26T18:12:06.834+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:06.836+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.838+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.845+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/default.gif", parameters={}
+2024-11-26T18:12:06.846+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:06.847+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.850+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.854+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-26T18:12:06.854+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:06.859+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.874+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/weather/status", parameters={}
+2024-11-26T18:12:06.875+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#getWeatherStatus()
+2024-11-26T18:12:06.875+09:00  INFO 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] c.s.app.controller.WeatherController     : 날씨 상태 호출: 이슬비
+2024-11-26T18:12:06.877+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-11-26T18:12:06.877+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["이슬비"]
+2024-11-26T18:12:06.878+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:06.883+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/images/weather/%EC%9D%B4%EC%8A%AC%EB%B9%84.gif", parameters={}
+2024-11-26T18:12:06.883+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:06.888+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:09.930+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/weather", parameters={}
+2024-11-26T18:12:09.930+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#index(Model)
+2024-11-26T18:12:09.933+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2024-11-26T18:12:09.987+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:09.998+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:09.999+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:10.003+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:09.998+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:12:10.005+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:10.004+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/member.js", parameters={}
+2024-11-26T18:12:10.007+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:10.009+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.011+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/images/main.gif", parameters={}
+2024-11-26T18:12:10.012+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/images/]]
+2024-11-26T18:12:10.012+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.026+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.030+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/weather.js", parameters={}
+2024-11-26T18:12:10.030+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/js/geolocation.js", parameters={}
+2024-11-26T18:12:10.030+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:10.030+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:10.031+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js", parameters={}
+2024-11-26T18:12:10.031+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:10.036+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.037+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.042+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.076+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:10.077+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:10.081+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.089+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/js/jquery-3.7.1.min.js", parameters={}
+2024-11-26T18:12:10.089+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [static/js/]]
+2024-11-26T18:12:10.093+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:10.909+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : POST "/getWeather", parameters={}
+2024-11-26T18:12:10.909+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.WeatherController#getWeather(WeatherDto)
+2024-11-26T18:12:10.973+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.springbootfinal.app.domain.WeatherDto@3c120b76]
+2024-11-26T18:12:10.993+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.client.RestTemplate              : HTTP GET http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0?serviceKey=Gow/B+pvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT+fYSDLtu0o9k6WY+Rp7E00ZA%3D%3D&dataType=JSON&numOfRows=60&pageNo=1&base_date=20241126&base_time=1700&nx=59&ny=125
+2024-11-26T18:12:11.001+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.client.RestTemplate              : Accept=[text/plain, application/xml, text/xml, application/json, application/*+xml, application/*+json, */*]
+2024-11-26T18:12:11.022+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.client.RestTemplate              : Response 500 INTERNAL_SERVER_ERROR
+2024-11-26T18:12:11.027+09:00 ERROR 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] c.s.app.controller.WeatherController     : Weather data retrieval failed
+
+org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error: "<?xml version="1.0" encoding="UTF-8"?><EOL><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><EOL>    <soapenv:Body><EOL>        <soapenv:Fault><EOL>            <faultcode>soapenv:Server</faultcode><EOL>            <faultstring>Policy Falsified</faultstring><EOL>            <faultactor>http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0?serviceKey=Gow/B+pvwKtRdRGfWEsPYdmR4X8u8LB342Dka9AaCg6XgZaYHeeOBcWH8aK9VT+fYSDLtu0o9k6WY+Rp7E00ZA%3D%3D&amp;dataType=JSON&amp;numOfRows=60&amp;pageNo=1&amp;base_date=20241126&amp;base_time=1700&amp;nx=59&amp;ny=125</faultactor><EOL>            <detail><EOL>                <l7:policyResult<EOL>                    status="Service Not Found.  The request may have been sent to an invalid URL, or intended for an unsupported operation." xmlns:l7="http://www.layer7tech.com/ws/policy/fault"/><EOL>            </detail><EOL>        </soapenv:Fault><EOL>    </soapenv:Body><EOL></soapenv:Envelope><EOL>"
+	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:942) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:891) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672) ~[spring-web-6.1.14.jar:6.1.14]
+	at com.springbootfinal.app.service.WeatherService.getWeatherGroupedByTime(WeatherService.java:139) ~[main/:na]
+	at com.springbootfinal.app.service.WeatherService.getMergedWeatherData(WeatherService.java:212) ~[main/:na]
+	at com.springbootfinal.app.controller.WeatherController.getWeather(WeatherController.java:111) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.31.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-11-26T18:12:11.050+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-11-26T18:12:11.050+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Nothing to write: null body
+2024-11-26T18:12:11.050+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 500 INTERNAL_SERVER_ERROR
+2024-11-26T18:12:15.138+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css", parameters={}
+2024-11-26T18:12:15.139+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:15.155+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-11-26T18:12:15.240+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.bundle.min.js.map", parameters={}
+2024-11-26T18:12:15.241+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:15.244+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-26T18:12:15.249+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.bundle.min.js.map.]
+2024-11-26T18:12:15.249+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-26T18:12:15.257+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-26T18:12:15.257+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-26T18:12:15.259+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-26T18:12:15.270+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2024-11-26T18:12:15.293+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css.map", parameters={}
+2024-11-26T18:12:15.293+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:15.295+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-26T18:12:15.296+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.min.css.map.]
+2024-11-26T18:12:15.296+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-26T18:12:15.296+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-26T18:12:15.297+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-26T18:12:15.297+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-26T18:12:15.300+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2024-11-26T18:12:15.302+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/bootstrap/bootstrap.min.css.map", parameters={}
+2024-11-26T18:12:15.303+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-11-26T18:12:15.305+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-11-26T18:12:15.305+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource bootstrap/bootstrap.min.css.map.]
+2024-11-26T18:12:15.305+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-11-26T18:12:15.306+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2024-11-26T18:12:15.306+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.springbootfinal.app.controller.CustomErrorController#handleError(HttpServletRequest, Model)
+2024-11-26T18:12:15.307+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected '*/*' given [*/*]
+2024-11-26T18:12:15.309+09:00 DEBUG 11472 --- [springbootfinal-app03] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2024-11-26T18:14:00.478+09:00  INFO 11472 --- [springbootfinal-app03] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-26T18:14:00.510+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:00.514+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-26T18:14:00.523+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-11-26T18:14:00.683+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:14:00.685+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:14:00.687+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:14:01.112+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:14:01.117+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:14:01.192+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:14:01.319+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:14:01.321+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:14:01.321+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:14:01.371+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:14:01.371+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 633 ms
+2024-11-26T18:14:01.417+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-11-26T18:14:01.422+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@218563df
+2024-11-26T18:14:01.423+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-11-26T18:14:01.425+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:14:01.432+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:14:01.446+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:14:01.449+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:14:01.472+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:14:01.472+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:01.549+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:14:01.559+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b0c01e6f-bf0b-4b6b-94f9-1903a78dcd8b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:14:01.560+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:14:01.571+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:14:01.585+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:14:01.589+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:14:01.635+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:14:01.670+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:14:01.675+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:14:01.746+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:14:01.785+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:14:01.791+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 1.197 seconds (process running for 145.722)
+2024-11-26T18:14:01.793+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-26T18:14:37.753+09:00  INFO 11472 --- [springbootfinal-app03] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-26T18:14:37.763+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:37.764+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-11-26T18:14:37.767+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-11-26T18:14:37.866+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:14:37.867+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:14:37.867+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:14:38.097+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:14:38.102+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:14:38.170+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:14:38.298+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:14:38.298+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:14:38.299+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:14:38.345+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:14:38.345+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 476 ms
+2024-11-26T18:14:38.382+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-11-26T18:14:38.385+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75abacc3
+2024-11-26T18:14:38.385+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-11-26T18:14:38.387+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:14:38.391+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:14:38.402+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:14:38.404+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:14:38.423+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:14:38.424+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:38.483+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:14:38.490+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9e5731a5-f1d8-4032-a9ff-28ebe325750e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:14:38.491+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:14:38.500+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:14:38.512+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:14:38.515+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:14:38.551+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:14:38.577+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:14:38.581+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:14:38.635+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:14:38.671+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:14:38.685+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 0.853 seconds (process running for 182.616)
+2024-11-26T18:14:38.687+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-26T18:14:58.436+09:00  INFO 11472 --- [springbootfinal-app03] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-26T18:14:58.446+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:58.447+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-11-26T18:14:58.451+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-11-26T18:14:58.546+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:14:58.546+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:14:58.546+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:14:58.772+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:14:58.776+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:14:58.838+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:14:58.950+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:14:58.951+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:14:58.951+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:14:58.998+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:14:58.998+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 450 ms
+2024-11-26T18:14:59.034+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2024-11-26T18:14:59.037+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@ea79bd
+2024-11-26T18:14:59.037+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2024-11-26T18:14:59.039+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:14:59.043+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:14:59.053+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:14:59.055+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:14:59.074+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:14:59.074+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:14:59.133+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:14:59.140+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 17078578-6190-444f-829c-4987782ef3cc
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:14:59.140+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:14:59.154+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:14:59.165+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:14:59.168+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:14:59.199+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:14:59.224+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:14:59.227+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:14:59.281+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:14:59.314+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:14:59.319+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 0.808 seconds (process running for 203.25)
+2024-11-26T18:14:59.322+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-26T18:15:13.734+09:00  INFO 11472 --- [springbootfinal-app03] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-26T18:15:13.745+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:15:13.746+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2024-11-26T18:15:13.753+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2024-11-26T18:15:13.857+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:15:13.857+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:15:13.857+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:15:14.085+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:15:14.089+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:15:14.149+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:15:14.253+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:15:14.254+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:15:14.254+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:15:14.300+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:15:14.300+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 441 ms
+2024-11-26T18:15:14.336+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2024-11-26T18:15:14.339+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4406a9fd
+2024-11-26T18:15:14.340+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2024-11-26T18:15:14.341+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:15:14.346+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:15:14.356+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:15:14.358+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:15:14.377+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:15:14.377+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:15:14.436+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:15:14.443+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c910d978-c4e4-4402-ba02-9c41b6a96374
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:15:14.444+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:15:14.458+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:15:14.470+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:15:14.474+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:15:14.509+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:15:14.537+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:15:14.540+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:15:14.595+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:15:14.626+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:15:14.634+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 0.816 seconds (process running for 218.564)
+2024-11-26T18:15:14.636+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-26T18:15:45.064+09:00  INFO 11472 --- [springbootfinal-app03] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-26T18:15:45.078+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:15:45.079+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2024-11-26T18:15:45.085+09:00  INFO 11472 --- [springbootfinal-app03] [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2024-11-26T18:15:45.188+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Starting SpringbootfinalApp03Application using Java 21.0.4 with PID 11472 (C:\Users\6A\git\3final\bin\main started by 6A in C:\Users\6A\git\3final)
+2024-11-26T18:15:45.188+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26T18:15:45.188+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : No active profile set, falling back to 1 default profile: "default"
+2024-11-26T18:15:45.415+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26T18:15:45.419+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2024-11-26T18:15:45.487+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.b.a.TimefoldSolverAutoConfiguration : Skipping Timefold loading because there are no @PlanningSolution  or @PlanningEntity annotated classes.
+Maybe your annotated classes are not in a subpackage of your @SpringBootApplication annotated class's package.
+Maybe move your planning solution and entity classes to your application class's (sub)package (or use @EntityScan).
+2024-11-26T18:15:45.590+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-11-26T18:15:45.591+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-26T18:15:45.591+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26T18:15:45.637+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-26T18:15:45.637+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 447 ms
+2024-11-26T18:15:45.672+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2024-11-26T18:15:45.676+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@221f1b01
+2024-11-26T18:15:45.676+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2024-11-26T18:15:45.678+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26T18:15:45.682+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-26T18:15:45.693+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26T18:15:45.695+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26T18:15:45.712+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26T18:15:45.712+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:15:45.772+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26T18:15:45.779+09:00  WARN 11472 --- [springbootfinal-app03] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 66535385-38bc-41ce-80d0-7181843d1996
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-26T18:15:45.782+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-26T18:15:45.793+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-26T18:15:45.807+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2024-11-26T18:15:45.810+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/, /writeForm, /writeBoard, /weather, /loginForm, /joinForm] in 'viewControllerHandlerMapping'
+2024-11-26T18:15:45.850+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /css/**, /js/**, /images/**] in 'resourceHandlerMapping'
+2024-11-26T18:15:45.874+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-26T18:15:45.878+09:00 DEBUG 11472 --- [springbootfinal-app03] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-26T18:15:45.930+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-26T18:15:45.961+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-11-26T18:15:45.969+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] c.s.app.SpringbootfinalApp03Application  : Started SpringbootfinalApp03Application in 0.815 seconds (process running for 249.9)
+2024-11-26T18:15:45.971+09:00  INFO 11472 --- [springbootfinal-app03] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-26T18:16:42.597+09:00  INFO 11472 --- [springbootfinal-app03] [RMI TCP Connection(24)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-11-26T18:16:42.623+09:00  INFO 11472 --- [springbootfinal-app03] [RMI TCP Connection(24)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26T18:16:42.623+09:00  INFO 11472 --- [springbootfinal-app03] [RMI TCP Connection(24)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2024-11-26T18:16:42.625+09:00  INFO 11472 --- [springbootfinal-app03] [RMI TCP Connection(24)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.

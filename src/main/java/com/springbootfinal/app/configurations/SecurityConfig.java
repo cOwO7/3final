@@ -25,7 +25,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 .requestMatchers(new AntPathRequestMatcher("/error")).permitAll() // /error 경로 허용
-                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll() // H2 콘솔 허용
+                .requestMatchers(new AntPathRequestMatcher("/weather/**")).permitAll() // 날씨 경로 허용
                 .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() // 기타 모든 요청 허용
             )
             .csrf(csrf -> csrf.ignoringRequestMatchers(
@@ -40,11 +40,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    /*@Bean // 기상청 API 요청용
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }*/
 }
 	
 	
