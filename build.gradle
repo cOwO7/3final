@@ -58,8 +58,10 @@ dependencies {
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    
+    // Jakarta Servlet API 의존성
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0' // Tomcat 10.x에 맞는 버전
     
     // MySQL 의존성
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -87,4 +89,3 @@ tasks.named('test') {
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-parameters"
 }
-
