@@ -3,16 +3,15 @@ package com.springbootfinal.app.controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springbootfinal.app.domain.ResultDto;
@@ -29,7 +28,7 @@ public class WeatherController {
 
 	private final WeatherService weatherService;
 
-	@GetMapping("/api/weather/status")
+	@RequestMapping("/api/weather/status")
 	public ResponseEntity<String> getWeatherStatus() {
 		try {
 			// 날씨 상태를 동적으로 가져오는 로직 (예: WeatherService를 통해 API 호출)
@@ -51,7 +50,7 @@ public class WeatherController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/weather")
+	@RequestMapping("/weather")
 	public String index(Model model) {
 		// 현재 시각
 		LocalDateTime now = LocalDateTime.now();
@@ -103,6 +102,7 @@ public class WeatherController {
 	 * @return
 	 * @throws IOException
 	 */
+	
 	@PostMapping(value = "/getWeather")
 	@ResponseBody
 	public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
@@ -123,6 +123,38 @@ public class WeatherController {
 	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*@PostMapping(value = "/getWeather")
+	@ResponseBody
+	public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
+	    try {
+	        // 병합된 데이터 가져오기
+	        Map<String, Map<String, String>> mergedData = weatherService.getMergedWeatherData(weatherDto);
+
+	        // ResultDto에 데이터 포함
+	        ResultDto result = ResultDto.builder()
+	                .resultCode("SUCCESS")
+	                .message("조회가 완료되었습니다.")
+	                .resultData(mergedData)
+	                .build();
+
+	        return new ResponseEntity<>(result, HttpStatus.OK);
+	    } catch (Exception e) {
+	        log.error("Weather data retrieval failed", e);
+	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}*/
 
 
 	

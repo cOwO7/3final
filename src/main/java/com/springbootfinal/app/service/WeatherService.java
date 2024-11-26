@@ -1,12 +1,7 @@
 
 package com.springbootfinal.app.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -50,6 +45,57 @@ public class WeatherService {
 		return statuses[randomIndex];
 	}
 
+	/**
+	 * 초단기실황조회
+	 * 
+	 * @param weatherDto
+	 * @return
+	 * @throws IOException
+	 */
+	public Map<String, String> getUltraSrtNcst(WeatherDto weatherDto) throws IOException {
+	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl + "/getUltraSrtNcst")
+	            .queryParam("serviceKey", apiKey)
+	            .queryParam("dataType", "JSON")
+	            .queryParam("numOfRows", 10) // 실황 데이터는 보통 10개 이하
+	            .queryParam("pageNo", 1)
+	            .queryParam("base_date", weatherDto.getBaseDate())
+	            .queryParam("base_time", weatherDto.getBaseTime())
+	            .queryParam("nx", weatherDto.getNx())
+	            .queryParam("ny", weatherDto.getNy())
+	            .build();
+
+	    ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, null, String.class);
+
+	    log.info("초단기실황 API 호출 URL: {}", uriBuilder.toUriString());
+	    log.info("초단기실황 API 응답: {}", response.getBody());
+	    
+	    if (!response.getStatusCode().is2xxSuccessful()) {
+	        throw new IOException("Failed to fetch Ultra Srt Ncst, HTTP Status: " + response.getStatusCode());
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    JsonNode root = mapper.readTree(response.getBody());
+	    JsonNode items = root.path("response").path("body").path("items").path("item");
+
+	    Map<String, String> ultraSrtNcstData = new HashMap<>();
+	    for (JsonNode item : items) {
+	        String category = item.get("category").asText();
+	        String value = item.get("obsrValue").asText(); // 실황은 obsrValue 사용
+	        
+	        log.info("카테고리: {}, 값: {}", category, value);
+	        
+	        ultraSrtNcstData.put(category, value);
+	    }
+
+	    return ultraSrtNcstData;
+	}
+
+	
+	
+	
+	
+	
+	
 	
 
 	/**
@@ -120,6 +166,13 @@ public class WeatherService {
 	}
 
 	
+	/**
+	 * 단기예보조회
+	 * 
+	 * @param weatherDto
+	 * @return
+	 * @throws IOException
+	 */
 	// 추가 api호출 
 	public Map<String, Map<String, String>> getShortTermForecast(WeatherDto weatherDto) throws IOException {
 	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
@@ -156,18 +209,25 @@ public class WeatherService {
 	// api 병합
 	public Map<String, Map<String, String>> getMergedWeatherData(WeatherDto weatherDto) throws IOException {
 	    // 초단기예보 데이터 가져오기
-	    Map<String, Map<String, String>> groupedData = getWeatherGroupedByTime(weatherDto);
+	    Map<String, Map<String, String>> forecastData = getWeatherGroupedByTime(weatherDto);
 
 	    // 단기예보 데이터 가져오기
 	    Map<String, Map<String, String>> shortTermData = getShortTermForecast(weatherDto);
 
-	    // 병합 로직
+	    // 초단기실황 데이터 가져오기
+	    Map<String, String> ultraSrtNcstData = getUltraSrtNcst(weatherDto);
+
+	    // 데이터 병합
 	    for (String timeKey : shortTermData.keySet()) {
-	        groupedData.computeIfAbsent(timeKey, k -> new HashMap<>()).putAll(shortTermData.get(timeKey));
+	        forecastData.computeIfAbsent(timeKey, k -> new HashMap<>()).putAll(shortTermData.get(timeKey));
 	    }
 
-	    return groupedData;
+	    // 초단기실황 데이터는 가장 최신 데이터로 병합
+	    forecastData.computeIfAbsent("current", k -> new HashMap<>()).putAll(ultraSrtNcstData);
+
+	    return forecastData;
 	}
+
 
 	
 	

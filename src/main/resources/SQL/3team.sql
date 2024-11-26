@@ -17,6 +17,17 @@ INSERT INTO member VALUES(1,'admin', '관리자',
 select * from member;
 commit;
 
+-- 소셜 테이블
+CREATE TABLE IF NOT EXISTS social_member (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    member_id INT,                    -- `member` 테이블과 1:1 관계
+    provider VARCHAR(50) NOT NULL,     -- 소셜 로그인 제공자 (google, naver, kakao)
+    provider_id VARCHAR(255) NOT NULL, -- 소셜 로그인 사용자 고유 ID (예: 구글 id, 네이버 id 등)
+    FOREIGN KEY (member_id) REFERENCES member(power) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+select * from social_member;
+
 -- 권한 부여
 
 GRANT ALL PRIVILEGES ON 3team.* TO 'root'@'localhost';

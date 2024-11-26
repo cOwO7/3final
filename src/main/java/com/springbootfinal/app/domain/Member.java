@@ -19,4 +19,8 @@ public class Member {
 	private String pass;
 	private String mobile;
 	private Timestamp regDate;
+	
+	// 소셜 로그인 관련 필드 추가
+   // private String provider;         // 소셜 로그인 제공자
+   // private String providerId;       // 소셜 로그인 사용자 고유 ID
 }

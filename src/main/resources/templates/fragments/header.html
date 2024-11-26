@@ -13,14 +13,23 @@
 		<div class="row">
 			<div class="col">
 				<ul class="nav justify-content-end">
+				<li class="nav-item">
+				<th:block th:unless="${session.isLogin}">
+					<a class="nav-link" th:href="@{loginForm}">로그인</a>
+				</th:block>
+				<th:block th:if="${session.isLogin}">
+					<!--/* MemberController를 통해서 로그아웃 처리 */-->
+					<a class="nav-link" th:href="@{memberLogout}">로그아웃</a>
+				</th:block>
+				</li>
 					<!-- Modal Login Form -->
-					<li class="nav-item"><th:block th:unless="${session.isLogin}">
+					<!-- <li class="nav-item"><th:block th:unless="${session.isLogin}">
 							<a class="nav-link" th:href="@{#}"
 								th:attrappend="data-bs-toggle='modal', data-bs-target='#loginModal'">
 								로그인-모달</a>
-						</th:block> <!-- Modal Logout Form --> <th:block th:if="${session.isLogin}">
+						</th:block> Modal Logout Form <th:block th:if="${session.isLogin}">
 							<a class="nav-link" th:href="@{logout}">로그아웃-모달</a>
-						</th:block></li>
+						</th:block></li> -->
 					<li class="nav-item"><a class="nav-link" th:href="@{main}">HOME</a>
 					</li>
 					<li class="nav-item"><th:block th:unless="${session.isLogin}">
@@ -29,6 +38,7 @@
 					<li class="nav-item"><th:block th:if="${session.isLogin}">
 							<a class="nav-link" href="memberUpdateForm">정보 수정</a>
 						</th:block>
+					
 				</ul>
 			</div>
 		</div>
