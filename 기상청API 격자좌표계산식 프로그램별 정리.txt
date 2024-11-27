@@ -1,0 +1,955 @@
+기상청 API 공식 nx,ny 계산 방식이래 이걸 학습해서 코드를 수정해줘
+
+// (사용 예)
+// var rs = dfs_xy_conv("toLL","60","127");
+// console.log(rs.lat, rs.lng);
+//
+
+<스크립트 언어="자바스크립트">
+    //<!--
+    //
+    // LCC DFS 라이브러리환을 기반 자료
+    //
+    var RE = 6371.00877; // 거리(km)
+    var 그리드 = 5.0; // 쪼개기(km)
+    var SLAT1 = 30.0; // 위도1(도)
+    var SLAT2 = 60.0; // 부분위도2(도)
+    var OLON = 126.0; //기준점 힘(degree)
+    var OLAT = 38.0; // 기준점 위도(degree)
+    var XO = 43; //기준점 X좌표(GRID)
+    변수 YO = 136; // 기1준점 Y좌표(GRID)
+    //
+    // LCC DFS 탐색변환 ( 코드 : "toXY"(위경도->좌표, v1:위도, v2:경도), "toLL"(좌표->위경도,v1:x, v2:y) )
+    //
+
+
+    함수 dfs_xy_conv(코드, v1, v2) {
+        var DEGRAD = Math.PI / 180.0;
+        다음 코드는 Math.PI의 값을 반환합니다.
+
+        var re = RE / GRID;
+        var slat1 = SLAT1 * DEGRAD;
+        var slat2 = SLAT2 * DEGRAD;
+        var 올론 = OLON * DEGRAD;
+        변수 olat = OLAT * DEGRAD;
+
+        var sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+        var sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+        var ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+        ro = re * sf / Math.pow(ro, sn);
+        var rs = {};
+        if (코드 == "toXY") {
+            위도 rs['위도'] = v1;
+            **rs['lng']** = v2;
+            var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
+            ra = re * sf / Math.pow(ra, sn);
+            var theta = v2 * DEGRAD - olon;
+            (세타 > Math.PI) 세타 -= 2.0 * Math.PI인 경우;
+            세타 < -Math.PI인 경우 세타 += 2.0 * Math.PI;
+            세타 * = sn;
+            다음 코드는 Math.floor(ra * Math.sin(세타) + XO + 0.5)를 반환합니다.
+            rs['y'] = Math.floor(ro - ra * Math.cos(세타) + YO + 0.5);
+        }
+        또 다른 {
+            **x**는 v1과 동일합니다.
+            y는 y의 두 번째 값입니다.
+            이것은 XO의 값입니다.
+            변수 yn = ro - v2 + YO;
+            ra = Math.sqrt(xn * xn + yn * yn);
+            만약 (sn < 0.0) - ra;
+            var alat = Math.pow((re * sf / ra), (1.0 / sn));
+            alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
+
+            if (Math.abs(xn) <= 0.0) {
+                세타 = 0.0;
+            }
+            또 다른 {
+                if (Math.abs(yn) <= 0.0) {
+                    세타 = Math.PI * 0.5;
+                    xn < 0.0인 경우 - 세타;
+                }
+                else theta = Math.atan2(xn, yn);
+            }
+            var 알론 = 세타 / sn + 올론;
+            rs['위도'] = 좌표 * RADDEG;
+            rs['lng'] = alon * RADDEG;
+        }
+        rs를 반환합니다.
+    }
+    //-->
+</스크립트>
+
+// 안드로이드 
+
+public 클래스 MainActivity는 AppCompatActivity를 확장합니다.
+
+public static int TO_GRID = 0;
+public static int TO_GPS = 1;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    LatXLngY tmp = convertGRID_GPS(TO_GRID, 37.579871128849334, 126.98935225645432);
+    LatXLngY tmp2 = convertGRID_GPS(TO_GRID, 35.101148844565955, 129.02478725562108);
+    LatXLngY tmp3 = convertGRID_GPS(TO_GRID, 33.500946412305076, 126.54663058817043);
+
+    Log.e(">>", "x = " + tmp.x + ", y = " + tmp.y);
+    Log.e(">>", "x = " + tmp2.x + ", y = " + tmp2.y);
+    Log.e(">>", "x = " + tmp3.x + ", y = " + tmp3.y);
+}
+
+
+private LatXLngY convertGRID_GPS(int mode, double lat_X, double lng_Y )
+{
+    double RE = 6371.00877; // 지구 반경(km)
+    double GRID = 5.0; // 격자 간격(km)
+    double SLAT1 = 30.0; // 투영 위도1(degree)
+    double SLAT2 = 60.0; // 투영 위도2(degree)
+    double OLON = 126.0; // 기준점 경도(degree)
+    double OLAT = 38.0; // 기준점 위도(degree)
+    double XO = 43; // 기준점 X좌표(GRID)
+    double YO = 136; // 기1준점 Y좌표(GRID)
+
+    //
+    // LCC DFS 좌표변환 ( code : "TO_GRID"(위경도->좌표, lat_X:위도,  lng_Y:경도), "TO_GPS"(좌표->위경도,  lat_X:x, lng_Y:y) )
+    //
+
+
+    double DEGRAD = Math.PI / 180.0;
+    double RADDEG = 180.0 / Math.PI;
+
+    double re = RE / GRID;
+    double slat1 = SLAT1 * DEGRAD;
+    double slat2 = SLAT2 * DEGRAD;
+    double olon = OLON * DEGRAD;
+    double olat = OLAT * DEGRAD;
+
+    double sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+    double sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+    double ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+    ro = re * sf / Math.pow(ro, sn);
+    LatXLngY rs = new LatXLngY();
+
+    if (mode == TO_GRID) {
+        rs.lat = lat_X;
+        rs.lng = lng_Y;
+        double ra = Math.tan(Math.PI * 0.25 + (lat_X) * DEGRAD * 0.5);
+        ra = re * sf / Math.pow(ra, sn);
+        double theta = lng_Y * DEGRAD - olon;
+        if (theta > Math.PI) theta -= 2.0 * Math.PI;
+        if (theta < -Math.PI) theta += 2.0 * Math.PI;
+        theta *= sn;
+        rs.x = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+        rs.y = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+    }
+    else {
+        rs.x = lat_X;
+        rs.y = lng_Y;
+        double xn = lat_X - XO;
+        double yn = ro - lng_Y + YO;
+        double ra = Math.sqrt(xn * xn + yn * yn);
+        if (sn < 0.0) {
+            ra = -ra;
+        }
+        double alat = Math.pow((re * sf / ra), (1.0 / sn));
+        alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
+
+        double theta = 0.0;
+        if (Math.abs(xn) <= 0.0) {
+            theta = 0.0;
+        }
+        else {
+            if (Math.abs(yn) <= 0.0) {
+                theta = Math.PI * 0.5;
+                if (xn < 0.0) {
+                    theta = -theta;
+                }
+            }
+            else theta = Math.atan2(xn, yn);
+        }
+        double alon = theta / sn + olon;
+        rs.lat = alat * RADDEG;
+        rs.lng = alon * RADDEG;
+    }
+    return rs;
+}
+
+
+
+class LatXLngY
+{
+    public double lat;
+    public double lng;
+
+    public double x;
+    public double y;
+
+}
+}
+
+
+스위프트 4용.
+//////////////// GPS -> GRID ///////////////
+func ConvertGRID_GPS(mode: Int, lat_X: Double, lng_Y: Double) -> LatXLngY {
+let RE = 6371.00877 // 지구 반대편(km)
+let GRID = 5.0 // 벽돌 찌(km)
+let SLAT1 = 30.0 // 대신 도1(degree)
+let SLAT2 = 60.0 // 안쪽 위도2(degree)
+let OLON = 126.0 // 경계점 위도(degree)
+let OLAT = 38.0 // 기준점 위도(degree)
+let XO:Double = 43 // 경계점 X좌표 (GRID)
+let YO:Double = 136 // 기1준점 Y좌표(GRID)
+
+    //
+    // LCC DFS 좌표변환 ( code : "TO_GRID"(위경도->좌표, lat_X:위도,  lng_Y:경도), "TO_GPS"(좌표->위경도,  lat_X:x, lng_Y:y) )
+    //
+    
+    let DEGRAD = Double.pi / 180.0
+    let RADDEG = 180.0 / Double.pi
+    
+    let re = RE / GRID
+    let slat1 = SLAT1 * DEGRAD
+    let slat2 = SLAT2 * DEGRAD
+    let olon = OLON * DEGRAD
+    let olat = OLAT * DEGRAD
+    
+    var sn = tan(Double.pi * 0.25 + slat2 * 0.5) / tan(Double.pi * 0.25 + slat1 * 0.5)
+    sn = log(cos(slat1) / cos(slat2)) / log(sn)
+    var sf = tan(Double.pi * 0.25 + slat1 * 0.5)
+    sf = pow(sf, sn) * cos(slat1) / sn
+    var ro = tan(Double.pi * 0.25 + olat * 0.5)
+    ro = re * sf / pow(ro, sn)
+    var rs = LatXLngY(lat: 0, lng: 0, x: 0, y: 0)
+
+    if mode == TO_GRID {
+        rs.lat = lat_X
+        rs.lng = lng_Y
+        var ra = tan(Double.pi * 0.25 + (lat_X) * DEGRAD * 0.5)
+        ra = re * sf / pow(ra, sn)
+        var theta = lng_Y * DEGRAD - olon
+        if theta > Double.pi {
+            theta -= 2.0 * Double.pi
+        }
+        if theta < -Double.pi {
+            theta += 2.0 * Double.pi
+        }
+        
+        theta *= sn
+        rs.x = Int(floor(ra * sin(theta) + XO + 0.5))
+        rs.y = Int(floor(ro - ra * cos(theta) + YO + 0.5))
+    }
+    else {
+        rs.x = Int(lat_X)
+        rs.y = Int(lng_Y)
+        let xn = lat_X - XO
+        let yn = ro - lng_Y + YO
+        var ra = sqrt(xn * xn + yn * yn)
+        if (sn < 0.0) {
+            ra = -ra
+        }
+        var alat = pow((re * sf / ra), (1.0 / sn))
+        alat = 2.0 * atan(alat) - Double.pi * 0.5
+        
+        var theta = 0.0
+        if (abs(xn) <= 0.0) {
+            theta = 0.0
+        }
+        else {
+            if (abs(yn) <= 0.0) {
+                theta = Double.pi * 0.5
+                if (xn < 0.0) {
+                    theta = -theta
+                }
+            }
+            else {
+                theta = atan2(xn, yn)
+            }
+        }
+        let alon = theta / sn + olon
+        rs.lat = alat * RADDEG
+        rs.lng = alon * RADDEG
+    }
+    return rs
+    
+    
+}
+
+struct LatXLngY {
+    public var lat: Double
+    public var lng: Double
+    
+    public var x: Int
+    public var y: Int
+}
+
+파이썬
+
+import math
+NX = 149            ## X축 격자점 수
+NY = 253            ## Y축 격자점 수
+
+Re = 6371.00877     ##  지도반경
+grid = 5.0          ##  격자간격 (km)
+slat1 = 30.0        ##  표준위도 1
+slat2 = 60.0        ##  표준위도 2
+olon = 126.0        ##  기준점 경도
+olat = 38.0         ##  기준점 위도
+xo = 210 / grid     ##  기준점 X좌표
+yo = 675 / grid     ##  기준점 Y좌표
+first = 0
+
+if first == 0 :
+    PI = math.asin(1.0) * 2.0
+    DEGRAD = PI/ 180.0
+    RADDEG = 180.0 / PI
+
+
+    re = Re / grid
+    slat1 = slat1 * DEGRAD
+    slat2 = slat2 * DEGRAD
+    olon = olon * DEGRAD
+    olat = olat * DEGRAD
+
+    sn = math.tan(PI * 0.25 + slat2 * 0.5) / math.tan(PI * 0.25 + slat1 * 0.5)
+    sn = math.log(math.cos(slat1) / math.cos(slat2)) / math.log(sn)
+    sf = math.tan(PI * 0.25 + slat1 * 0.5)
+    sf = math.pow(sf, sn) * math.cos(slat1) / sn
+    ro = math.tan(PI * 0.25 + olat * 0.5)
+    ro = re * sf / math.pow(ro, sn)
+    first = 1
+
+def mapToGrid(lat, lon, code = 0 ):
+    ra = math.tan(PI * 0.25 + lat * DEGRAD * 0.5)
+    ra = re * sf / pow(ra, sn)
+    theta = lon * DEGRAD - olon
+    if theta > PI :
+        theta -= 2.0 * PI
+    if theta < -PI :
+        theta += 2.0 * PI
+    theta *= sn
+    x = (ra * math.sin(theta)) + xo
+    y = (ro - ra * math.cos(theta)) + yo
+    x = int(x + 1.5)
+    y = int(y + 1.5)
+    return x, y
+
+def gridToMap(x, y, code = 1):
+    x = x - 1
+    y = y - 1
+    xn = x - xo
+    yn = ro - y + yo
+    ra = math.sqrt(xn * xn + yn * yn)
+    if sn < 0.0 :
+        ra = -ra
+    alat = math.pow((re * sf / ra), (1.0 / sn))
+    alat = 2.0 * math.atan(alat) - PI * 0.5
+    if math.fabs(xn) <= 0.0 :
+        theta = 0.0
+    else :
+        if math.fabs(yn) <= 0.0 :
+            theta = PI * 0.5
+            if xn < 0.0 :
+                theta = -theta
+        else :
+            theta = math.atan2(xn, yn)
+    alon = theta / sn + olon
+    lat = alat * RADDEG
+    lon = alon * RADDEG
+
+    return lat, lon
+
+print(mapToGrid(37.579871128849334, 126.98935225645432))
+print(mapToGrid(35.101148844565955, 129.02478725562108))
+print(mapToGrid(33.500946412305076, 126.54663058817043))
+### result :
+#(60, 127)
+#(97, 74)
+#(53, 38)
+
+print(gridToMap(60, 127))
+print(gridToMap(97, 74))
+print(gridToMap(53, 38))
+### result
+# 37.579871128849334, 126.98935225645432
+# 35.101148844565955, 129.02478725562108
+# 33.500946412305076, 126.54663058817043
+
+
+Unity3D
+반환은 Dictionary<string, double> LatLngToXY = new Dictionary<string, double>(); 합의하시면 됩니다.
+
+// 위도 경도 좌표 변환
+double RE = 6371.00877; // 지구 반경(km)
+double GRID = 5.0; // 격자 간격(km)
+double SLAT1 = 30.0; // 투영 위도1(degree)
+double SLAT2 = 60.0; // 투영 위도2(degree)
+double OLON = 126.0; // 기준점 경도(degree)
+double OLAT = 38.0; // 기준점 위도(degree)
+double XO = 0.0; // 기준점 X좌표(GRID)
+double YO = 0.0; // 기1준점 Y좌표(GRID)
+
+Dictionary<string, double> dfs_xy_conf(string code, double v1, double v2)
+{
+    double DEGRAD = System.Math.PI / 180.0;
+    double RADDEG = 180.0 / System.Math.PI;
+
+    double re = RE / GRID;
+    double slat1 = SLAT1 * DEGRAD;
+    double slat2 = SLAT2 * DEGRAD;
+    double olon = OLON * DEGRAD;
+    double olat = OLAT * DEGRAD;
+
+    double sn = System.Math.Tan((System.Math.PI * 0.25f + slat2 * 0.5f)) / System.Math.Tan(System.Math.PI * 0.25f + slat1 * 0.5f);
+    sn = System.Math.Log(System.Math.Cos(slat1) / System.Math.Cos(slat2)) / System.Math.Log(sn);
+    double sf = System.Math.Tan(System.Math.PI * 0.25f + slat1 * 0.5f);
+    sf = System.Math.Pow(sf, sn) * System.Math.Cos(slat1) / sn;
+    double ro = System.Math.Tan(System.Math.PI * 0.25f + olat * 0.5f);
+    ro = re * sf / System.Math.Pow(ro, sn);
+
+    Dictionary<string, double> rs = new Dictionary<string, double>();
+    double ra, theta;
+
+    if (code == "toXY")
+    {
+        rs["lat"] = v1;
+        rs["lng"] = v2;
+        ra = System.Math.Tan(System.Math.PI * 0.25f + (v1) * DEGRAD * 0.5f);
+        ra = re * sf / System.Math.Pow(ra, sn);
+        theta = v2 * DEGRAD - olon;
+        if (theta > System.Math.PI) theta -= 2.0f * System.Math.PI;
+        if (theta < -System.Math.PI) theta += 2.0f * System.Math.PI;
+        theta *= sn;
+        rs["x"] = System.Math.Floor(ra * System.Math.Sin(theta) + XO + 0.5f);
+        rs["y"] = System.Math.Floor(ro - ra * System.Math.Cos(theta) + YO + 0.5f);
+    }
+    else
+    {
+        rs["x"] = v1;
+        rs["y"] = v2;
+        double xn = v1 - XO;
+        double yn = ro - v2 + YO;
+        ra = System.Math.Sqrt(xn * xn + yn * yn);
+        if (sn < 0.0f) ra = -ra;
+        double alat = System.Math.Pow((re * sf / ra), (1.0f/ sn));
+        alat = 2.0f * System.Math.Atan(alat) - System.Math.PI * 0.5f;
+
+        if (System.Math.Abs(xn) <= 0.0)
+        {
+            theta = 0.0f;
+        }
+        else
+        {
+            if (System.Math.Abs(yn) <= 0.0)
+            {
+                theta = System.Math.PI * 0.5f;
+                if (xn < 0.0f) theta = -theta;
+            }
+            else theta = System.Math.Atan2(xn, yn);
+        }
+        double alon = theta / sn + olon;
+        rs["lat"] = alat * RADDEG;
+        rs["lng"] = alon * RADDEG;
+    }
+    return rs;
+}
+
+// C#입니다.
+// 튜플 이 Dictionary<string, double>로 가능
+
+        VilageFcstInfoSvc       vfis    =   new VilageFcstInfoSvc();
+        vfis.GetData();
+
+
+class WeatherApiCommon 
+{
+    /// <summary>
+    /// 대기오염 정보조회 서비스
+    /// 1 getMsrstnAcctoRltmMesureDnsty               측정소별 실시간 측정정보 조회
+    /// 2 getUnityAirEnvrnIdexSnstiveAboveMsrstnList  통합대기환경지수 나쁨 이상 측정소 목록조회
+    /// 3 getCtprvnRltmMesureDnsty                    시도별 실시간 측정정보 조회
+    /// 4 getMinuDustFrcstDspth                       대기질 예보통보 조회
+    /// 5 getCtprvnMesureLIst                         시도별 실시간 평균정보 조회
+    /// 6 getCtprvnMesureSidoLIst                     시군구별 실시간 평균정보 조회
+    /// </summary>
+    /// <returns></returns>
+    internal static string GetArpltnInforInqireSvcUrl( byte idx )
+    {
+        return @"http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/" + GetArpltnInforInqireSvcNm( idx ); 
+    }
+
+    /// <summary> 
+    /// 오퍼레이션명(영문)
+    /// </summary>
+    /// <param name="idx">default -> 3</param>
+    /// <returns></returns>
+    private static string GetArpltnInforInqireSvcNm( byte idx )
+    {  
+        switch( idx )
+        {
+            case 1:
+                return "getMsrstnAcctoRltmMesureDnsty";
+            case 2:
+                return "getUnityAirEnvrnIdexSnstiveAboveMsrstnList";
+            case 3: default:
+                return "getCtprvnRltmMesureDnsty";
+            case 4:
+                return "getMinuDustFrcstDspth";
+            case 5:
+                return "getCtprvnMesureLIst";
+            case 6:
+                return "getCtprvnMesureSidoLIst"; 
+        } 
+    }
+
+
+    /// <summary>
+    /// 동네예보 조회서비스
+    /// 1 getUltraSrtNcst       초단가실황조회
+    /// 2 getUltraSrtFcst       초단가예보조회
+    /// 3 getVilageFcst         동네예보조회
+    /// 4 getFcstVersion        예보버전조회
+    /// </summary>
+    /// <returns></returns>
+    internal static string GetVilageFcstInfoSvcUrl( byte idx )
+    {
+        return @"http://apis.data.go.kr/1360000/VilageFcstInfoService/" + GetVilageFcstInfoSvcNm( idx ); 
+    } 
+
+    /// <summary> 
+    /// 오퍼레이션명(영문)
+    /// </summary>
+    /// <param name="idx">default -> 3</param>
+    /// <returns></returns>
+    private static string GetVilageFcstInfoSvcNm( byte idx )
+    {
+        switch( idx )
+        {
+            case 1:
+                return "getUltraSrtNcst";
+            case 2:
+                return "getUltraSrtFcst";
+            case 3: default:
+                return "getVilageFcst";
+            case 4:
+                return "getFcstVersion"; 
+        } 
+    } 
+    
+    /// <summary>
+    /// 동네예보 조회서비스
+    /// 1 getUltraSrtNcst       초단가실황조회
+    /// 2 getUltraSrtFcst       초단가예보조회
+    /// 3 getVilageFcst         동네예보조회
+    /// 4 getFcstVersion        예보버전조회
+    /// </summary>
+    /// <returns></returns>
+    internal static string GetBaseTime( byte idx )
+    { 
+        switch( idx )
+        {
+            case 1:
+            {
+                if( DateTime.Now < DateTime.Now.AddMinutes( 40 - DateTime.Now.Minute ) )
+                    return DateTime.Now.AddHours(-1).ToString( "HH00" );
+                else
+                     return DateTime.Now.ToString( "HH00" );
+            }
+            case 2:
+            { 
+                if( DateTime.Now < DateTime.Now.AddMinutes( 45 - DateTime.Now.Minute ) )
+                    return DateTime.Now.AddHours(-1).ToString( "HH00" );
+                else
+                     return DateTime.Now.ToString( "HH00" );
+            }
+            case 3:  case 4: default:
+            {
+                int hour = DateTime.Now.Hour;
+                if (DateTime.Now < DateTime.Now.AddMinutes(10 - DateTime.Now.Minute))
+                {
+                    hour = DateTime.Now.AddHours(-1).Hour;
+                }
+                if (hour - 2 == 0)
+                {
+                    hour = 24;
+                }
+                int select = (hour - 2) / 3; 
+                return GetBaseTimeSelect( select );
+            } 
+        }
+    } 
+    private static string GetBaseTimeSelect( int idx )
+    {
+        switch( idx )
+        {
+            case 0: default:
+                return "0200";
+            case 1:
+                return "0500";
+            case 2:
+                return "0800";
+            case 3:
+                return "1100";
+            case 4:
+                return "1400";
+            case 5:
+                return "1700";
+            case 6:
+                return "2000";
+            case 7:
+                return "2300";
+        }
+    }
+
+    /// <summary>
+    /// 인증키
+    /// 개발인증키만 받음상태 운영인증키는 현재 발급안한상태
+    /// </summary>
+    /// <param name="bDev">개발인증키여부</param>
+    /// <returns></returns>
+    internal static string GetAuthenticationkey( bool bDev = true )
+    {
+        if( bDev )
+        {
+            return "Authenticationkey";
+        }
+        else
+        {
+            return "Authenticationkey";
+        }
+    }
+}
+
+
+class VilageFcstInfoSvc : WeatherApiCommon
+{
+    
+    private string GetUrl( bool bjson = true )
+    {
+        byte baseidx            =   3; 
+        var tuplugrid           =   GetWeatherDigitalForecast( "toGRID", 37.579871128849334, 126.98935225645432 );
+        //var tuplugrid2          =   GetWeatherDigitalForecast( "toGPS", 60, 127 );
+        HttpClient  client      =   new HttpClient();
+        string      basedate    =   DateTime.Now.ToString( "yyyyMMdd" );
+        string      basetime    =   WeatherApiCommon.GetBaseTime( baseidx );
+        string      serviceKey  =   GetAuthenticationkey(); 
+        string      xmljson     =   bjson ? "JSON" : "XML";
+        string      url         =   WeatherApiCommon.GetVilageFcstInfoSvcUrl( baseidx )+ $"?ServiceKey={serviceKey}&numOfRows=900&pageNo=1";
+        return  url + $"&dataType={xmljson}&base_date={basedate}&base_time={basetime}&nx={tuplugrid.x}&ny={tuplugrid.y}";
+             
+    }
+    
+    public void GetData( bool bjson = false )
+    {
+        if( bjson )
+            GetDataJson();
+        else
+            GetDataXml();
+    }
+
+    
+    /// <summary>
+    /// 동네예보조회
+    /// </summary>
+    public DataTable GetDataXml()
+    {
+        string      url         =   GetUrl(false);
+        var         request     =   WebRequest.Create(url) as HttpWebRequest;
+        request.Method          =   "GET";
+
+        using( HttpWebResponse response = request.GetResponse() as HttpWebResponse )
+        {
+            var     stream      =   response.GetResponseStream();
+            DataSet dts         =   new DataSet();
+            dts.ReadXml( stream, XmlReadMode.InferSchema);                
+            DataTable   dtt     =   dts.Tables["item"]; 
+            return dtt;
+        }  
+    }
+
+    /// <summary>
+    /// 동네예보조회
+    /// </summary>
+    public JToken GetDataJson()
+    {
+        string      url         =   GetUrl();
+        var         request     =   WebRequest.Create(url) as HttpWebRequest;
+        request.Method          =   "GET";
+
+        using( HttpWebResponse response = request.GetResponse() as HttpWebResponse )
+        {
+            var     reader      =   new StreamReader(response.GetResponseStream());
+            string  results     =   reader.ReadToEnd();                
+            JObject jObject     =   JObject.Parse( results );
+            JToken  jList       =   jObject["response"]["body"]["items"]["item"]; 
+            return jList;
+        }
+    }
+    
+    /// <summary>
+    /// http://www.kma.go.kr/weather/forecast/digital_forecast.jsp 
+    /// LCC DFS 좌표변환 
+    /// toGRID : 위경도->좌표,  latX:위도,  lngY:경도
+    /// toGPS  : 좌표->위경도,  latX:x,     lngY:y
+    /// </summary>
+    /// <param name="code"></param>
+    /// <param name="latX"></param>
+    /// <param name="lngY"></param>
+    /// <returns></returns>
+    /// private Dictionary<string, double> GetWeatherDigitalForecast( string code, double latX, double lngY )
+    private ( double lat, double lng, double x, double y ) GetWeatherDigitalForecast( string code, double latX, double lngY )
+    {
+        double  ra;
+        double  theta;
+        double  RE      =   6371.00877;     // 지구 반경(km)
+        double  GRID    =   5.0;            // 격자 간격(km)
+        double  SLAT1   =   30.0;           // 투영 위도1(degree)
+        double  SLAT2   =   60.0;           // 투영 위도2(degree)
+        double  OLON    =   126.0;          // 기준점 경도(degree)
+        double  OLAT    =   38.0;           // 기준점 위도(degree)
+        double  XO      =   43;             // 기준점 X좌표(GRID)
+        double  YO      =   136;            // 기1준점 Y좌표(GRID)
+
+        double  DEGRAD  =   Math.PI / 180.0;
+        double  RADDEG  =   180.0 / Math.PI;
+
+        double  re      =   RE / GRID;
+        double  slat1   =   SLAT1 * DEGRAD;
+        double  slat2   =   SLAT2 * DEGRAD;
+        double  olon    =   OLON  * DEGRAD;
+        double  olat    =   OLAT  * DEGRAD;
+
+        double  sn      =   Math.Tan( Math.PI * 0.25f + slat2 * 0.5f ) / Math.Tan( Math.PI * 0.25f + slat1 * 0.5f );
+        sn              =   Math.Log( Math.Cos(slat1) / Math.Cos(slat2) ) / Math.Log(sn);
+        double  sf      =   Math.Tan( Math.PI * 0.25f + slat1 * 0.5f );
+        sf              =   Math.Pow( sf, sn ) * Math.Cos(slat1) / sn;
+        double  ro      =   Math.Tan( Math.PI * 0.25f + olat * 0.5f );
+        ro              =   re * sf / Math.Pow(ro, sn);
+        
+        if ( "toGRID".Equals( code ) )
+        {
+            ra          =   Math.Tan(Math.PI * 0.25f + (latX) * DEGRAD * 0.5f);
+            ra          =   re * sf / Math.Pow(ra, sn);
+            theta       =   lngY * DEGRAD - olon;
+            if( theta > Math.PI ) 
+                theta   -=  2.0f * Math.PI;
+            if( theta < -Math.PI) 
+                theta   +=  2.0f * Math.PI;
+            theta       *=  sn;
+            return ( latX, lngY, Math.Floor(ra * Math.Sin(theta) + XO + 0.5f), Math.Floor(ro - ra * Math.Cos(theta) + YO + 0.5f) );
+        }
+        else
+        {
+            double  xn  =   latX - XO;
+            double  yn  =   ro - lngY + YO;
+            ra          =   Math.Sqrt(xn * xn + yn * yn);
+            if( sn < 0.0f ) 
+                ra      =   -ra;
+            double  alat    =   Math.Pow((re * sf / ra), (1.0f/ sn));
+            alat            =   2.0f * Math.Atan(alat) - Math.PI * 0.5f;
+
+            if( Math.Abs(xn) <= 0.0 )
+                theta = 0.0f;
+            else
+            {
+                if( Math.Abs(yn) <= 0.0 )
+                {
+                    theta   =   Math.PI * 0.5f;
+                    if (xn < 0.0f) 
+                        theta   =   -theta;
+                }
+                else 
+                    theta   =   Math.Atan2(xn, yn);
+            }
+            double  alon    =   theta / sn + olon;  
+            return ( alat * RADDEG, alon * RADDEG, latX, lngY );
+        }
+    }
+
+}
+
+flutter 
+
+var gridToGpsData = ConvGridGps.gridToGPS(60, 127);
+var gpsToGridData = ConvGridGps.gpsToGRID(37.579871128849334, 126.98935225645432);
+print(gridToGpsData);
+print(gpsToGridData);
+
+결과 :
+I/flutter (27910): {x: 60, y: 127, lat: 37.61574148576467, lng: 126.98991183668376}
+I/flutter (27910): {lat: 37.579871128849334, lng: 126.98935225645432, x: 60, y: 127}
+
+import 'dart:math' as Math;
+
+class ConvGridGps {
+  static const double RE = 6371.00877; // 지구 반경(km)
+  static const double GRID = 5.0; // 격자 간격(km)
+  static const double SLAT1 = 30.0; // 투영 위도1(degree)
+  static const double SLAT2 = 60.0; // 투영 위도2(degree)
+  static const double OLON = 126.0; // 기준점 경도(degree)
+  static const double OLAT = 38.0; // 기준점 위도(degree)
+  static const double XO = 43; // 기준점 X좌표(GRID)
+  static const double YO = 136; // 기1준점 Y좌표(GRID)
+
+  static const double DEGRAD = Math.pi / 180.0;
+  static const double RADDEG = 180.0 / Math.pi;
+
+  static double get re => RE / GRID;
+  static double get slat1 => SLAT1 * DEGRAD;
+  static double get slat2 => SLAT2 * DEGRAD;
+  static double get olon => OLON * DEGRAD;
+  static double get olat => OLAT * DEGRAD;
+
+  static double get snTmp =>
+      Math.tan(Math.pi * 0.25 + slat2 * 0.5) /
+      Math.tan(Math.pi * 0.25 + slat1 * 0.5);
+  static double get sn =>
+      Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(snTmp);
+
+  static double get sfTmp => Math.tan(Math.pi * 0.25 + slat1 * 0.5);
+  static double get sf => Math.pow(sfTmp, sn) * Math.cos(slat1) / sn;
+
+  static double get roTmp => Math.tan(Math.pi * 0.25 + olat * 0.5);
+
+  static double get ro => re * sf / Math.pow(roTmp, sn);
+
+  static gridToGPS(int v1, int v2) {
+    var rs = {};
+    double theta;
+
+    rs['x'] = v1;
+    rs['y'] = v2;
+    int xn = (v1 - XO).toInt();
+    int yn = (ro - v2 + YO).toInt();
+    var ra = Math.sqrt(xn * xn + yn * yn);
+    if (sn < 0.0) ra = -ra;
+    var alat = Math.pow((re * sf / ra), (1.0 / sn));
+    alat = 2.0 * Math.atan(alat) - Math.pi * 0.5;
+
+    if (xn.abs() <= 0.0) {
+      theta = 0.0;
+    } else {
+      if (yn.abs() <= 0.0) {
+        theta = Math.pi * 0.5;
+        if (xn < 0.0) theta = -theta;
+      } else
+        theta = Math.atan2(xn, yn);
+    }
+    var alon = theta / sn + olon;
+    rs['lat'] = alat * RADDEG;
+    rs['lng'] = alon * RADDEG;
+
+    return rs;
+  }
+
+  static gpsToGRID(double v1, double v2) {
+    var rs = {};
+    double theta;
+
+    rs['lat'] = v1;
+    rs['lng'] = v2;
+    var ra = Math.tan(Math.pi * 0.25 + (v1) * DEGRAD * 0.5);
+    ra = re * sf / Math.pow(ra, sn);
+    theta = v2 * DEGRAD - olon;
+    if (theta > Math.pi) theta -= 2.0 * Math.pi;
+    if (theta < -Math.pi) theta += 2.0 * Math.pi;
+    theta *= sn;
+    rs['x'] = (ra * Math.sin(theta) + XO + 0.5).floor();
+    rs['y'] = (ro - ra * Math.cos(theta) + YO + 0.5).floor();
+
+    return rs;
+  }
+}
+
+
+
+// PHP 버전입니다.
+
+
+  $ConvGridGps = new ConvGridGps();
+  $gridToGpsData = $ConvGridGps->gridToGPS(60,127);
+  $gpsToGridData = $ConvGridGps->gpsToGRID(37.579871128849334, 126.98935225645432);
+  print_r($gridToGpsData);
+  print_r($gpsToGridData);
+배열 ( [x] => 60 [y] => 127 [위도] => 37.615741485765 [경도] => 126.98991183668 ) 배열
+( [위도] => 37.579871128849 [경도] => 126.98935225645 [x] => 60 [y] => 127 )
+
+class ConvGridGps {
+	const RE = 6371.00877; // 지구 반경(km)
+	const GRID = 5.0; // 격자 간격(km)
+	const SLAT1 = 30.0; // 투영 위도1(degree)
+	const SLAT2 = 60.0; // 투영 위도2(degree)
+	const OLON = 126.0; // 기준점 경도(degree)
+	const OLAT = 38.0; // 기준점 위도(degree)
+	const XO = 43; // 기준점 X좌표(GRID)
+	const YO = 136; // 기1준점 Y좌표(GRID)
+
+	const DEGRAD = M_PI / 180.0;
+	const RADDEG = 180.0 / M_PI;
+
+	const re = self::RE / self::GRID;
+	const slat1 = self::SLAT1 * self::DEGRAD;
+	const slat2 = self::SLAT2 * self::DEGRAD;
+	const olon = self::OLON * self::DEGRAD;
+	const olat = self::OLAT * self::DEGRAD;
+
+	function sn(){
+		$snTmp = tan(M_PI * 0.25 + self::slat2 * 0.5) / tan(M_PI * 0.25 + self::slat1 * 0.5);
+		return log(cos(self::slat1) / cos(self::slat2)) / log($snTmp);
+	}
+
+	function sf(){
+		$sfTmp = tan(M_PI * 0.25 + self::slat1 * 0.5);
+		return pow($sfTmp, $this->sn()) * cos(self::slat1) / $this->sn();
+	}
+
+	function ro(){
+		$roTmp = tan(M_PI * 0.25 + self::olat * 0.5);
+		return self::re * $this->sf() / pow($roTmp, $this->sn());
+	}
+
+	function gridToGPS($v1, $v2) {
+	  $rs['x'] = $v1;
+	  $rs['y'] = $v2;
+	  $xn = (int)($v1 - self::XO);
+	  $yn = (int)($this->ro() - $v2 + self::YO);
+	  $ra = sqrt($xn * $xn + $yn * $yn);
+	  if ($this->sn() < 0.0) $ra = -$ra;
+	  $alat = pow((self::re * $this->sf() / $ra), (1.0 / $this->sn()));
+	  $alat = 2.0 * atan($alat) - M_PI * 0.5;
+
+	  if (abs($xn) <= 0.0) {
+		$theta = 0.0;
+	  } else {
+		if (abs($yn) <= 0.0) {
+		  $theta = M_PI * 0.5;
+		  if ($xn < 0.0) $theta = -$theta;
+		} else
+		  $theta = atan2($xn, $yn);
+	  }
+	  $alon = $theta / $this->sn() + self::olon;
+	  $rs['lat'] = $alat * self::RADDEG;
+	  $rs['lng'] = $alon * self::RADDEG;
+
+	  return $rs;
+	}
+
+	function gpsToGRID($v1, $v2) {
+	  $rs['lat'] = $v1;
+	  $rs['lng'] = $v2;
+	  $ra = tan(M_PI * 0.25 + ($v1) * self::DEGRAD * 0.5);
+	  $ra = self::re * $this->sf() / pow($ra, $this->sn());
+	  $theta = $v2 * self::DEGRAD - self::olon;
+	  if ($theta > M_PI) $theta -= 2.0 * M_PI;
+	  if ($theta < -M_PI) $theta += 2.0 * M_PI;
+	  $theta *= $this->sn();
+	  $rs['x'] = floor(($ra * sin($theta) + self::XO + 0.5));
+	  $rs['y'] = floor(($this->ro() - $ra * cos($theta) + self::YO + 0.5));
+
+	  return $rs;
+	}
+  }

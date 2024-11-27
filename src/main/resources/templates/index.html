@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/main_layout}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>오늘의 날씨</title>
+<style>
+.container {
+	width: 100% !important;
+}
+
+input {
+	width: 100px;
+}
+
+td {
+	text-align: center;
+}
+
+#sys {
+	width: auto;
+	margin: auto;
+	background-color: #f8f8f8 !important;
+	text-align: center !important;
+}
+
+#sms {
+	text-align: center;
+}
+
+#sq {
+	width: 100px;
+}
+</style>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 pt-5">
+					<div class="card mb-4">
+						<h5 class="card-header text-center">오늘의 날씨</h5>
+						<div class="card-body">
+							<div>
+								<script type="text/javascript"
+									src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36a75517ce82693ff837cc79c740e197&libraries=LIBRARY"></script>
+							</div>
+							<div class="col-md-12 text-center">
+								<table width="80%" style="margin: auto; text-align: center;">
+									<tr>
+										<p>
+											조회 시간: <strong th:text="${fullBaseTime}"></strong>
+										</p>
+										<!-- base_time 출력 -->
+										<td>예보지점 x값</td>
+										<td><input type="text" id="nx" name="nx" value="" /></td>
+										<td>예보지점 y값</td>
+										<td><input type="text" id="ny" name="ny" value="" /></td>
+
+									</tr>
+									<tr>
+										<td>날짜(baseDate)</td>
+										<td><input type="text" id="baseDate" name="baseDate"
+											th:value="${baseDate}" /></td>
+										<td>시간(baseTime)</td>
+										<td><input type="text" id="baseTime" name="baseTime"
+											th:value="${baseTime}" /></td>
+									</tr>
+								</table>
+								<br />
+								<button id="getWeatherButton" type="button"
+									class="btn btn-outline-success">현재 위치 입력</button>
+								<br>
+								<br>
+								<button type="button" class="btn btn-outline-success"
+									id="btn_weather">날씨 예보 조회</button>
+								<div class="text-end">자료 제공: 기상청,공공데이터 포털</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="result">
+				<div class="col-md-12">
+					<table class="table table-bordered table-hover" id="resultTable"
+						style="display: none;">
+						<colgroup id="sms">
+							<col width="250px">
+							<col width="250px">
+							<col width="250px">
+							<col width="250px">
+							<col width="250px">
+							<col width="250px">
+						</colgroup>
+						<thead id="sys">
+							<tr class="table-secondary">
+								<th>일자</th>
+								<th>시간</th>
+								<th>날씨</th>
+								<th>기온</th>
+								<th>강수형태</th>
+								<th>강수량<br>적설량
+								</th>
+								<th id="sq">습도</th>
+								<th>풍향<br>풍속
+								</th>
+								<th>동서풍<br>남북풍
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/proj4"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+		<script th:src="@{js/jquery-3.7.1.min.js}"></script>
+		<script th:src="@{js/weather.js}"></script>
+		<script th:src="@{js/geolocation.js}"></script>
+		<!-- Luxon 라이브러리 추가 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.0.4/luxon.min.js"></script>
+</body>
+</th:block>
+</html>
