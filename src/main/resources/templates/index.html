@@ -30,7 +30,8 @@ td {
 
 #sms {
 	text-align: center;
-} 
+}
+
 #sq {
 	width: 100px;
 }
@@ -59,7 +60,7 @@ td {
 										<td><input type="text" id="nx" name="nx" value="" /></td>
 										<td>예보지점 y값</td>
 										<td><input type="text" id="ny" name="ny" value="" /></td>
-										
+
 									</tr>
 									<tr>
 										<td>날짜(baseDate)</td>
@@ -71,8 +72,10 @@ td {
 									</tr>
 								</table>
 								<br />
-								<button id="getWeatherButton" type="button" class="btn btn-outline-success">
-									현재 위치 입력</button><br><br>
+								<button id="getWeatherButton" type="button"
+									class="btn btn-outline-success">현재 위치 입력</button>
+								<br>
+								<br>
 								<button type="button" class="btn btn-outline-success"
 									id="btn_weather">날씨 예보 조회</button>
 								<div class="text-end">자료 제공: 기상청,공공데이터 포털</div>
@@ -100,10 +103,13 @@ td {
 								<th>날씨</th>
 								<th>기온</th>
 								<th>강수형태</th>
-								<th>강수량</th>
+								<th>강수량<br>적설량
+								</th>
 								<th id="sq">습도</th>
-								<th>풍향<br>풍속</th>
-								<th>동서풍<br>남북풍</th>
+								<th>풍향<br>풍속
+								</th>
+								<th>동서풍<br>남북풍
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -118,6 +124,8 @@ td {
 		<script th:src="@{js/jquery-3.7.1.min.js}"></script>
 		<script th:src="@{js/weather.js}"></script>
 		<script th:src="@{js/geolocation.js}"></script>
+		<!-- Luxon 라이브러리 추가 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.0.4/luxon.min.js"></script>
 </body>
 </th:block>
 </html>

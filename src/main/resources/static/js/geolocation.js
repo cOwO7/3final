@@ -34,8 +34,11 @@ $(function () {
                         body: JSON.stringify(weatherDto),
                     })
                         .then((response) => {
-                            if (!response.ok) {
+                            if (!response.ok) { // 추가
+								return response.json().then((data) => { // 추가
+								console.error("서버 오류:", data.message || "알 수 없는 오류");	
                                 throw new Error('날씨 데이터를 가져오지 못했습니다: ' + response.status);
+								}); // 추가
                             }
                             return response.json();
                         })

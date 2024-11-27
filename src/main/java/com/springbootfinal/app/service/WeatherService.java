@@ -70,7 +70,7 @@ public class WeatherService {
 	    log.info("초단기실황 API 응답: {}", response.getBody());
 	    
 	    if (!response.getStatusCode().is2xxSuccessful()) {
-	        throw new IOException("Failed to fetch Ultra Srt Ncst, HTTP Status: " + response.getStatusCode());
+	        throw new IOException("Ultra Srt Ncst, HTTP 상태를 가져오지 못했습니다: " + response.getStatusCode());
 	    }
 
 	    ObjectMapper mapper = new ObjectMapper();
@@ -90,13 +90,7 @@ public class WeatherService {
 	    return ultraSrtNcstData;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+
 
 	/**
 	 * 초단기예보조회
@@ -117,7 +111,7 @@ public class WeatherService {
 		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
 
 		// 응답 내용 로깅
-		log.info("API Response: {}", response.getBody());
+		log.info("API 응답: {}", response.getBody());
 
 		// 응답 내용 반환
 		return response.getBody();
@@ -140,11 +134,11 @@ public class WeatherService {
 
 	    // 응답 상태 코드 확인
 	    if (!response.getStatusCode().is2xxSuccessful()) {
-	        throw new IOException("Failed to fetch weather data, HTTP Status: " + response.getStatusCode());
+	        throw new IOException("날씨 데이터를 가져오지 못했습니다. HTTP 상태: " + response.getStatusCode());
 	    }
 
 	    // 응답 내용 로깅 (디버깅을 위한 출력)
-	    log.info("API Response: {}", response.getBody());
+	    log.info("API 응답: {}", response.getBody());
 
 	    // JSON 응답 파싱
 	    ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +149,8 @@ public class WeatherService {
 
 	    // 시간별 데이터 그룹화
 	    for (JsonNode item : items) {
-	        String timeKey = item.get("fcstDate").asText() + item.get("fcstTime").asText(); // 날짜+시간 키
+	    	// 날짜+시간 키
+	        String timeKey = item.get("fcstDate").asText() + item.get("fcstTime").asText(); 
 	        String category = item.get("category").asText();
 	        String value = item.get("fcstValue").asText();
 
