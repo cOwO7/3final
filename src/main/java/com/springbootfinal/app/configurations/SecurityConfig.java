@@ -10,15 +10,23 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.client.RestTemplate;
 
+import com.springbootfinal.app.custom.CustomOAuth2UserService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-	@Bean
+	
+	
+	@Bean // 비밀번호 암호화
 	public PasswordEncoder passwordEncoder() {
 
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Bean // 소셜 로그인
+    public CustomOAuth2UserService customOAuth2UserService() {
+        return new CustomOAuth2UserService();
+    }
 	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,8 +44,14 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .logoutSuccessUrl("/loginForm")
                 .invalidateHttpSession(true)
-            );
-
+            )
+            // 소셜 로그인
+            .oauth2Login()
+            .loginPage("/login") // 소셜 로그인 시에도 동일 로그인 페이지 사용
+            .defaultSuccessUrl("/") // 네이버 로그인 성공 후 이동할 페이지
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService()
+            		); // 사용자 정보를 처리할 서비스 등록
         return http.build();
     }
 }
