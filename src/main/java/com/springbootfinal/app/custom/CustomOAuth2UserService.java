@@ -1,36 +1,80 @@
 package com.springbootfinal.app.custom;
 
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.stereotype.Service;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Collections;
-import java.util.Map;
+import jakarta.servlet.http.HttpSession;
 
-@Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
+    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate;
+
+    public CustomOAuth2UserService() {
+        this.delegate = new DefaultOAuth2UserService();  // 기본 구현체 사용
+    }
+
+    public CustomOAuth2UserService(OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate) {
+        this.delegate = delegate;
+    }
+
+   /* @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) {
+        OAuth2User oAuth2User = delegate.loadUser(userRequest);  // 기본 OAuth2UserService 호출
+
+        // 네이버 사용자 정보를 NaverUserInfo로 변환
+        NaverUserInfo naverUserInfo = NaverUserInfo.fromOAuth2User(oAuth2User);
+
+        // 인증 객체 생성
+        Authentication authentication = new OAuth2AuthenticationToken(
+                naverUserInfo, 
+                naverUserInfo.getAuthorities(), 
+                userRequest.getClientRegistration().getClientId()
+        );
+
+        // SecurityContext에 인증 정보 저장
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // 세션에 로그인 상태 반영
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+        session.setAttribute("isLogin", true);  // 소셜 로그인 시 로그인 상태 설정
+        session.setAttribute("social", naverUserInfo);  // 사용자 정보도 함께 세션에 저장
+
+        return oAuth2User;  // 원본 OAuth2User 반환
+    }*/
+    
+    
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) {
-        OAuth2User oAuth2User = new DefaultOAuth2UserService().loadUser(userRequest);
-
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        String userNameAttributeName = userRequest.getClientRegistration()
-                                                  .getProviderDetails()
-                                                  .getUserInfoEndpoint()
-                                                  .getUserNameAttributeName();
-
-        // 사용자 정보 맵핑 (예: 네이버 response에 맞게 처리)
-        Map<String, Object> attributes = oAuth2User.getAttributes();
-        return new DefaultOAuth2User(
-            Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
-            attributes,
-            userNameAttributeName
+        OAuth2User oAuth2User = delegate.loadUser(userRequest);
+        
+        // 네이버 사용자 정보를 NaverUserInfo로 변환
+        NaverUserInfo naverUserInfo = NaverUserInfo.fromOAuth2User(oAuth2User);
+        
+        // 인증 객체 생성
+        Authentication authentication = new OAuth2AuthenticationToken(
+                naverUserInfo, 
+                naverUserInfo.getAuthorities(), 
+                userRequest.getClientRegistration().getClientId()
         );
+        
+        // SecurityContext에 인증 정보 저장
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // 세션에 로그인 상태 반영
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+        session.setAttribute("social", naverUserInfo);  // 세션에 social 정보 저장
+        
+        System.out.println("세션에 social 정보 저장: " + session.getAttribute("social"));  // 로그 확인
+
+        return oAuth2User;  // 원본 OAuth2User 반환
     }
+
 }
 
