@@ -47,7 +47,7 @@ button {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 1em;
   cursor: pointer;
   border-radius: 5px;
@@ -62,12 +62,12 @@ button:hover {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-  width: auto;
+  width: 80%; /* 부모 요소에 비례하여 100% 크기로 확장 */
   padding: 10px;
   margin: 10px 0;
   border: 2px solid #ddd;
   border-radius: 5px;
-  box-sizing: border-box;
+  box-sizing: border-box; /* padding과 border가 width에 포함되도록 설정 */
 }
 
 input[type="text"]:focus,
@@ -91,7 +91,7 @@ input[type="email"]:focus {
 									src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36a75517ce82693ff837cc79c740e197&libraries=LIBRARY"></script>
 							</div>
 							<div class="col-md-12 text-center">
-								<table width="80%" style="margin: auto; text-align: center;">
+								<table width="85%" style="margin: auto; text-align: center;">
 									<tr>
 										<p>
 											조회 시간: <strong th:text="${fullBaseTime}"></strong>
@@ -105,10 +105,10 @@ input[type="email"]:focus {
 									</tr>
 									<tr>
 										<td>날짜(baseDate)</td>
-										<td><input type="text" id="baseDate" name="baseDate"
+										<td><input width="auto" type="text" id="baseDate" name="baseDate"
 											th:value="${baseDate}" /></td>
 										<td>시간(baseTime)</td>
-										<td><input type="text" id="baseTime" name="baseTime"
+										<td><input width="auto" type="text" id="baseTime" name="baseTime"
 											th:value="${baseTime}" /></td>
 									</tr>
 								</table>
