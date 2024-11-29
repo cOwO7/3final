@@ -11,20 +11,27 @@
 	justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
 	gap: 10px; /* 버튼 간의 간격 조정 */
 }
-		.button-container {
-			display: flex;
-			justify-content: center; /* 버튼들을 가운데 정렬 */
-			gap: 20px; /* 버튼 간의 간격 조정 */
-			margin-top: 20px;
-		}
-		#weatherImage {
-			width: 100%; /* 이미지 크기를 화면에 맞게 조정 */
-			max-width: 500px; /* 이미지 최대 크기 설정 */
-			margin: 20px 0; /* 이미지와 버튼 사이에 여백 추가 */
-		}
-	</style>
+
+.button-container {
+	display: flex;
+	justify-content: center; /* 버튼들을 가운데 정렬 */
+	gap: 20px; /* 버튼 간의 간격 조정 */
+	margin-top: 20px;
+}
+
+#weatherImage {
+	width: 100%; /* 이미지 크기를 화면에 맞게 조정 */
+	max-width: 500px; /* 이미지 최대 크기 설정 */
+	margin: 20px 0; /* 이미지와 버튼 사이에 여백 추가 */
+}
+</style>
+
 <!-- content -->
 <th:block layout:fragment="content">
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<div class="row my-5" id="global-content">
 		<div class="col-10 offset-1">
 			<div class="row text-center">
@@ -34,61 +41,65 @@
 			</div>
 		</div>
 	</div>
+
 	<form class="default text-center">
+			<input type="text" id="address" placeholder="주소를 입력하세요"
+				style="width: 300px; padding: 5px;">
+			<button id="submit" type="submit">검색</button>
+		<!-- 지도를 표시할 div -->
+		<div id="map" style="width: 100%; height: 500px;"></div>
+		<script type="text/javascript" src="js/navermap.js"></script>
+		<button id="current-location-btn">현재 위치로 가기</button>
 		<div>
 			<!-- 날씨 이미지 -->
-			<img id="weatherImage" src="/images/weather/default.gif" alt="Weather Image">
-			<!--<img id="weatherImage" src="/images/weather/맑음.gif" alt="Weather Image"><br>
-			 <img id="weatherImage" src="/images/weather/구름많음.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/흐림아침.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/바람.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/비.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/이슬비.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/흐림밤.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/함박눈.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/진눈깨비.gif" alt="Weather Image"><br> -->
-			<br><a>아이콘 제작자: Freepik - Flaticon</a>
+			<img id="weatherImage" src="/images/weather/default.gif"
+				alt="Weather Image"> <br>
+			<a>아이콘 제작자: Freepik - Flaticon</a>
 		</div>
 		<div class="row my-12">
 			<div class="button-container">
 				<!-- 날씨 버튼 클릭 시 페이지 이동 -->
-				<a href="/weather" class="btn btn-primary btn-lg rounded">날씨</a>
-				<a href="/weather/alerts" class="btn btn-warning btn-lg rounded">알림받기</a>
-				<a href="/weather/remove-alert" class="btn btn-danger btn-lg rounded">알람삭제</a>
+				<a href="/weather" class="btn btn-primary btn-lg rounded">날씨</a> <a
+					href="/weather/alerts" class="btn btn-warning btn-lg rounded">알림받기</a>
+				<a href="/weather/remove-alert"
+					class="btn btn-danger btn-lg rounded">알람삭제</a>
 			</div>
 		</div>
 	</form>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script>
-    $(document).ready(function() {
-        // 서버에서 현재 날씨 상태 가져오기
-        $.ajax({
-            url: '/api/weather/status',
-            method: 'GET',
-            success: function(status) {
-            	console.log(status)
-                // 서버에서 받은 status 값에 따라 이미지 변경
-                let weatherImageMap = {
-                    "맑음": "/images/weather/맑음.gif",
-                    "구름많음": "/images/weather/구름많음.gif",
-                    "흐림": "/images/weather/흐림아침.gif",
-                    "바람": "/images/weather/바람.gif",
-                    "비": "/images/weather/비.gif",
-                    "이슬비": "/images/weather/이슬비.gif",
-                    "흐림밤": "/images/weather/흐림밤.gif",
-                    "함박눈": "/images/weather/함박눈.gif",
-                    "진눈깨비": "/images/weather/진눈깨비.gif"
-                };
 
-                // 이미지 엘리먼트 업데이트
-                let imagePath = weatherImageMap[status] || "/images/weather/default.gif";
-                $("#weatherImage").attr("src", imagePath);
-            },
-            error: function() {
-                alert("날씨 정보를 불러오는 데 실패했습니다.");
-            }
-        });
-    });
-</script>
+	<script>
+		$(document).ready(
+				function() {
+					// 서버에서 현재 날씨 상태 가져오기
+					$.ajax({
+						url : '/api/weather/status',
+						method : 'GET',
+						success : function(status) {
+							console.log(status)
+							// 서버에서 받은 status 값에 따라 이미지 변경
+							let weatherImageMap = {
+								"맑음" : "/images/weather/맑음.gif",
+								"구름많음" : "/images/weather/구름많음.gif",
+								"흐림" : "/images/weather/흐림아침.gif",
+								"바람" : "/images/weather/바람.gif",
+								"비" : "/images/weather/비.gif",
+								"이슬비" : "/images/weather/이슬비.gif",
+								"흐림밤" : "/images/weather/흐림밤.gif",
+								"함박눈" : "/images/weather/함박눈.gif",
+								"진눈깨비" : "/images/weather/진눈깨비.gif"
+							};
+
+							// 이미지 엘리먼트 업데이트
+							let imagePath = weatherImageMap[status]
+									|| "/images/weather/default.gif";
+							$("#weatherImage").attr("src", imagePath);
+						},
+						error : function() {
+							alert("날씨 정보를 불러오는 데 실패했습니다.");
+						}
+					});
+				});
+	</script>
 </th:block>
 </html>

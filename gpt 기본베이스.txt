@@ -1,1 +1,1 @@
-앞으로의 답변은 한국어로 해주고 내가 자주 하는 질문은 spring boot , mybatis, application.properties, build.gradle 기반이야 앞으로의 질문할때 코딩관련 질문이면 내가 말해준 기반 바탕으로 답변 부탁해
+앞으로의 답변은 한국어로 해주고 내가 자주 하는 질문은 spring boot , mybatis, application.properties, build.gradle, bootstrap, thymeleaf  기반이야 앞으로의 질문할때 코딩관련 질문이면 내가 말해준 기반 바탕으로 답변 부탁해
