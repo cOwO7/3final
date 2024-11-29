@@ -45,12 +45,6 @@ public class WeatherService {
 		//this.weatherService = weatherService;
 	}
 
-	public String getCurrentWeatherStatus() {
-		// 테스트를 위해 랜덤 상태 값 반환
-		String[] statuses = { "맑음", "구름많음", "흐림", "비", "이슬비", "함박눈" };
-		int randomIndex = new Random().nextInt(statuses.length);
-		return statuses[randomIndex];
-	}
 	
 	// 11-28일 추가
 	 // 기상청 갱신 주기 시간 (시:분)
