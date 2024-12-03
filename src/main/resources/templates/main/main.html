@@ -28,11 +28,11 @@
 
 <!-- content -->
 <th:block layout:fragment="content">
-	<script type="text/javascript"
-		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder"></script>
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/js/mainpageweather.js"></script>
+	<!-- 다음(kakao) 주소 API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 네이버 지도 API -->
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder" ></script>
+	<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm"></script> -->
 	<div class="row my-5" id="global-content">
 		<div class="col-10 offset-1">
 			<div class="row text-center">
@@ -51,24 +51,20 @@
 		<script type="text/javascript" src="js/navermap.js"></script>
 		<button id="current-location-btn">현재 위치로 가기</button>
 		<div>
-			<div id="weather">
-				<!-- 날씨 정보를 출력할 테이블 -->
-				<table id="weatherTable" style="width: 100%;">
-					<thead>
-						<tr>
-							<th>시간</th>
-							<th>기온</th>
-							<th>하늘</th>
-							<th>강수형태</th>
-							<th>강수량<br>적설량
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- 날씨 정보가 여기에 추가됩니다 -->
-					</tbody>
-				</table>
-			</div>
+			<button id="btnFetchWeather" type="button" class="btn btn-primary">날씨
+				조회</button>
+			<table id="mainWeatherTable" style="display: none;">
+				<thead>
+					<tr>
+						<th>날짜</th>
+						<th>시간</th>
+						<th>기온</th>
+						<th>하늘 상태</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
 		</div>
 		<div class="row my-12">
 			<div class="button-container">
@@ -81,6 +77,6 @@
 		</div>
 	</form>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+	<script src="/js/mainpageweather.js"></script>
 </th:block>
 </html>
