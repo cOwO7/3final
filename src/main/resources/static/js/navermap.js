@@ -1,301 +1,167 @@
-/*document.addEventListener('DOMContentLoaded', function () {
-    // 네이버 맵 API가 로드되었는지 확인하는 함수
-    function checkMapAPI() {
-        if (typeof naver !== 'undefined' && typeof naver.maps !== 'undefined' && typeof naver.maps.Service !== 'undefined') {
-            initializeMap(); // API 로드가 완료되면 지도 초기화
-        } else {
-            setTimeout(checkMapAPI, 100); // 100ms 후 다시 확인
-        }
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    var map, marker;
 
-    // 네이버 맵 API 로드 확인 후 지도 초기화
-    function initializeMap() {
-        var position = new naver.maps.LatLng(37.4809615, 126.9521689); // 기본 서울 위치
-
-        // 네이버 맵 초기화 (사용자 정의 컨트롤 및 기본 컨트롤 설정)
-        var map = new naver.maps.Map('map', {
-            center: position,
+    // 지도 초기화 및 위치 지정
+    function initializeMap(lat, lon) {
+        var mapContainer = document.getElementById("map"); // 지도 표시할 div
+        var mapOption = {
+            center: new naver.maps.LatLng(lat, lon), // 지도 중심 위치
             zoom: 17,
-            scaleControl: true,      // 스케일 컨트롤 활성화
-            logoControl: false,      // 네이버 로고 컨트롤 비활성화
-            mapDataControl: true,    // 지도 데이터 컨트롤 비활성화
-            zoomControl: true,       // 줌 컨트롤 활성화
-            minZoom: 7               // 최소 줌 레벨 설정
+            mapTypeControl: true, // 지도 타입 컨트롤 (지도 종류 변경 버튼)
+            scaleControl: true, // 스케일 컨트롤 (지도 크기 조정)
+            logoControl: false, // 네이버 지도 로고 컨트롤 활성화 여부
+            mapDataControl: true, // 지도 데이터 제어 버튼 (위성, 일반 지도 등)
+            zoomControl: true, // 줌 버튼 활성화 여부
+            zoomControlOptions: {
+                position: naver.maps.Position.TOP_RIGHT // 줌 버튼 위치
+            },
+            draggable: false, // 지도 드래그 가능 여부
+            disableDoubleClickZoom: false, // 더블클릭 줌 기능 비활성화 여부
+            keyboardShortcuts: true // 키보드 단축키 활성화
+        };
+
+        map = new naver.maps.Map(mapContainer, mapOption);
+        marker = new naver.maps.Marker({
+            position: map.getCenter(),
+            map: map,
         });
 
-        // 마커 객체 생성
-        var marker = new naver.maps.Marker({
-            position: position,
-            map: map
+        // 커스텀 버튼을 지도에 추가
+        var locationBtnHtml = `
+            <button id="current-location-btn" style="position:absolute; bottom: 50px; right: 20px; background-color: #ff6a00; color: white; border-radius: 50%; padding: 10px; z-index: 9999;">
+                📍 현재 위치
+            </button>`;
+
+        var locationBtn = new naver.maps.CustomControl(locationBtnHtml, {
+            position: naver.maps.Position.BOTTOM_RIGHT
         });
 
-        // 기본 위치로 돌아가지 않도록 `isLocationSet` 플래그 추가
-        var isLocationSet = false; // 기본 위치가 설정되었는지 여부
-
-        // 현재 위치로 이동하는 버튼 HTML
-        var locationBtnHtml = '<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">현재 위치로 이동</span></a>';
-
-        // 사용자 정의 컨트롤로 버튼을 맵에 추가
-        var customControl = new naver.maps.CustomControl(locationBtnHtml, {
-            position: naver.maps.Position.BOTTOM_RIGHT  // 버튼을 지도 오른쪽 하단에 배치
-        });
-        customControl.setMap(map);
+        locationBtn.setMap(map);
 
         // 버튼 클릭 시 현재 위치로 이동
-        naver.maps.Event.addDOMListener(customControl.getElement(), 'click', function () {
+        naver.maps.Event.addDOMListener(locationBtn.getElement(), 'click', function () {
             getCurrentLocation(); // 현재 위치로 이동하는 함수 호출
         });
+		
+		// 줌 버튼 위치를 더 세부적으로 조정하려면 zoomControl 스타일을 추가
+		        var zoomControl = map.getZoomControl();
 
-        // 현재 위치를 가져와서 지도 이동
-        function getCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var lon = position.coords.longitude;
-                    var currentPosition = new naver.maps.LatLng(lat, lon);
-                    
-                    // 지도 중심을 현재 위치로 설정
-                    map.setCenter(currentPosition);
-                    marker.setPosition(currentPosition); // 마커도 현재 위치로 변경
-                }, function () {
-                    alert("현재 위치를 찾을 수 없습니다.");
-                });
-            } else {
-                alert("이 브라우저는 Geolocation을 지원하지 않습니다.");
-            }
-        }
+		        // 줌 컨트롤 위치 및 스타일 변경 (CSS 스타일링으로 추가)
+		        zoomControl.style.left = '20px';   // 왼쪽에서 20px
+		        zoomControl.style.bottom = '500px'; // 아래에서 100px
+		        zoomControl.style.position = 'absolute'; // 위치 고정
 
-        // 카카오 주소 검색 API를 사용하는 함수
-        function openPostcode() {
-            // 카카오 주소 검색 API
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    // 데이터에서 주소와 함께 위도, 경도 정보 가져오기
-                    var fullAddr = data.address; // 전체 주소 (도로명 주소)
-                    var latitude = data.y;  // 위도
-                    var longitude = data.x; // 경도
+		        // 기본 위치에 대해 'zoomControl'을 스타일링 하여 조정
+		        zoomControl.style.zIndex = '1000'; // 줌 컨트롤의 z-index 설정
+		    }
 
-                    // 주소를 입력한 입력 필드에 도로명 주소만 설정
-                    document.getElementById("address").value = fullAddr;
+    // 현재 위치로 지도 중심을 설정
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var currentLat = position.coords.latitude;
+                var currentLon = position.coords.longitude;
 
-                    // 네이버 지도를 해당 위치로 이동
-                    var latLng = new naver.maps.LatLng(latitude, longitude);
-                    map.setCenter(latLng);  // 지도 중심을 해당 위치로 설정
-                    marker.setPosition(latLng);  // 마커도 해당 위치로 이동
+                // 지도 초기화
+                initializeMap(currentLat, currentLon);
 
-                    // 주소 검색 후에는 현재 위치 버튼의 기능을 비활성화
-                    isLocationSet = true; // 주소가 설정되었으므로 현재 위치 버튼 기능을 끈다.
-                }
-            }).open();
-        }
+                // 현재 위치 좌표값을 input 필드에 넣기
+                document.getElementById("latitudeNum").value = currentLat;
+                document.getElementById("longitudeNum").value = currentLon;
 
-        // 검색 버튼 클릭 시 해당 주소로 지도가 이동하는 함수
-        function searchAddress(e) {
-            e.preventDefault(); // 기본 동작 방지 (폼 제출 방지)
+                // 기상청 격자 좌표 변환
+                var gridCoordinates = dfs_xy_conv("toXY", currentLat, currentLon);
+                document.getElementById("nx").value = gridCoordinates.x;
+                document.getElementById("ny").value = gridCoordinates.y;
 
-            var address = document.getElementById("address").value;
-
-            if (address.trim() === "") {
-                alert("주소를 입력하세요.");
-                return;
-            }
-
-            // 도로명 주소를 입력받아 위도, 경도를 구하기 위한 네이버 Geocoding API
-            naver.maps.Service.geocode({
-                address: address
-            }, function(status, response) {
-                if (status === naver.maps.Service.Status.OK) {
-                    var result = response.result.items[0];
-                    var latLng = new naver.maps.LatLng(result.point.y, result.point.x); // point.y, point.x로 위도와 경도 접근
-
-                    // 콘솔에 위도, 경도 값 확인
-                    console.log("Geocoding API 응답:", result); // Geocoding 응답 확인
-                    console.log("위도:", result.point.y, "경도:", result.point.x);  // 위도와 경도 출력
-
-                    // 지도 중심을 해당 위치로 이동
-                    map.setCenter(latLng);
-                    marker.setPosition(latLng);  // 마커도 해당 위치로 이동
-                } else {
-                    alert("주소를 찾을 수 없습니다.");
-                }
+            }, function (error) {
+                alert("현재 위치를 가져올 수 없습니다.");
             });
-        }
-
-        // 엔터 키로도 검색할 수 있게 이벤트 리스너 추가
-        document.getElementById("address").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                searchAddress(event);  // 엔터 키 입력 시 검색
-            }
-        });
-
-        // "검색" 버튼 클릭 시 검색
-        // 여기서 `searchAddress(e)` 호출하면서 e.preventDefault()를 사용하여 페이지 새로고침 방지
-        document.getElementById("submit").addEventListener("click", function(e) {
-            searchAddress(e); // e.preventDefault()로 페이지 새로고침 방지
-        });
-
-        // 주소 입력창 클릭 시 카카오 주소 검색 팝업 열기
-        document.getElementById("address").addEventListener("click", openPostcode);
-
-        // 초기 위치는 한 번만 설정하고, 주소 검색 후에는 현재 위치로 돌아가지 않도록
-        if (!isLocationSet) {
-            // 기본 위치로 설정 (서울)
-            map.setCenter(position);
-            marker.setPosition(position); // 기본 마커 위치 설정
-        }
-    }
-
-    // 네이버 맵 API 로드 여부 확인
-    checkMapAPI(); // 맵 API가 로드되었는지 확인하고 초기화
-});*/
-
-document.addEventListener('DOMContentLoaded', function () {
-    // 네이버 맵 API가 로드되었는지 확인하는 함수
-    function checkMapAPI() {
-        if (typeof naver !== 'undefined' && typeof naver.maps !== 'undefined' && typeof naver.maps.Service !== 'undefined') {
-            initializeMap(); // API 로드가 완료되면 지도 초기화
         } else {
-            setTimeout(checkMapAPI, 100); // 100ms 후 다시 확인
+            alert("이 브라우저는 Geolocation을 지원하지 않습니다.");
         }
     }
 
-    // 네이버 맵 API 로드 확인 후 지도 초기화
-    function initializeMap() {
-        var position = new naver.maps.LatLng(37.4809615, 126.9521689); // 기본 서울 위치
+    // 주소 검색 함수
+    function searchAddress() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                var fullAddr = data.address; // 전체 주소
+                var lat = data.y;  // 위도
+                var lon = data.x; // 경도
 
-        // 네이버 맵 초기화 (사용자 정의 컨트롤 및 기본 컨트롤 설정)
-        var map = new naver.maps.Map('map', {
-            center: position,
-            zoom: 17,
-            scaleControl: true,      // 스케일 컨트롤 활성화
-            logoControl: false,      // 네이버 로고 컨트롤 비활성화
-            mapDataControl: true,    // 지도 데이터 컨트롤 비활성화
-            zoomControl: true,       // 줌 컨트롤 활성화
-            minZoom: 7               // 최소 줌 레벨 설정
-        });
+                // 새로운 좌표가 입력되면 기존 값을 덮어쓰도록
+                document.getElementById("address").value = fullAddr;
+                document.getElementById("address-hidden").value = fullAddr;
 
-        // 마커 객체 생성
-        var marker = new naver.maps.Marker({
-            position: position,
-            map: map
-        });
+                // 위도, 경도 필드 덮어쓰기
+                document.getElementById("latitudeNum").value = lat;
+                document.getElementById("longitudeNum").value = lon;
 
-        // 기본 위치로 돌아가지 않도록 `isLocationSet` 플래그 추가
-        var isLocationSet = false; // 기본 위치가 설정되었는지 여부
+                // 기상청 좌표 변환
+                var gridCoordinates = dfs_xy_conv("toXY", lat, lon);
+                document.getElementById("nx").value = gridCoordinates.x;
+                document.getElementById("ny").value = gridCoordinates.y;
 
-        // 현재 위치로 이동하는 버튼 HTML
-        var locationBtnHtml = '<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">현재 위치로 이동</span></a>';
-
-        // 사용자 정의 컨트롤로 버튼을 맵에 추가
-        var customControl = new naver.maps.CustomControl(locationBtnHtml, {
-            position: naver.maps.Position.BOTTOM_RIGHT  // 버튼을 지도 오른쪽 하단에 배치
-        });
-        customControl.setMap(map);
-
-        // 버튼 클릭 시 현재 위치로 이동
-        naver.maps.Event.addDOMListener(customControl.getElement(), 'click', function () {
-            getCurrentLocation(); // 현재 위치로 이동하는 함수 호출
-        });
-
-        // 현재 위치를 가져와서 지도 이동
-        function getCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var lon = position.coords.longitude;
-                    var currentPosition = new naver.maps.LatLng(lat, lon);
-                    
-                    // 지도 중심을 현재 위치로 설정
-                    map.setCenter(currentPosition);
-                    marker.setPosition(currentPosition); // 마커도 현재 위치로 변경
-                }, function () {
-                    alert("현재 위치를 찾을 수 없습니다.");
-                });
-            } else {
-                alert("이 브라우저는 Geolocation을 지원하지 않습니다.");
+                // 지도 및 마커 업데이트
+                updateMap(lat, lon);
             }
-        }
-
-        // 카카오 주소 검색 API를 사용하는 함수
-        function openPostcode() {
-            // 카카오 주소 검색 API
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    // 데이터에서 주소와 함께 위도, 경도 정보 가져오기
-                    var fullAddr = data.address; // 전체 주소 (도로명 주소)
-                    var latitude = data.y;  // 위도
-                    var longitude = data.x; // 경도
-
-                    // 주소를 입력한 입력 필드에 도로명 주소만 설정
-                    document.getElementById("address").value = fullAddr;
-
-                    // 네이버 지도를 해당 위치로 이동
-                    var latLng = new naver.maps.LatLng(latitude, longitude);
-                    map.setCenter(latLng);  // 지도 중심을 해당 위치로 설정
-                    marker.setPosition(latLng);  // 마커도 해당 위치로 이동
-
-                    // 주소 검색 후에는 현재 위치 버튼의 기능을 비활성화
-                    isLocationSet = true; // 주소가 설정되었으므로 현재 위치 버튼 기능을 끈다.
-                }
-            }).open();
-        }
-
-        // 검색 버튼 클릭 시 해당 주소로 지도가 이동하는 함수
-        function searchAddress(e) {
-            e.preventDefault(); // 기본 동작 방지 (폼 제출 방지)
-
-            var address = document.getElementById("address").value;
-
-            if (address.trim() === "") {
-                alert("주소를 입력하세요.");
-                return;
-            }
-
-            // 도로명 주소를 입력받아 위도, 경도를 구하기 위한 네이버 Geocoding API
-            naver.maps.Service.geocode({
-                address: address
-            }, function(status, response) {
-                if (status === naver.maps.Service.Status.OK) {
-                    var result = response.result.items[0];
-                    var latLng = new naver.maps.LatLng(result.point.y, result.point.x); // point.y, point.x로 위도와 경도 접근
-
-                    // 콘솔에 위도, 경도 값 확인
-                    console.log("Geocoding API 응답:", result); // Geocoding 응답 확인
-                    console.log("위도:", result.point.y, "경도:", result.point.x);  // 위도와 경도 출력
-
-                    // 지도 중심을 해당 위치로 이동
-                    map.setCenter(latLng);
-                    marker.setPosition(latLng);  // 마커도 해당 위치로 이동
-                } else {
-                    alert("주소를 찾을 수 없습니다.");
-                }
-            });
-        }
-
-        // 엔터 키로도 검색할 수 있게 이벤트 리스너 추가
-        document.getElementById("address").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                searchAddress(event);  // 엔터 키 입력 시 검색
-            }
-        });
-
-        // "검색" 버튼 클릭 시 검색
-        // 여기서 `searchAddress(e)` 호출하면서 e.preventDefault()를 사용하여 페이지 새로고침 방지
-        document.getElementById("submit").addEventListener("click", function(e) {
-            searchAddress(e); // e.preventDefault()로 페이지 새로고침 방지
-        });
-
-        // 주소 입력창 클릭 시 카카오 주소 검색 팝업 열기
-        document.getElementById("address").addEventListener("click", openPostcode);
-
-        // 초기 위치는 한 번만 설정하고, 주소 검색 후에는 현재 위치로 돌아가지 않도록
-        if (!isLocationSet) {
-            // 기본 위치로 설정 (서울)
-            map.setCenter(position);
-            marker.setPosition(position); // 기본 마커 위치 설정
-        }
+        }).open();
     }
 
-    // 네이버 맵 API 로드 여부 확인
-    checkMapAPI(); // 맵 API가 로드되었는지 확인하고 초기화
+    // 지도 및 마커 업데이트
+    function updateMap(latitude, longitude) {
+        var position = new naver.maps.LatLng(latitude, longitude); // 새로운 좌표 생성
+        map.setCenter(position); // 지도 중심 변경
+        marker.setPosition(position); // 마커 위치 업데이트
+    }
+
+    // 현재 위치 버튼 클릭 시 지도 중심을 현재 위치로 설정
+    document.getElementById("current-location-btn").addEventListener("click", function () {
+        getCurrentLocation(); // 현재 위치를 다시 가져오도록 호출
+    });
+
+    // 초기 위치를 가져옴
+    getCurrentLocation();
 });
+
+// 기상청 좌표 변환 함수 (위경도 -> 격자 좌표 변환)
+function dfs_xy_conv(code, v1, v2) {
+    var RE = 6371.00877; // 지구 반경(km)
+    var GRID = 5.0; // 격자 간격(km)
+    var SLAT1 = 30.0; // 투영 위도1(degree)
+    var SLAT2 = 60.0; // 투영 위도2(degree)
+    var OLON = 126.0; // 기준점 경도(degree)
+    var OLAT = 38.0; // 기준점 위도(degree)
+    var XO = 43; // 기준점 X좌표(GRID)
+    var YO = 136; // 기준점 Y좌표(GRID)
+
+    var DEGRAD = Math.PI / 180.0;
+    var RADDEG = 180.0 / Math.PI;
+
+    var re = RE / GRID;
+    var slat1 = SLAT1 * DEGRAD;
+    var slat2 = SLAT2 * DEGRAD;
+    var olon = OLON * DEGRAD;
+    var olat = OLAT * DEGRAD;
+
+    var sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+    var sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+    sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+    var ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+    ro = re * sf / Math.pow(ro, sn);
+
+    var rs = {};
+    if (code === "toXY") {
+        var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
+        ra = re * sf / Math.pow(ra, sn);
+        var theta = v2 * DEGRAD - olon;
+        if (theta > Math.PI) theta -= 2.0 * Math.PI;
+        if (theta < -Math.PI) theta += 2.0 * Math.PI;
+        theta *= sn;
+        rs.x = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+        rs.y = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+    }
+    return rs;
+}

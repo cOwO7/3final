@@ -24,14 +24,26 @@
 	max-width: 500px; /* 이미지 최대 크기 설정 */
 	margin: 20px 0; /* 이미지와 버튼 사이에 여백 추가 */
 }
+#current-location-btn {
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    background-color: #ff6a00;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    z-index: 9999;  /* 버튼을 최상위로 표시 */
+}
 </style>
 
 <!-- content -->
 <th:block layout:fragment="content">
 	<!-- 다음(kakao) 주소 API -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- 네이버 지도 API -->
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder" ></script>
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder"></script>
 	<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm"></script> -->
 	<div class="row my-5" id="global-content">
 		<div class="col-10 offset-1">
@@ -43,17 +55,50 @@
 		</div>
 	</div>
 	<form class="default text-center">
-		<input type="text" id="address" placeholder="주소를 입력하세요"
+		<!-- <input type="hidden" id="address" placeholder="주소를 입력하세요"
 			style="width: 300px; padding: 5px;">
-		<button id="submit" type="submit">검색</button>
+		<button id="submit" type="hidden"></button> -->
 		<!-- 지도를 표시할 div -->
-		<div id="map" style="width: 100%; height: 500px;"></div>
+		<div style="width: 400px; height: 400px;">
+		<div id="map" style="width: 100%; height: 100%;"></div>
+		</div>
 		<script type="text/javascript" src="js/navermap.js"></script>
 		<button id="current-location-btn">현재 위치로 가기</button>
+		<!-- 현재 위치 버튼 (이 버튼은 JavaScript에서 사용하지 않아도 HTML로 작성 가능합니다.) -->
+		<button id="current-location-btn"
+			style="position: absolute; bottom: 50px; right: 20px; background-color: #ff6a00; color: white; border-radius: 50%; padding: 10px;">
+			📍 현재 위치</button>
 		<div>
-			<button id="btnFetchWeather" type="button" class="btn btn-primary">날씨
-				조회</button>
-			<table id="mainWeatherTable" style="display: none;">
+			<tr>
+				<!-- <td>날짜(baseDate)</td> -->
+				<td><input width="auto" type="text" id="baseDate"
+					name="baseDate" th:value="${baseDate}" /></td>
+				<!-- <td>시간(baseTime)</td> -->
+				<td><input width="auto" type="text" id="baseTime"
+					name="baseTime" th:value="${baseTime}" /></td>
+			</tr>
+			<tr>
+				<!-- <td>예보지점 x값</td> -->
+				<td><input type="text" id="nx" name="nx" th:value="${gridX}" />
+				</td>
+				<!-- <td>예보지점 y값</td> -->
+				<td><input type="text" id="ny" name="ny" th:value="${gridY}" />
+				</td>
+			</tr>
+			<tr>
+				<!-- <td>위도(latitude)</td> -->
+				<td><input width="auto" type="text" id="latitudeNum"
+					name="latitudeNum" th:value="${latitudeNum}" /></td>
+				<!-- <td>경도(longitude)</td> -->
+				<td><input width="auto" type="text" id="longitudeNum"
+					name="longitudeNum" th:value="${longitudeNum}" /></td>
+			</tr>
+
+			<button id="btn_weather" type="button" class="btn btn-primary">
+				날씨조회</button>
+			<!-- <table id="mainWeatherTable" style="display: none;"> -->
+			<table class="table table-bordered table-hover" id="resultTable"
+				style="display: none;">
 				<thead>
 					<tr>
 						<th>날짜</th>
@@ -78,5 +123,6 @@
 	</form>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="/js/mainpageweather.js"></script>
+
 </th:block>
 </html>
