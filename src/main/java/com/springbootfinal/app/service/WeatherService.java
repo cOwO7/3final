@@ -2,7 +2,10 @@
 package com.springbootfinal.app.service;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -34,16 +37,60 @@ public class WeatherService {
 
 	private final RestTemplate restTemplate;
 
-	public WeatherService(RestTemplate restTemplate) {
+	private WeatherService weatherService;
+
+	public WeatherService(RestTemplate restTemplate
+			/*,WeatherService weatherService*/) {
 		this.restTemplate = restTemplate;
+		//this.weatherService = weatherService;
 	}
 
-	public String getCurrentWeatherStatus() {
-		// 테스트를 위해 랜덤 상태 값 반환
-		String[] statuses = { "맑음", "구름많음", "흐림", "비", "이슬비", "함박눈" };
-		int randomIndex = new Random().nextInt(statuses.length);
-		return statuses[randomIndex];
-	}
+	
+	// 11-28일 추가
+	 // 기상청 갱신 주기 시간 (시:분)
+    private static final List<LocalTime> updateTimes = Arrays.asList(
+            LocalTime.of(2, 40), LocalTime.of(5, 40), LocalTime.of(8, 40),
+            LocalTime.of(11, 40), LocalTime.of(14, 40), LocalTime.of(17, 40),
+            LocalTime.of(20, 40), LocalTime.of(23, 40)
+    );
+
+    // 가장 가까운 갱신 시간을 찾는 메소드
+    public LocalTime getNextUpdateTime() {
+        LocalTime currentTime = LocalTime.now();
+
+        // 가장 가까운 갱신 시간을 찾기 위한 변수
+        LocalTime nextUpdateTime = updateTimes.get(0);  // 기본값은 첫 번째 갱신 시간
+
+        // 현재 시간 이후 가장 가까운 갱신 시간을 찾음
+        for (LocalTime updateTime : updateTimes) {
+            if (updateTime.isAfter(currentTime)) {
+                nextUpdateTime = updateTime;
+                break;
+            }
+        }
+
+        return nextUpdateTime;
+    }
+
+    // 날씨 정보를 API에서 가져오는 메소드 예시
+    public String getWeatherInfo() {
+        String url = "http://api.weather.com/forecast";
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public static void main(String[] args) {
+        // Spring에서 RestTemplate을 빈으로 주입받을 수 있으면 이렇게 호출합니다.
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherService service = new WeatherService(restTemplate);  // RestTemplate을 생성자에 주입
+        LocalTime nextUpdate = service.getNextUpdateTime();
+        System.out.println("다음 갱신 시간: " + nextUpdate);
+    }
+	
+	// 여기까지
+	
+	
+	
+	
 
 	/**
 	 * 초단기실황조회

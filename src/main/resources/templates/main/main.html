@@ -5,90 +5,89 @@
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 <title>오늘 어때?</title>
 <meta charset="UTF-8">
-<style>
-.button-container {
-	display: flex;
-	justify-content: flex-start; /* 버튼들을 왼쪽 정렬 */
-	gap: 10px; /* 버튼 간의 간격 조정 */
-}
-		.button-container {
-			display: flex;
-			justify-content: center; /* 버튼들을 가운데 정렬 */
-			gap: 20px; /* 버튼 간의 간격 조정 */
-			margin-top: 20px;
-		}
-		#weatherImage {
-			width: 100%; /* 이미지 크기를 화면에 맞게 조정 */
-			max-width: 500px; /* 이미지 최대 크기 설정 */
-			margin: 20px 0; /* 이미지와 버튼 사이에 여백 추가 */
-		}
-	</style>
 <!-- content -->
 <th:block layout:fragment="content">
+	<!-- 네이버 지도 API -->
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=51mvmkqypm&submodules=geocoder"></script>
+	<script type="text/javascript" src="js/navermap.js"></script>
+	<link href="/css/mainstyles.css" rel="stylesheet" />
 	<div class="row my-5" id="global-content">
 		<div class="col-10 offset-1">
-			<div class="row text-center">
-				<div class="col">
-					<h2 class="fs-3 fw-bold">오늘 어때?</h2>
+			<form class="default text-center">
+				<!-- 지도를 표시할 div -->
+				<div class="container">
+					<div class="map-container">
+						<div class="col-6" style="width: 400px; height: 400px;">
+							<div id="map" style="width: 100%; height: 100%;">
+								<!-- 커스텀 현재 위치 버튼 -->
+								<button id="current-location-btn"
+									style="position: absolute; right: 10px; bottom: 40px; background-color: #fff; border-radius: 50%; padding: 10px; color: white; background-size: cover; background-position: center; z-index: 9999; background-image: url('/images/현재위치.png');">
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="weather-container">
+						<div class="row">
+							<table class="col-12 table table-bordered table-hover"
+								id="main-resultTable">
+								<thead>
+									<tr>
+										<th>하늘 상태</th>
+										<th>기온</th>
+										<th>강수 확률</th>
+										<th>강수 량</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 날씨 데이터 출력 -->
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-			</div>
+
+				<div style="display: none;">
+					<tr>
+						<!-- <td>날짜(baseDate)</td> -->
+						<td><input width="auto" type="text" id="baseDate"
+							name="baseDate" th:value="${baseDate}" /></td>
+						<!-- <td>시간(baseTime)</td> -->
+						<td><input width="auto" type="text" id="baseTime"
+							name="baseTime" th:value="${baseTime}" /></td>
+					</tr>
+					<tr>
+						<!-- <td>예보지점 x값</td> -->
+						<td><input type="text" id="nx" name="nx" th:value="${gridX}" />
+						</td>
+						<!-- <td>예보지점 y값</td> -->
+						<td><input type="text" id="ny" name="ny" th:value="${gridY}" />
+						</td>
+					</tr>
+					<tr>
+						<!-- <td>위도(latitude)</td> -->
+						<td><input width="auto" type="text" id="latitudeNum"
+							name="latitudeNum" th:value="${latitudeNum}" /></td>
+						<!-- <td>경도(longitude)</td> -->
+						<td><input width="auto" type="text" id="longitudeNum"
+							name="longitudeNum" th:value="${longitudeNum}" /></td>
+					</tr>
+				</div>
+				<!--<div class="row my-12">
+					<div class="button-container">
+						<button id="btn_weather" type="button" class="btn btn-primary">
+							날씨조회</button>
+					
+						 
+						<a href="/weather" class="btn btn-primary btn-lg rounded">날씨</a> 
+						<a href="/weather/alerts" class="btn btn-warning btn-lg rounded">알림받기</a>
+						<a href="/weather/remove-alert" class="btn btn-danger btn-lg rounded">알람삭제</a> 
+					</div>
+				</div>-->
+			</form>
+			<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+			<script src="/js/mainpageweather.js"></script>
 		</div>
 	</div>
-	<form class="default text-center">
-		<div>
-			<!-- 날씨 이미지 -->
-			<img id="weatherImage" src="/images/weather/default.gif" alt="Weather Image">
-			<!--<img id="weatherImage" src="/images/weather/맑음.gif" alt="Weather Image"><br>
-			 <img id="weatherImage" src="/images/weather/구름많음.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/흐림아침.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/바람.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/비.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/이슬비.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/흐림밤.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/함박눈.gif" alt="Weather Image"><br>
-			<img id="weatherImage" src="/images/weather/진눈깨비.gif" alt="Weather Image"><br> -->
-			<br><a>아이콘 제작자: Freepik - Flaticon</a>
-		</div>
-		<div class="row my-12">
-			<div class="button-container">
-				<!-- 날씨 버튼 클릭 시 페이지 이동 -->
-				<a href="/weather" class="btn btn-primary btn-lg rounded">날씨</a>
-				<a href="/weather/alerts" class="btn btn-warning btn-lg rounded">알림받기</a>
-				<a href="/weather/remove-alert" class="btn btn-danger btn-lg rounded">알람삭제</a>
-			</div>
-		</div>
-	</form>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script>
-    $(document).ready(function() {
-        // 서버에서 현재 날씨 상태 가져오기
-        $.ajax({
-            url: '/api/weather/status',
-            method: 'GET',
-            success: function(status) {
-            	console.log(status)
-                // 서버에서 받은 status 값에 따라 이미지 변경
-                let weatherImageMap = {
-                    "맑음": "/images/weather/맑음.gif",
-                    "구름많음": "/images/weather/구름많음.gif",
-                    "흐림": "/images/weather/흐림아침.gif",
-                    "바람": "/images/weather/바람.gif",
-                    "비": "/images/weather/비.gif",
-                    "이슬비": "/images/weather/이슬비.gif",
-                    "흐림밤": "/images/weather/흐림밤.gif",
-                    "함박눈": "/images/weather/함박눈.gif",
-                    "진눈깨비": "/images/weather/진눈깨비.gif"
-                };
-
-                // 이미지 엘리먼트 업데이트
-                let imagePath = weatherImageMap[status] || "/images/weather/default.gif";
-                $("#weatherImage").attr("src", imagePath);
-            },
-            error: function() {
-                alert("날씨 정보를 불러오는 데 실패했습니다.");
-            }
-        });
-    });
-</script>
 </th:block>
 </html>

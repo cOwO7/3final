@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.springbootfinal.app.mapper.WeatherCoordinateMapper">
+
+	<!-- 도시와 구/시 이름으로 좌표 조회 (korCode를 이용하여) -->
+	<select id="getCoordinatesByKorCode" parameterType="string"
+		resultType="com.springbootfinal.app.domain.WeatherCoordinate">
+		SELECT grid_x AS gridX, grid_y AS gridY, longitude, latitude
+		FROM weather_coordinate
+		WHERE kor_code = #{korCode}
+	</select>
+
+
+
+	<select id="getCoordinatesByAreaName"
+		resultType="com.springbootfinal.app.domain.WeatherCoordinate">
+		SELECT
+		grid_x AS gridX,
+		grid_y AS gridY,
+		longitude,
+		latitude
+		FROM weather_coordinate
+		WHERE area_name = #{areaName}
+	</select>
+
+	<select id="findByKorCode" resultType="WeatherCoordinate">
+		SELECT * FROM
+		weather_coordinate WHERE kor_code = #{korCode}
+	</select>
+
+	<select id="findAll" resultType="WeatherCoordinate">
+		SELECT * FROM weather_coordinate
+	</select>
+
+</mapper>

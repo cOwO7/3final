@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/* index(날씨) 페이지 스타일 */
+
+/* 전체 화면을 flex로 설정 */
+.container {
+  display: flex;
+  flex-direction: column;  /* 세로로 배치 */
+  min-height: 100vh; /* 화면 크기를 꽉 채우기 위한 최소 높이 설정 */
+}
+
+/* 각 행을 적절하게 배치 */
+.row {
+  display: flex;
+  justify-content: space-between; /* 요소들 간 간격을 일정하게 */
+  flex: 1;  /* 비율에 맞게 요소들이 공간을 나누도록 설정 */
+}
+
+/* 도시와 구/시 선택을 위한 좌측 부분 */
+#addressChoice {
+  flex: 1; /* 50% 너비로 설정 */
+}
+
+/* 주소 입력란 및 현재 위치 입력을 위한 우측 부분 */
+#currentLocation {
+  flex: 1; /* 50% 너비로 설정 */
+}
+
+/* 지도 */
+#map {
+  flex: 1;
+  height: 400px; /* 지도 높이 지정 */
+}
+
+/* 버튼은 크기 맞추지 않고 고정 */
+#btn_weather {
+  flex-shrink: 0; /* 버튼 크기가 줄어들지 않도록 설정 */
+}
+
+/* 결과 테이블 부분 */
+#result {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 20px;
+}
+
+
+/* 스크롤이 필요할 때 적용될 스타일 */
+.dropdown-menu {
+	max-height: 200px; /* 스크롤이 발생할 최대 높이 */
+	overflow-y: auto; /* 세로 스크롤을 자동으로 추가 */
+}
+
+/* 헤더 스타일 */
+header {
+	background-color: #4CAF50;
+	color: white;
+	padding: 15px;
+	text-align: center;
+	font-size: 1.5em;
+	border-radius: 8px;
+}
+
+/* 카드 스타일 (예: 사용자 프로필) */
+.card {
+	background: white;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	border-bottom: 50px;
+	padding: 20px;
+	margin: 20px;
+	text-align: center;
+	transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+	transform: scale(1.05);
+}
+
+/* 버튼 스타일 */
+button {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 10px;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+* /
+	/* 입력 필드 스타일 */                                             
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 80%; /* 부모 요소에 비례하여 100% 크기로 확장 */
+	padding: 10px;
+	margin: 10px 0;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	box-sizing: border-box; /* padding과 border가 width에 포함되도록 설정 */
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus
+	{
+	border-color: #4CAF50;
+	outline: none;
+}
+
+th:nth-child(1), td:nth-child(1) {
+	width: 9%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+	width: 9%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+	width: 9%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+	width: 9%;
+}
+
+th:nth-child(5), td:nth-child(5) {
+	width: 9%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+	width: 9%;
+}
+
+th:nth-child(7), td:nth-child(7) {
+	width: 9%;
+}
+
+th:nth-child(8), td:nth-child(8) {
+	width: 9%;
+}
+
+th:nth-child(9), td:nth-child(9) {
+	width: 9%;
+}
+
+th:nth-child(10), td:nth-child(10) {
+	width: 9%;
+}
+
+th:nth-child(11), td:nth-child(11) {
+	width: 9%;
+}

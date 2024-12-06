@@ -1,12 +1,11 @@
 package com.springbootfinal.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.springbootfinal.app.domain.Member;
 import com.springbootfinal.app.mapper.MemberMapper;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -17,6 +16,7 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	@Autowired
+	@Lazy
 	private PasswordEncoder passwordEncoder;
 	
 	// MemberMapper를 이용해 회원 정보를 수정하는 메서드

@@ -34,6 +34,7 @@ public class WebConfig implements WebMvcConfigurer{
         return new RestTemplate();
     }
 	
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/writeForm").setViewName("views/writeForm");
@@ -57,4 +58,5 @@ public class WebConfig implements WebMvcConfigurer{
                 .allowCredentials(false)
                 .maxAge(3600);
     }
+
 }

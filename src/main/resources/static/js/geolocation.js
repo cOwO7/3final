@@ -1,14 +1,14 @@
 // DOM이 준비되면 실행될 콜백 함수
-$(function () {
+$(function() {
     function getLocationAndSubmit() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+                    const latitudeNum = position.coords.latitude;
+                    const longitudeNum = position.coords.longitude;
 
-                    // 기상청의 좌표 변환 함수 적용 (toXY: 위경도 -> 격자 좌표)
-                    const result = dfs_xy_conv("toXY", latitude, longitude);
+                    // 기상청의 좌표 변환 함수 적용 (위경도 -> 격자 좌표)
+                    const result = dfs_xy_conv("toXY", latitudeNum, longitudeNum);
 
                     // 변환된 격자 좌표
                     const nx = result.x;
@@ -17,6 +17,8 @@ $(function () {
                     // nx, ny를 텍스트 필드에 업데이트
                     $("#nx").val(nx);
                     $("#ny").val(ny);
+					$("#latitudeNum").val(latitudeNum);
+					$("#longitudeNum").val(longitudeNum);
 
                     // 서버로 데이터 전송
                     const weatherDto = {
@@ -26,6 +28,7 @@ $(function () {
                         ny: ny,
                     };
 
+                    // AJAX로 서버에 데이터 전송
                     fetch('/getWeather', {
                         method: 'POST',
                         headers: {
@@ -34,11 +37,11 @@ $(function () {
                         body: JSON.stringify(weatherDto),
                     })
                         .then((response) => {
-                            if (!response.ok) { // 추가
-								return response.json().then((data) => { // 추가
-								console.error("서버 오류:", data.message || "알 수 없는 오류");	
-                                throw new Error('날씨 데이터를 가져오지 못했습니다: ' + response.status);
-								}); // 추가
+                            if (!response.ok) {
+                                return response.json().then((data) => {
+                                    console.error("서버 오류:", data.message || "알 수 없는 오류");
+                                    throw new Error('날씨 데이터를 가져오지 못했습니다: ' + (data.message || response.statusText));
+                                });
                             }
                             return response.json();
                         })
@@ -51,6 +54,20 @@ $(function () {
                 },
                 (error) => {
                     console.error("위치정보 에러: ", error);
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("위치 권한이 거부되었습니다.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("위치 정보를 사용할 수 없습니다.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("위치 정보를 가져오는 데 시간이 초과되었습니다.");
+                            break;
+                        default:
+                            alert("알 수 없는 오류가 발생했습니다.");
+                            break;
+                    }
                 }
             );
         } else {
@@ -90,7 +107,7 @@ function dfs_xy_conv(code, v1, v2) {
     ro = re * sf / Math.pow(ro, sn);
 
     var rs = {};
-    if (code == "toXY") {
+    if (code === "toXY") {
         var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
         ra = re * sf / Math.pow(ra, sn);
         var theta = v2 * DEGRAD - olon;
