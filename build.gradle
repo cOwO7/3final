@@ -78,6 +78,9 @@ dependencies {
 	
 	implementation 'org.springframework.security:spring-security-web:6.0.0'
 	implementation 'org.springframework.security:spring-security-config:6.0.0'
+	
+	//메세지 보내기위한 의존성
+	implementation 'net.nurigo:sdk:4.3.0'
 
     
 }
