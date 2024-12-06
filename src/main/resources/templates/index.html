@@ -8,127 +8,6 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>오늘의 날씨</title>
-<style>
-#sq {
-	width: 100px;
-}
-
-/* 스크롤이 필요할 때 적용될 스타일 */
-.dropdown-menu {
-	max-height: 200px; /* 스크롤이 발생할 최대 높이 */
-	overflow-y: auto; /* 세로 스크롤을 자동으로 추가 */
-}
-
-/* 중앙 정렬을 위한 컨테이너 */
-.container {
-	width: 80%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-}
-
-/* 헤더 스타일 */
-header {
-	background-color: #4CAF50;
-	color: white;
-	padding: 15px;
-	text-align: center;
-	font-size: 1.5em;
-	border-radius: 8px;
-}
-
-/* 카드 스타일 (예: 사용자 프로필) */
-.card {
-	background: white;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	border-radius: 10px;
-	padding: 20px;
-	margin: 20px;
-	text-align: center;
-	transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-	transform: scale(1.05);
-}
-
-/* 버튼 스타일 */
-button {
-	background-color: #4CAF50;
-	color: white;
-	border: none;
-	padding: 10px;
-	font-size: 1em;
-	cursor: pointer;
-	border-radius: 5px;
-	transition: background-color 0.3s ease;
-}
-
-button:hover {
-	background-color: #45a049;
-}
-
-* /
-	/* 입력 필드 스타일 */                                             
-input[type="text"], input[type="password"], input[type="email"] {
-	width: 80%; /* 부모 요소에 비례하여 100% 크기로 확장 */
-	padding: 10px;
-	margin: 10px 0;
-	border: 2px solid #ddd;
-	border-radius: 5px;
-	box-sizing: border-box; /* padding과 border가 width에 포함되도록 설정 */
-}
-
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus
-	{
-	border-color: #4CAF50;
-	outline: none;
-}
-
-th:nth-child(1), td:nth-child(1) {
-	width: 8%;
-}
-
-th:nth-child(2), td:nth-child(2) {
-	width: 8%;
-}
-
-th:nth-child(3), td:nth-child(3) {
-	width: 8%;
-}
-
-th:nth-child(4), td:nth-child(4) {
-	width: 8%;
-}
-
-th:nth-child(5), td:nth-child(5) {
-	width: 8%;
-}
-
-th:nth-child(6), td:nth-child(6) {
-	width: 8%;
-}
-
-th:nth-child(7), td:nth-child(7) {
-	width: 8%;
-}
-
-th:nth-child(8), td:nth-child(8) {
-	width: 8%;
-}
-
-th:nth-child(9), td:nth-child(9) {
-	width: 5%;
-}
-
-th:nth-child(10), td:nth-child(10) {
-	width: 8%;
-}
-
-th:nth-child(11), td:nth-child(11) {
-	width: 8%;
-}
-</style>
 </head>
 <body>
 	<th:block layout:fragment="content">
@@ -158,18 +37,18 @@ th:nth-child(11), td:nth-child(11) {
 									</tr>
 									<tr>
 										<!-- <td>예보지점 x값</td> -->
-										<td><input type="text" id="nx" name="nx"
+										<td><input type="hidden" id="nx" name="nx"
 											th:value="${gridX}" /></td>
 										<!-- <td>예보지점 y값</td> -->
-										<td><input type="text" id="ny" name="ny"
+										<td><input type="hidden" id="ny" name="ny"
 											th:value="${gridY}" /></td>
 									</tr>
 									<tr>
 										<!-- <td>위도(latitude)</td> -->
-										<td><input width="auto" type="text" id="latitudeNum"
+										<td><input width="auto" type="hidden" id="latitudeNum"
 											name="latitudeNum" th:value="${latitudeNum}" /></td>
 										<!-- <td>경도(longitude)</td> -->
-										<td><input width="auto" type="text" id="longitudeNum"
+										<td><input width="auto" type="hidden" id="longitudeNum"
 											name="longitudeNum" th:value="${longitudeNum}" /></td>
 									</tr>
 								</table>
@@ -251,40 +130,39 @@ th:nth-child(11), td:nth-child(11) {
 								<!-- 버튼들 -->
 								<button type="button" class="btn btn-outline-success"
 									id="btn_weather">날씨 예보 조회</button>
-								<div class="text-end">자료 제공: 기상청,공공데이터 포털</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row" id="result">
-				<div class="col-md-12">
-					<table class="table table-bordered table-hover" id="resultTable"
-						style="display: none;">
-						<colgroup id="sms">
 
-						</colgroup>
-						<thead id="sys">
-							<tr class="table-secondary">
-								<th>일자</th>
-								<th>시간</th>
-								<th>날씨</th>
-								<th>기온</th>
-								<th>강수형태</th>
-								<th>강수량<br>적설량
-								</th>
-								<th id="sq">습도</th>
-								<th>풍향<br>풍속
-								</th>
-								<th>동서풍<br>남북풍
-								</th>
-								<th>일출</th>
-								<th>일몰</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
+					<div class="row" id="result">
+						<div class="col-md-12">
+							<table class="table table-bordered table-hover" id="resultTable"
+								style="display: none;">
+								<colgroup>
+								</colgroup>
+								<thead>
+									<tr class="table-secondary">
+										<th>일자</th>
+										<th>시간</th>
+										<th>날씨</th>
+										<th>기온</th>
+										<th>강수형태</th>
+										<th>강수량<br>적설량
+										</th>
+										<th>습도</th>
+										<th>풍향<br>풍속
+										</th>
+										<th>동서풍<br>남북풍
+										</th>
+										<th>일출</th>
+										<th>일몰</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -294,6 +172,7 @@ th:nth-child(11), td:nth-child(11) {
 		<script src="https://cdn.jsdelivr.net/npm/proj4"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/indexstyles.css" rel="stylesheet" />
 		<script th:src="@{js/jquery-3.7.1.min.js}"></script>
 		<script th:src="@{js/weather.js}"></script>
 		<script th:src="@{js/geolocation.js}"></script>

@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* 메인 페이지 스타일 */
+#main-resultTable {
+    display: block; 
+    position: absolute; 
+    z-index: 1000;
+    width: 400px;
+    text-align: center;
+}
+
+.text-center {
+    text-align: justify;
+}
+.container {
+    display: flex;
+    justify-content: space-between; /* 좌우 간격을 자동으로 맞춤 */
+    gap: 20px; /* 두 요소 사이의 간격 */
+    flex-wrap: wrap; /* 화면 크기에 따라 요소가 줄바꿈 될 수 있도록 설정 */
+    margin: 0 auto; /* 화면 중앙에 배치 */
+}
+
+/* 지도 영역 */
+.map-container {
+    flex: 1; /* 지도는 남은 공간을 차지 */
+    min-width: 300px; /* 지도 최소 너비 */
+    max-width: 600px; /* 지도 최대 너비 */
+    height: 400px; /* 지도 고정 높이 */
+    position: relative;
+}
+
+/* 날씨 테이블 영역 */
+.weather-container {
+    flex: 1; /* 날씨 데이터는 남은 공간을 차지 */
+    min-width: 300px; /* 최소 너비 */
+    max-width: 600px; /* 최대 너비 */
+    padding: 10px;
+    height: auto;
+    overflow-y: auto; /* 긴 데이터가 있으면 스크롤 가능하도록 */
+}
+
+th:nth-child(1), td:nth-child(1) {
+	width: 20%;
+	text-align: center;
+}
+
+th:nth-child(2), td:nth-child(2) {
+	width: 20%;
+	text-align: center;
+}
+
+th:nth-child(3), td:nth-child(3) {
+	width: 20%;
+	text-align: center;
+}
+
+th:nth-child(4), td:nth-child(4) {
+	width: 20%;
+	text-align: center;
+} 

@@ -1,3 +1,4 @@
+// 시간 포맷팅 함수
 function formatTime(date, time) {
 	// 24시간제에서 12시간제로 변환
 	let hour = parseInt(time.slice(0, 2)); // 시간 (00 ~ 23)
@@ -19,6 +20,80 @@ function formatTime(date, time) {
 	return { date: formattedDate, time: formattedTime };
 }
 
+// 날씨 상태에 따른 이미지 반환 (날 vs 밤 구분)
+function getWeatherImage(sky, fcstTime) {
+	let isNight = parseInt(fcstTime) >= 1800; // fcstTime이 1800 이상이면 밤
+	switch (sky) {
+		case "맑음":
+			return isNight ? "images/weather/맑음밤.gif" : "images/weather/맑음.gif";
+		case "구름 많음":
+			return isNight ? "images/weather/구름많음.gif" : "images/weather/구름많음.gif";
+		case "흐림":
+			return isNight ? "images/weather/흐림밤.gif" : "images/weather/흐림.gif";
+		case "비":
+			return "images/weather/비.gif";
+		case "눈":
+			return "images/weather/함박눈.gif";
+		default:
+			return "images/weather/default.gif";
+	}
+}
+
+// 풍향에 따른 이미지 반환
+function getWindDirectionImage(direction) {
+	if (!direction) return { image: "images/weather/value/ARROW.png", rotation: 0 };
+	let deg = parseFloat(direction);
+	return { image: "images/weather/value/ARROW.png", rotation: deg };
+}
+
+// 일출 이미지
+function getWeatherSunriseImg() {
+	return "images/weather/일출.gif"
+}
+
+// 일몰 이미지
+function getWeatherSunsetImg() {
+	return "images/weather/일몰.gif";
+}
+
+function code_value(category, code) {
+	let value = "-";
+	if (code) {
+		if (category === "SKY") {
+			if (code === "1") value = "맑음";
+			else if (code === "3") value = "구름 많음";
+			else if (code === "4") value = "흐림";
+		} else if (category === "PTY") {
+			if (code === "0") value = "없음";
+			else if (code === "1") value = "비";
+			else if (code === "2") value = "비/눈";
+			else if (code === "3") value = "눈";
+			else if (code === "5") value = "빗방울";
+			else if (code === "6") value = "빗방울눈날림";
+			else if (code === "7") value = "눈날림";
+		}
+	}
+	return value;
+}
+
+// API 제공 시간을 정확히 맞추는 함수
+	function getBaseTime(hours, minutes) {
+		// 제공되는 시간: 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
+		var apiTimes = ["0200", "0500", "0800", "1100", "1400", "1700", "2000", "2300"];
+
+		// 현재 시간을 "HH:MM" 형식으로 구하기
+		var currentTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+		// 현재 시간보다 이전의 가장 가까운 시간 찾기
+		for (var i = apiTimes.length - 1; i >= 0; i--) {
+			if (currentTime >= apiTimes[i]) {
+				return apiTimes[i];  // 가장 가까운 시간 반환
+			}
+		}
+
+		// 만약 현재 시간이 가장 늦은 시간보다 빠르다면 마지막 시간 반환
+		return apiTimes[apiTimes.length - 1]; // 마지막 시간 23:10
+	}
 
 $(function() {
 	$(document).ready(function() {
@@ -45,11 +120,11 @@ $(function() {
 
 			// 기상청 API URL 동적 생성
 			let apiUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=${dataType}&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
-			console.log("API 호출 URL:", apiUrl);
+			//console.log("API 호출 URL:", apiUrl);
 
 			// 일출/일몰 정보 API 호출 (위도, 경도를 이용)
 			let sunriseSunsetApiUrl = `http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getLCRiseSetInfo?longitude=${longitudeNum}&latitude=${latitudeNum}&locdate=${baseDate}&dnYn=N&ServiceKey=${serviceKey}`;
-			console.log("일출/일몰 정보 API 호출 URL:", sunriseSunsetApiUrl);
+			//console.log("일출/일몰 정보 API 호출 URL:", sunriseSunsetApiUrl);
 
 			// 일출/일몰 API 호출
 			$.ajax({
@@ -176,12 +251,13 @@ $(function() {
 									row.append(`<td>${formatted.time}</td>`);
 
 									// sky 상태가 '맑음'일 때 낮/밤 구분 추가
+
 									let skyLabel = weather.sky;
 									if (skyLabel === "맑음") {
-										skyLabel = isDayTime ? "맑음(낮)" : "맑음(밤)";
+										skyLabel = weather.time >= 1800 ? "맑음(밤)" : "맑음(낮)";
 									}
 
-									let weatherImg = getWeatherImage(weather.sky);
+									let weatherImg = getWeatherImage(weather.sky, weather.time);
 									row.append(`<td><img src="${weatherImg}" alt="weather icon" style="width: 50px; height: 50px; text-align: center;"/><br>${skyLabel}</td>`);
 									row.append(`<td>${weather.temp}℃</td>`);
 									row.append(`<td>${weather.pty}%</td>`);
@@ -192,6 +268,7 @@ $(function() {
 										`<td><img src="${windImgData.image}" alt="wind direction" style="width: 50px; height: 50px; transform: rotate(${windImgData.rotation}deg); transform-origin: center;" /><br>${weather.wsd}</td>`
 									);
 									row.append(`<td>${weather.uuu}<br>${weather.vvv}</td>`);
+
 									// 일출과 일몰 이미지 추가
 									let weatherSunriseImg = getWeatherSunriseImg();
 									let weatherSunsetImg = getWeatherSunsetImg();
@@ -208,14 +285,12 @@ $(function() {
 							} else {
 								alert("예보 데이터가 없습니다.");
 							}
-
 						},
 						error: function(error) {
 							console.error("API 호출 오류:", error);
 							alert("API 호출 중 오류가 발생했습니다.");
 						},
 					});
-
 				},
 				error: function(error) {
 					console.error("일출/일몰 API 호출 오류:", error);
@@ -224,64 +299,4 @@ $(function() {
 			});
 		});
 	});
-
-	// 날씨 상태에 따른 이미지 반환
-	function getWeatherImage(sky) {
-		switch (sky) {
-			case "맑음":
-				return "images/weather/맑음.gif";
-			case "맑음(밤)":
-				return "images/weather/맑음밤.gif";
-			case "구름 많음":
-				return "images/weather/구름많음.gif";
-			case "흐림":
-				return "images/weather/흐림아침.gif";
-			case "흐림밤":
-				return "images/weather/흐림밤.gif";
-			case "비":
-				return "images/weather/비.gif";
-			case "눈":
-				return "images/weather/함박눈.gif";
-			default:
-				return "images/weather/default.gif";
-		}
-	}
-
-	// 풍향에 따른 이미지 반환
-	function getWindDirectionImage(direction) {
-		if (!direction) return { image: "images/weather/value/ARROW.png", rotation: 0 };
-		let deg = parseFloat(direction);
-		return { image: "images/weather/value/ARROW.png", rotation: deg };
-	}
-
-	// 일출 이미지
-	function getWeatherSunriseImg() {
-		return "images/weather/일출.gif"
-	}
-	
-	// 일몰 이미지
-	function getWeatherSunsetImg() {
-		return "images/weather/일몰.gif";
-	}
-	
-	function code_value(category, code) {
-		let value = "-";
-		if (code) {
-			if (category === "SKY") {
-				if (code === "1") value = "맑음";
-				else if (code === "3") value = "구름 많음";
-				else if (code === "4") value = "흐림";
-			} else if (category === "PTY") {
-				if (code === "0") value = "없음";
-				else if (code === "1") value = "비";
-				else if (code === "2") value = "비/눈";
-				else if (code === "3") value = "눈";
-				else if (code === "5") value = "빗방울";
-				else if (code === "6") value = "빗방울눈날림";
-				else if (code === "7") value = "눈날림";
-			}
-		}
-		return value;
-	}
 });
-
