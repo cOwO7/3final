@@ -12,19 +12,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	private MainService mainService;
 
 	
-	  @GetMapping("/")
-	    public String home() {
-	        // 원하는 페이지로 리다이렉트
-	        return "redirect:/main";
-	    }
 	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "views/mypage";
+	}
+	
+	@GetMapping("/")
+	public String home() {
+		// 원하는 페이지로 리다이렉트
+		return "redirect:/main";
+	}
+
 	@GetMapping("/main")
-	public String main() { 
+	public String main() {
 		return "main/main";
 	}
 }

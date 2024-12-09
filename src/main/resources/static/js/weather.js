@@ -22,7 +22,8 @@ function formatTime(date, time) {
 
 // 날씨 상태에 따른 이미지 반환 (날 vs 밤 구분)
 function getWeatherImage(sky, fcstTime) {
-	let isNight = parseInt(fcstTime) >= 1800; // fcstTime이 1800 이상이면 밤
+	let isNight = (parseInt(fcstTime) >= 1800 || (fcstTime >= "0000" && fcstTime < "0600")); 
+	// fcstTime이 1800 이상이면 밤
 	switch (sky) {
 		case "맑음":
 			return isNight ? "images/weather/맑음밤.gif" : "images/weather/맑음.gif";
@@ -253,9 +254,15 @@ $(function() {
 									// sky 상태가 '맑음'일 때 낮/밤 구분 추가
 
 									let skyLabel = weather.sky;
+
 									if (skyLabel === "맑음") {
-										skyLabel = weather.time >= 1800 ? "맑음(밤)" : "맑음(낮)";
+									    if (weather.time >= 1800 || (weather.time >= 0 && weather.time < 600)) {
+									        skyLabel = "맑음(밤)";
+									    } else {
+									        skyLabel = "맑음(낮)";
+									    }
 									}
+
 
 									let weatherImg = getWeatherImage(weather.sky, weather.time);
 									row.append(`<td><img src="${weatherImg}" alt="weather icon" style="width: 50px; height: 50px; text-align: center;"/><br>${skyLabel}</td>`);

@@ -10,13 +10,17 @@ CREATE TABLE IF NOT EXISTS member ( -- 테이블 생성
     mobile VARCHAR(13) NOT NULL,
     reg_date TIMESTAMP NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ALTER TABLE member
+ADD COLUMN birthdate DATE,
+ADD COLUMN alarm VARCHAR(20),
+ADD COLUMN vip VARCHAR(20);
 # 회원 정보 추가
 INSERT INTO member VALUES(1,'admin', '관리자', 
 '$2a$10$b3t8sn6QZGHYaRx3OS5KUuPxzWZdY5yHPRxlSdAgByQ7v0BlCLzrO', 
-	'000-0001-0002', '2024-11-11 16:16:50');
+	'000-0001-0002', '2024-11-11 16:16:50', 0000-01-01, 'ON', 'ON');
 select * from member;
 commit;
-
+drop table member;
 -- 소셜 테이블
 CREATE TABLE IF NOT EXISTS social_member (
     id INT AUTO_INCREMENT PRIMARY KEY,

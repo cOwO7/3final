@@ -1,6 +1,7 @@
 package com.springbootfinal.app.domain;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,10 @@ public class Member {
 	private String pass;
 	private String mobile;
 	private Timestamp regDate;
+	private Date birthdate;
+	private String alarm;
+	private String vip;
+	
 	
 	// 소셜 로그인 관련 필드 추가
    // private String provider;         // 소셜 로그인 제공자

@@ -1,4 +1,4 @@
-package com.springbootfinal.app.controller;
+/*package com.springbootfinal.app.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
@@ -22,5 +22,5 @@ public class CustomErrorController implements ErrorController {
         return "views/custom-error";
     }
 
-}
+}*/
 
