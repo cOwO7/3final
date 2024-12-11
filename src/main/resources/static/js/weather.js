@@ -30,7 +30,7 @@ function getWeatherImage(sky, fcstTime) {
 		case "구름 많음":
 			return isNight ? "images/weather/구름많음.gif" : "images/weather/구름많음.gif";
 		case "흐림":
-			return isNight ? "images/weather/흐림밤.gif" : "images/weather/흐림.gif";
+			return isNight ? "images/weather/흐림밤.gif" : "images/weather/흐림아침.gif";
 		case "비":
 			return "images/weather/비.gif";
 		case "눈":

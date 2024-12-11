@@ -23,7 +23,7 @@
 	<!-- 회원 정보 추가 맵핑 -->
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO member
-		VALUES(#{power}, #{id}, #{name}, #{pass}, #{mobile}, SYSDATE(), birthdate=#{birthdate}, alarm=#{alarm}, vip=#{vip});
+		VALUES(#{power}, #{id}, #{name}, #{pass}, #{mobile}, SYSDATE(), #{birthdate}, #{alarm}, #{vip});
 	
 	</insert>
 

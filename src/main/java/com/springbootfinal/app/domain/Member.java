@@ -1,7 +1,6 @@
 package com.springbootfinal.app.domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +19,7 @@ public class Member {
 	private String pass;
 	private String mobile;
 	private Timestamp regDate;
-	private Date birthdate;
+	private String birthdate;
 	private String alarm;
 	private String vip;
 	

@@ -2,10 +2,9 @@ package com.springbootfinal.app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,9 +41,13 @@ public class MemberController {
 			@RequestParam("pass1") String pass1,
 			@RequestParam("mobile1") String mobile1,
 			@RequestParam("mobile2") String mobile2,
-			@RequestParam("mobile3") String mobile3) {
+			@RequestParam("mobile3") String mobile3,
+			@RequestParam("birthdate1") Date birthdate1,
+			@RequestParam("birthdate2") Date birthdate2,
+			@RequestParam("birthdate3") Date birthdate3) {
 		member.setPass(pass1);
 		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
+		member.setBirthdate(birthdate1 + "-" + birthdate2 + "-" + birthdate3);
 		
 		// 회원 정보를 수정
 		memberService.updateMember(member);
@@ -59,9 +62,13 @@ public class MemberController {
 			@RequestParam("pass1") String pass1,
 			@RequestParam("mobile1") String mobile1,
 			@RequestParam("mobile2") String mobile2,
-			@RequestParam("mobile3") String mobile3) {
+			@RequestParam("mobile3") String mobile3,
+			@RequestParam("birthdate1") String birthdate1,
+			@RequestParam("birthdate2") String birthdate2,
+			@RequestParam("birthdate3") String birthdate3) {
 		member.setPass(pass1);
 		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
+		member.setBirthdate(birthdate1 + "-" + birthdate2 + "-" + birthdate3);
 
 		log.info("로그인페이지 이동 오류3");
 		// 회원정보를 등록
