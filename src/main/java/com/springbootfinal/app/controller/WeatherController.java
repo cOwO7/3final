@@ -77,14 +77,14 @@ public class WeatherController {
 	    // Base_time 배열에서 현재 시간에 해당하는 유효 시간 계산
 	    for (int i = 0; i < baseHours.length; i++) {
 	        if (currentHour < baseHours[i]) {
-	            validHour = (currentMinute < 40 && i > 0) ? baseHours[i - 1] : baseHours[i];
+	            validHour = (currentMinute < 50 && i > 0) ? baseHours[i - 1] : baseHours[i];
 	            break;
 	        }
 	    }
 
 	    // 현재 시간이 Base_time 배열의 마지막 값보다 큰 경우 마지막 시간 사용
 	    if (currentHour >= baseHours[baseHours.length - 1]) {
-	        validHour = (currentMinute < 40) ? baseHours[baseHours.length - 1] : baseHours[0];
+	        validHour = (currentMinute < 50) ? baseHours[baseHours.length - 1] : baseHours[0];
 	    }
 
 	    // 2자리 형식으로 시간 반환

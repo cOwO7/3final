@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- header -->
 <div th:fragment="header" class="row border-bottom border-primary">
-<style>
+	<style>
 #menu {
 	text-align: center;
 	width: 80%;
@@ -12,8 +12,8 @@
 </style>
 	<!-- 헤더 이미지 로고 -->
 	<div class="col-2">
-		<a th:href="main">
-		<img src="/images/main.gif" style="width: 65%; height: auto; max-width: 100px;">
+		<a th:href="main"> <img src="/images/mainLogo.png"
+			style="width: 100%; height: auto; max-width: 200px;">
 		</a>
 	</div>
 	<div class="col">
@@ -64,24 +64,21 @@
 					<div th:if="${OAUTH2_USER == null}">
 						<p>Please login.!!!</p>
 					</div>
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12">
-					<nav id="menu" class="btn-group" role="group"
-						aria-label="Basic outlined example">
-						<a th:href="weather" class="btn btn-outline-primary">날씨</a> <a
-							th:href="tarot" class="btn btn-outline-primary">운세</a> <a
-							th:href="tidings" class="btn btn-outline-primary">소식</a> <a
-							th:href="helper" class="btn btn-outline-primary">고객센터</a>
-					</nav>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-11">
+				<nav id="menu" class="btn-group text-center" role="group"
+					aria-label="Basic outlined example">
+					<a th:href="weather" class="btn btn-outline-primary">날씨</a> <a
+						th:href="tarot" class="btn btn-outline-primary">운세</a> <a
+						th:href="tidings" class="btn btn-outline-primary">소식</a> <a
+						th:href="helper" class="btn btn-outline-primary">고객센터</a>
+				</nav>
+			</div>
+		</div>
 	</div>
-	
 </div>
 
 </html>

@@ -3,6 +3,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.springbootfinal.app.mapper.MemberMapper" >
+	<!-- 회원 테이블에서 id를 삭제하는 맵핑 -->
+	<delete id="deleteMember" parameterType="Member">
+		DELETE FROM member
+    	WHERE id = #{id}
+	</delete>
 
 	<!-- 회원 테이블에서 id 해당하는 회원 정보를 수정하는 맵핑 -->
 	<update id="updateMember" parameterType="Member">

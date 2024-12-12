@@ -182,9 +182,11 @@ $(function() {
 
 								// 일몰시간 계산 (예: 18:00을 기준으로 설정)
 								let sunsetTime = 18; // 일몰시간을 18:00으로 고정
+								//let sunsetTime = formattedSunset; // 일몰시간을 18:00으로 고정
 
 								// isDayTime 정의
 								let isDayTime = currentHour >= 6 && currentHour < sunsetTime; // 6시부터 18시까지를 낮 시간으로 설정
+								//let isDayTime = currentHour >= formattedSunrise && currentHour < sunsetTime; // 6시부터 18시까지를 낮 시간으로 설정
 
 								// 시간별 데이터 정리
 								items.forEach(function(item) {

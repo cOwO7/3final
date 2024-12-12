@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main_layout}">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script th:src="@{js/jquery-3.7.1.min.js}"></script>    
+    <script th:src="@{js/member.js}"></script>
+<div layout:fragment="content" class="row my-5" id="global-content">
+<form id="deleteMemberForm">
+    <label for="pass">현재 비밀번호:</label>
+    <input type="password" id="pass" name="pass" required>
+    
+    <input type="button" id="deleteMember" value="탈퇴하기" onclick="checkPassword()">
+</form>
+<div id="message"></div>
+
+</div>
+</html>

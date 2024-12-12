@@ -2,13 +2,18 @@ package com.springbootfinal.app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -35,6 +40,36 @@ public class MemberController {
 		return "member/memberUpdateForm";
 	}
 	
+	// 회원 탈퇴 요청을 처리하는 메서드
+	@PostMapping("/deleteMember")
+    public ResponseEntity<Map<String, Object>> deleteMember(Authentication authentication) {
+        String loggedInUsername = authentication.getName(); // 현재 로그인된 사용자 정보
+
+        try {
+            memberService.deletMember(loggedInUsername);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);  // 탈퇴 성공
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);  // 탈퇴 실패
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+	
+	@RequestMapping("/checkPassword")
+    public ResponseEntity<Map<String, Object>> checkPassword(@RequestBody Map<String, String> body, Authentication authentication) {
+        String loggedInUsername = authentication.getName(); // 현재 로그인된 사용자 정보
+        String password = body.get("password");
+
+        boolean isPasswordCorrect = memberService.memberPassCheck(loggedInUsername, password);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("isValid", isPasswordCorrect);  // 비밀번호가 맞으면 true, 아니면 false
+        
+        return ResponseEntity.ok(response);
+    }
+	
 	// 회원 수정 폼에서 들어오는 회원 정보 수정 요청을 처리하는 메서드
 	@RequestMapping("/memberUpdateResult")
 	public String memberUpdateResult(Model model, Member member, 
@@ -42,9 +77,9 @@ public class MemberController {
 			@RequestParam("mobile1") String mobile1,
 			@RequestParam("mobile2") String mobile2,
 			@RequestParam("mobile3") String mobile3,
-			@RequestParam("birthdate1") Date birthdate1,
-			@RequestParam("birthdate2") Date birthdate2,
-			@RequestParam("birthdate3") Date birthdate3) {
+			@RequestParam("birthdate1") String birthdate1,
+			@RequestParam("birthdate2") String birthdate2,
+			@RequestParam("birthdate3") String birthdate3) {
 		member.setPass(pass1);
 		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
 		member.setBirthdate(birthdate1 + "-" + birthdate2 + "-" + birthdate3);
@@ -123,7 +158,6 @@ public class MemberController {
 			out.println("</script>");
 			
 			return null;
-			
 		}
 		
 		Member member = memberService.getMember(id);
@@ -134,6 +168,5 @@ public class MemberController {
 		System.out.println("member.name : " + member.getName());
 		// 로그인이 성공하면
 		return "redirect:main";
-		
 	}
 }

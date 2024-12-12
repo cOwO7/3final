@@ -27,6 +27,11 @@ public class MemberService {
 		memberMapper.updateMember(member);
 	}
 	
+	// 회원 탈퇴 처리 메서드
+    public void deletMember(String id) {
+        memberMapper.deleteMember(id);
+    }
+	
 	
 	// 회원 정보 수정시 기본 비밀번호가 맞는지 체크하는 메서드
 	public boolean memberPassCheck(String id, String pass) {

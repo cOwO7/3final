@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -46,7 +45,7 @@ public class WeatherService {
 	}
 
 	
-	// 11-28일 추가
+	 // 11-28일 추가
 	 // 기상청 갱신 주기 시간 (시:분)
     private static final List<LocalTime> updateTimes = Arrays.asList(
             LocalTime.of(2, 40), LocalTime.of(5, 40), LocalTime.of(8, 40),
@@ -87,10 +86,6 @@ public class WeatherService {
     }
 	
 	// 여기까지
-	
-	
-	
-	
 
 	/**
 	 * 초단기실황조회
