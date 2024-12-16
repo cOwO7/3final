@@ -7,6 +7,9 @@ import com.springbootfinal.app.domain.Member;
 @Mapper
 public interface MemberMapper {
 	
+	// 회원 정보를 회원 테이블에서 삭제하는 메서드
+	public void deleteMember(String id);
+	
 	// 회원 정보를 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member);
 	

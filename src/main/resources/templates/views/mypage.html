@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/main_layout}">
+<head>
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>마이 페이지</title>
+<style>
+a {
+	text-decoration: none;
+	text-align: center;
+	color: #47B5FF;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #fff;
+	border: 1px solid #1396E5;
+	background-color: #1396E5;
+}
+
+#p1-1 {
+	border-bottom: 1px double #1396E5;
+	height: 40px;
+}
+/*#p2 {
+	background-color: #1396E5;
+	color: #fff;
+}*/
+</style>
+</head>
+<body>
+	<!-- content -->
+	<th:block layout:fragment="content">
+		<div class="container mt-5">
+			<div class="row">
+				<!-- Left Column: 4 -->
+				<div id="p1" class="col-md-3 bg-light p-4">
+					<h5 id="p1-1" class="text-center">My Page</h5>
+					<div>
+						<a th:href="memberUpdateForm">정보 수정</a>
+					</div>
+					<br>
+					<div>
+						<a href="#">결제 내역</a>
+					</div>
+					<br>
+					<div>
+						<a href="#">알림 설정</a>
+					</div>
+					<br>
+					<div>
+						<a href="#">내 문의 내역</a>
+					</div>
+					<br>
+					<div>
+						<a href="#">VIP 페이지</a>
+					</div>
+					<br>
+					<div>
+						<a th:href="deleteMember">회원 탈퇴</a>
+					</div>
+				</div>
+				<!-- Right Column: 8 -->
+				<div id="p2" class="col-md-9 bg-secondary text-white p-4">
+					<h5>내 정보</h5>
+					<p>
+						이름 : <span th:text="${session.member.name}"></span>
+					</p>
+					<p>
+						아이디 : <span th:text="${session.member.id}"></span>
+					</p>
+					<p>
+						연락처 : <span th:text="${session.member.mobile}"></span>
+					</p>
+					<p>
+						생년월일 : <span th:text="${session.member.birthdate}"></span>
+					</p>
+					<p>
+						알람 수신여부 : <span th:text="${session.member.alarm}"></span>
+					</p>
+					<p>
+						VIP 구독 여부 : <span th:text="${session.member.vip}"></span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

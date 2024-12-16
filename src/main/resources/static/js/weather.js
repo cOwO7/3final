@@ -22,14 +22,15 @@ function formatTime(date, time) {
 
 // 날씨 상태에 따른 이미지 반환 (날 vs 밤 구분)
 function getWeatherImage(sky, fcstTime) {
-	let isNight = parseInt(fcstTime) >= 1800; // fcstTime이 1800 이상이면 밤
+	let isNight = (parseInt(fcstTime) >= 1800 || (fcstTime >= "0000" && fcstTime < "0600")); 
+	// fcstTime이 1800 이상이면 밤
 	switch (sky) {
 		case "맑음":
 			return isNight ? "images/weather/맑음밤.gif" : "images/weather/맑음.gif";
 		case "구름 많음":
 			return isNight ? "images/weather/구름많음.gif" : "images/weather/구름많음.gif";
 		case "흐림":
-			return isNight ? "images/weather/흐림밤.gif" : "images/weather/흐림.gif";
+			return isNight ? "images/weather/흐림밤.gif" : "images/weather/흐림아침.gif";
 		case "비":
 			return "images/weather/비.gif";
 		case "눈":
@@ -181,9 +182,11 @@ $(function() {
 
 								// 일몰시간 계산 (예: 18:00을 기준으로 설정)
 								let sunsetTime = 18; // 일몰시간을 18:00으로 고정
+								//let sunsetTime = formattedSunset; // 일몰시간을 18:00으로 고정
 
 								// isDayTime 정의
 								let isDayTime = currentHour >= 6 && currentHour < sunsetTime; // 6시부터 18시까지를 낮 시간으로 설정
+								//let isDayTime = currentHour >= formattedSunrise && currentHour < sunsetTime; // 6시부터 18시까지를 낮 시간으로 설정
 
 								// 시간별 데이터 정리
 								items.forEach(function(item) {
@@ -253,9 +256,15 @@ $(function() {
 									// sky 상태가 '맑음'일 때 낮/밤 구분 추가
 
 									let skyLabel = weather.sky;
+
 									if (skyLabel === "맑음") {
-										skyLabel = weather.time >= 1800 ? "맑음(밤)" : "맑음(낮)";
+									    if (weather.time >= 1800 || (weather.time >= 0 && weather.time < 600)) {
+									        skyLabel = "맑음(밤)";
+									    } else {
+									        skyLabel = "맑음(낮)";
+									    }
 									}
+
 
 									let weatherImg = getWeatherImage(weather.sky, weather.time);
 									row.append(`<td><img src="${weatherImg}" alt="weather icon" style="width: 50px; height: 50px; text-align: center;"/><br>${skyLabel}</td>`);

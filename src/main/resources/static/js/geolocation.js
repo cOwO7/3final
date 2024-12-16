@@ -29,28 +29,29 @@ $(function() {
                     };
 
                     // AJAX로 서버에 데이터 전송
-                    fetch('/getWeather', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(weatherDto),
-                    })
-                        .then((response) => {
-                            if (!response.ok) {
-                                return response.json().then((data) => {
-                                    console.error("서버 오류:", data.message || "알 수 없는 오류");
-                                    throw new Error('날씨 데이터를 가져오지 못했습니다: ' + (data.message || response.statusText));
-                                });
-                            }
-                            return response.json();
-                        })
-                        .then((data) => {
-                            console.log("날씨 데이터: ", data);
-                        })
-                        .catch((error) => {
-                            console.error("에러:", error);
-                        });
+					fetch('/getWeather', {
+					    method: 'POST',
+					    headers: {
+					        'Content-Type': 'application/json',
+					    },
+					    body: JSON.stringify(weatherDto),
+					})
+					.then(response => {
+					    if (!response.ok) {
+					        return response.text().then(text => {
+					            console.error("서버 오류:", text);
+					            throw new Error('날씨 데이터를 가져오지 못했습니다.');
+					        });
+					    }
+					    return response.json();
+					})
+					.then(data => {
+					    console.log("날씨 데이터: ", data);
+					})
+					.catch(error => {
+					    console.error("에러:", error);
+					});
+
                 },
                 (error) => {
                     console.error("위치정보 에러: ", error);

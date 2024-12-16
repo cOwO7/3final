@@ -8,15 +8,21 @@ CREATE TABLE IF NOT EXISTS member ( -- 테이블 생성
     name VARCHAR(10) NOT NULL,
     pass VARCHAR(100) NOT NULL,
     mobile VARCHAR(13) NOT NULL,
-    reg_date TIMESTAMP NOT NULL
+    reg_date TIMESTAMP NOT NULL,
+    birthdate VARCHAR(20),
+    alarm VARCHAR(20),
+    vip VARCHAR(20)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 # 회원 정보 추가
 INSERT INTO member VALUES(1,'admin', '관리자', 
 '$2a$10$b3t8sn6QZGHYaRx3OS5KUuPxzWZdY5yHPRxlSdAgByQ7v0BlCLzrO', 
-	'000-0001-0002', '2024-11-11 16:16:50');
+	'000-0001-0002', '2024-11-11 16:16:50', '1995-10-18', '수신', '구독중');
 select * from member;
+
 commit;
 
+drop table member;
 -- 소셜 테이블
 CREATE TABLE IF NOT EXISTS social_member (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,6 +32,7 @@ CREATE TABLE IF NOT EXISTS social_member (
     FOREIGN KEY (member_id) REFERENCES member(power) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+drop table member;
 select * from social_member;
 
 -- 권한 부여

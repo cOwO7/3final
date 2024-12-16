@@ -77,36 +77,20 @@ public class WeatherController {
 	    // Base_time 배열에서 현재 시간에 해당하는 유효 시간 계산
 	    for (int i = 0; i < baseHours.length; i++) {
 	        if (currentHour < baseHours[i]) {
-	            validHour = (currentMinute < 40 && i > 0) ? baseHours[i - 1] : baseHours[i];
+	            validHour = (currentMinute < 50 && i > 0) ? baseHours[i - 1] : baseHours[i];
 	            break;
 	        }
 	    }
 
 	    // 현재 시간이 Base_time 배열의 마지막 값보다 큰 경우 마지막 시간 사용
 	    if (currentHour >= baseHours[baseHours.length - 1]) {
-	        validHour = (currentMinute < 40) ? baseHours[baseHours.length - 1] : baseHours[0];
+	        validHour = (currentMinute < 50) ? baseHours[baseHours.length - 1] : baseHours[0];
 	    }
 
 	    // 2자리 형식으로 시간 반환
 	    return String.format("%02d00", validHour);
 	}
 	
-	// 기존꺼 특정시간대에 호출안됨
-	/*private int getClosestBaseTime(int currentHour, int[] baseHours) {
-		int closestBaseTime = baseHours[0]; // 기본값으로 첫 번째 Base_time을 설정
-		for (int i = 0; i < baseHours.length; i++) {
-			if (currentHour < baseHours[i]) {
-				// 현재 시간이 Base_time 사이에 있으면 더 큰 값을 선택
-				if (i > 0 && (currentHour - baseHours[i - 1] <= baseHours[i] - currentHour)) {
-					closestBaseTime = baseHours[i - 1];
-				} else {
-					closestBaseTime = baseHours[i];
-				}
-				break;
-			}
-		}
-		return closestBaseTime;
-	}*/
 
 	/**
 	 * 초단기예보조회
@@ -116,7 +100,8 @@ public class WeatherController {
 	 * @throws IOException
 	 */
 	
-	@PostMapping(value = "/getWeather")
+	//@PostMapping(value = "/getWeather")
+	/*@PostMapping("/getWeather")
 	@ResponseBody
 	public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
 	    try {
@@ -134,7 +119,41 @@ public class WeatherController {
 	    } catch (Exception e) {
 	        log.error("날씨 데이터 검색에 실패했습니다.", e);
 	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+	    }*/
+	@PostMapping("/getWeather")
+    @ResponseBody
+    public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
+        try {
+            // 전달된 weatherDto의 값 확인 (디버깅 용)
+            log.debug("Received weatherDto: {}", weatherDto);
+
+            // weatherService 호출 (날씨 데이터 조회)
+            Map<String, Map<String, String>> mergedData = weatherService.getMergedWeatherData(weatherDto);
+            
+            // mergedData가 null인 경우 처리
+            if (mergedData == null || mergedData.isEmpty()) {
+                log.error("Merged data is null or empty.");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // 204 No Content
+            }
+
+            // 정상적인 응답 반환
+            ResultDto result = ResultDto.builder()
+                    .resultCode("SUCCESS")
+                    .message("조회가 완료되었습니다.")
+                    .resultData(mergedData)
+                    .build();
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
+        } catch (IOException e) {
+            // IOException 발생 시 처리
+            log.error("IO Exception occurred while fetching weather data", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            // 기타 예외 처리
+            log.error("날씨 데이터 검색에 실패했습니다.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 	}
 
 }

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -46,7 +45,7 @@ public class WeatherService {
 	}
 
 	
-	// 11-28일 추가
+	 // 11-28일 추가
 	 // 기상청 갱신 주기 시간 (시:분)
     private static final List<LocalTime> updateTimes = Arrays.asList(
             LocalTime.of(2, 40), LocalTime.of(5, 40), LocalTime.of(8, 40),
@@ -87,10 +86,6 @@ public class WeatherService {
     }
 	
 	// 여기까지
-	
-	
-	
-	
 
 	/**
 	 * 초단기실황조회
@@ -270,61 +265,5 @@ public class WeatherService {
 	    return forecastData;
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
-
-	/*public Map<String, Map<String, String>> getWeatherGroupedByTime(WeatherDto weatherDto) throws IOException {
-		UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
-				.queryParam("serviceKey", apiKey)
-				.queryParam("dataType", "JSON")
-				.queryParam("numOfRows", 60)
-				.queryParam("pageNo", 1)
-				.queryParam("base_date", weatherDto.getBaseDate())
-				.queryParam("base_time", weatherDto.getBaseTime())
-				.queryParam("nx", weatherDto.getNx())
-				.queryParam("ny", weatherDto.getNy())
-				.build();
-
-		URL url = new URL(uriBuilder.toUriString());
-		URI uri = uriBuilder.toUri();
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/json");
-
-		BufferedReader rd = new BufferedReader(new InputStreamReader(
-				conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300 ? conn.getInputStream()
-						: conn.getErrorStream()));
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = rd.readLine()) != null) {
-			sb.append(line);
-		}
-		rd.close();
-		conn.disconnect();
-
-		// JSON 응답 파싱 및 데이터 가공
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode root = mapper.readTree(sb.toString());
-		JsonNode items = root.path("response").path("body").path("items").path("item");
-
-		Map<String, Map<String, String>> groupedData = new HashMap<>();
-
-		// 시간별 데이터 그룹화
-		for (JsonNode item : items) {
-			String timeKey = item.get("fcstDate").asText() + item.get("fcstTime").asText(); // 날짜+시간 키
-			String category = item.get("category").asText();
-			String value = item.get("fcstValue").asText();
-
-			groupedData.computeIfAbsent(timeKey, k -> new HashMap<>()).put(category, value);
-		}
-
-		return groupedData;
-	}*/
 
 }

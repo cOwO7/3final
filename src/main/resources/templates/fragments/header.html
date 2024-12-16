@@ -3,24 +3,23 @@
 <!-- header -->
 <div th:fragment="header" class="row border-bottom border-primary">
 	<style>
-/* 전체 페이지 스타일 */
-nav#menu {
-	text-align: left;
-	width: 500px;
+#menu {
+	text-align: center;
+	width: 80%;
 	margin: auto;
-	justify-content: flex-start !important; /* 왼쪽 정렬 */
+	justify-content: flex-start !important;
 }
 </style>
 	<!-- 헤더 이미지 로고 -->
-	<div class="col-4">
-		<a th:href="main"> <img src="/images/main.gif"
-			style="width: 65%; height: auto; max-width: 100px;">
+	<div class="col-2">
+		<a th:href="main"> <img src="/images/mainLogo.png"
+			style="width: 100%; height: auto; max-width: 200px;">
 		</a>
 	</div>
-	<div class="col-8">
-		<div class="row">
-			<div class="col">
-				<ul class="nav justify-content-end">
+	<div class="col">
+		<div class="row-12">
+			<div class="col-12">
+				<ul class="col-12 nav justify-content-end">
 					<!-- 로그인 안 한 경우 로그인 버튼 표시 -->
 					<li class="nav-item"><th:block th:unless="${session.isLogin}">
 							<a class="nav-link" th:href="@{loginForm}">로그인</a>
@@ -30,13 +29,17 @@ nav#menu {
 					<li class="nav-item"><th:block th:if="${session.isLogin}">
 							<a class="nav-link" th:href="@{memberLogout}">로그아웃</a>
 						</th:block></li>
-					<li class="nav-item"><a class="nav-link" th:href="main">Home</a>
+					<li class="nav-item"><a class="nav-link" th:href="@{main}">Home</a>
 					</li>
 
 					<!-- 로그인한 경우 정보 수정 페이지로 이동 -->
-					<li class="nav-item"><th:block th:if="${session.isLogin}">
+					<!-- <li class="nav-item"><th:block th:if="${session.isLogin}">
 							<a class="nav-link" href="memberUpdateForm">정보 수정</a>
+						</th:block></li> -->
+					<li class="nav-item"><th:block th:if="${session.isLogin}">
+							<a class="nav-link" th:href="@{mypage}">마이 페이지</a>
 						</th:block></li>
+					<li class="nav-item"><a class="nav-link" href="#">고객 센터</a>
 				</ul>
 			</div>
 		</div>
@@ -44,8 +47,10 @@ nav#menu {
 		<!-- 로그인한 경우 인사말 표시 -->
 		<div class="row">
 			<div class="col text-end text-primary pe-5">
-				<div th:if="${session.isLogin}">[[${session.member != null} ? ${session.member.id} : '']]님 방문을 감사합니다.</div>
-				<div th:if="${session.OAUTH2_USER}">[[${session.social != null} ? ${session.social.id} : '']]님 방문을 감사합니다.</div>
+				<div th:if="${session.isLogin}">[[${session.member != null} ?
+					${session.member.id} : '']]님 방문을 감사합니다.</div>
+				<div th:if="${session.OAUTH2_USER}">[[${session.social !=
+					null} ? ${session.social.id} : '']]님 방문을 감사합니다.</div>
 				<div th:if="${social != null}">
 					<p>
 						닉네임: <span th:text="${social.name}"></span>
@@ -59,20 +64,21 @@ nav#menu {
 					<div th:if="${OAUTH2_USER == null}">
 						<p>Please login.!!!</p>
 					</div>
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">
-					<nav id="menu" class="btn-group" role="group" aria-label="Basic outlined example">
-						<a th:href="weather" class="btn btn-outline-primary">날씨</a> 
-						<a th:href="fortune" class="btn btn-outline-primary">운세</a> 
-						<a th:href="tidings" class="btn btn-outline-primary">소식</a> 
-						<a th:href="helper" class="btn btn-outline-primary">고객센터</a>
-					</nav>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-11">
+				<nav id="menu" class="btn-group text-center" role="group"
+					aria-label="Basic outlined example">
+					<a th:href="weather" class="btn btn-outline-primary">날씨</a> <a
+						th:href="tarot" class="btn btn-outline-primary">운세</a> <a
+						th:href="tidings" class="btn btn-outline-primary">소식</a> <a
+						th:href="helper" class="btn btn-outline-primary">고객센터</a>
+				</nav>
+			</div>
+		</div>
 	</div>
+</div>
+
 </html>

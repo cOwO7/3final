@@ -198,6 +198,35 @@ $(function() {
 			return false;
 		}
 	});
+	
+	// 탈퇴 버튼 클릭 시 처리
+	    $("#deleteMember").click(function() {
+	        let password = $("#oldPass").val();
+	        if (!password) {
+	            alert("비밀번호를 확인해주세요.");
+	            return false;
+	        }
+
+	        // 비밀번호 확인 후, 탈퇴 처리 로직 추가
+	        $.ajax({
+	            url: "/deleteMember",  // 회원 탈퇴 API URL
+	            type: "post",
+	            data: { password: password },
+	            success: function(response) {
+	                if (response.success) {
+	                    alert("회원 탈퇴가 완료되었습니다.");
+	                    window.location.href = "/logout";  // 로그아웃 후 리다이렉트
+	                } else {
+	                    alert("탈퇴 처리 중 오류가 발생했습니다.");
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.log("탈퇴 처리 실패:", error);
+	                alert("탈퇴 처리 중 오류가 발생했습니다.");
+	            }
+	        });
+	    });
+	
 }); // END $(function() {});
 
 function findZipcode() {
