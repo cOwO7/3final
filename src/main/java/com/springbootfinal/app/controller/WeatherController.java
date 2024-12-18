@@ -9,11 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.springbootfinal.app.domain.LongWeatherDto;
 import com.springbootfinal.app.domain.ResultDto;
 import com.springbootfinal.app.domain.WeatherDto;
 import com.springbootfinal.app.service.WeatherService;
@@ -27,8 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 public class WeatherController {
 
 	private final WeatherService weatherService;
-
-
 
 	/**
 	 * 메인 페이지
@@ -58,7 +59,7 @@ public class WeatherController {
 		model.addAttribute("baseDate", baseDate);
 		model.addAttribute("baseTime", baseTime);
 		model.addAttribute("fullBaseTime", fullBaseTime); // 전체 base_time을 추가
-		return "index"; // index.html
+		return "weather/index"; // index.html
 	}
 
 	/**
@@ -99,27 +100,6 @@ public class WeatherController {
 	 * @return
 	 * @throws IOException
 	 */
-	
-	//@PostMapping(value = "/getWeather")
-	/*@PostMapping("/getWeather")
-	@ResponseBody
-	public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
-	    try {
-	        // 병합된 데이터 가져오기
-	        Map<String, Map<String, String>> mergedData = weatherService.getMergedWeatherData(weatherDto);
-
-	        // ResultDto에 데이터 포함
-	        ResultDto result = ResultDto.builder()
-	                .resultCode("SUCCESS")
-	                .message("조회가 완료되었습니다.")
-	                .resultData(mergedData)
-	                .build();
-
-	        return new ResponseEntity<>(result, HttpStatus.OK);
-	    } catch (Exception e) {
-	        log.error("날씨 데이터 검색에 실패했습니다.", e);
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }*/
 	@PostMapping("/getWeather")
     @ResponseBody
     public ResponseEntity<ResultDto> getWeather(@RequestBody WeatherDto weatherDto) throws IOException {
@@ -155,5 +135,6 @@ public class WeatherController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
+	
 
 }
