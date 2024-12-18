@@ -13,5 +13,7 @@ public class WeatherDto {
 	Integer ny;
     String baseDate;
     String baseTime;
+    String regld;
+    String tmFc;
  
 }

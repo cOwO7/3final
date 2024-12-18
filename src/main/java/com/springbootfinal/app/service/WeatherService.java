@@ -2,11 +2,17 @@
 package com.springbootfinal.app.service;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.io.BufferedReader;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -20,6 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springbootfinal.app.domain.LongWeatherDto;
 import com.springbootfinal.app.domain.WeatherDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -264,6 +271,8 @@ public class WeatherService {
 
 	    return forecastData;
 	}
+	
+	
 
 
 }
