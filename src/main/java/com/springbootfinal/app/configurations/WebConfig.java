@@ -27,6 +27,8 @@ public class WebConfig implements WebMvcConfigurer{
 	        .addResourceLocations("classpath:/static/js/");
 	    registry.addResourceHandler("/images/**")
 	        .addResourceLocations("classpath:/static/images/");
+	    registry.addResourceHandler("/longWeather/**")
+        .addResourceLocations("classpath:/static/longWeather/");
 	}
 	
 	@Bean
