@@ -1,8 +1,8 @@
 package com.springbootfinal.app.domain;
 
-import java.util.List;
-
 import lombok.Data;
+
+import java.util.List;
 
 /*@Setter
 @Getter
@@ -13,7 +13,10 @@ public class LongWeatherDto {
 
 	private Response response;
 
-	@Data
+    public void setMessage(String 기본값_반환) {
+    }
+
+    @Data
 	public static class Response {
 		private Header header;
 		private Body body;

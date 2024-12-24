@@ -124,10 +124,19 @@
 							</div>
 							<!-- 사용자 입력 폼 (중기육상예보)-->
 							<form th:action="@{/long}" method="get">
-								<label for="regId">지역 코드:</label> <input type="text" id="regId"
-									name="regId" placeholder="예: 11B00000" required> <br>
-								<label for="tmFc">발표 시각 (yyyymmddhhmm):</label> <input
-									type="text" id="tmFc" name="tmFc" placeholder="예: 202312230600"
+								<label for="regId">육상 지역 코드:</label>
+								<input type="text" id="regId" name="regId" placeholder="예: 11B00000" required> <br>
+								<label for="tmFc">발표 시각:</label>
+								<input type="text" id="tmFc" name="tmFc" placeholder="예: 202312230600" required> <br>
+								<button type="submit">조회</button>
+							</form>
+
+							<!-- 사용자 입력 폼 (중기기온예보)-->
+							<form th:action="@{/longTemp}" method="get">
+								<label for="regId">기온 지역 코드:</label> <input type="text" id="regId"
+									name="regId" placeholder="예: 11B10101" required> <br>
+								<label for="tmFc">발표 시각:</label> <input
+									type="text" id="tmFc" name="tmFc" placeholder="예: 202412240600"
 									required> <br>
 								<button type="submit">조회</button>
 							</form>
@@ -154,47 +163,101 @@
 											<td th:text="${item.wf4Pm}"></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>5일</td>
 											<td th:text="${item.rnSt5Am}"></td>
 											<td th:text="${item.rnSt5Pm}"></td>
 											<td th:text="${item.wf5Am}"></td>
 											<td th:text="${item.wf5Pm}"></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>6일</td>
 											<td th:text="${item.rnSt6Am}"></td>
 											<td th:text="${item.rnSt6Pm}"></td>
 											<td th:text="${item.wf6Am}"></td>
 											<td th:text="${item.wf6Pm}"></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>7일</td>
 											<td th:text="${item.rnSt7Am}"></td>
 											<td th:text="${item.rnSt7Pm}"></td>
 											<td th:text="${item.wf7Am}"></td>
 											<td th:text="${item.wf7Pm}"></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>8일</td>
 											<td th:text="${item.rnSt8}"></td>
 											<td></td>
 											<td th:text="${item.wf8}"></td>
 											<td></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>9일</td>
 											<td th:text="${item.rnSt9}"></td>
 											<td></td>
 											<td th:text="${item.wf9}"></td>
 											<td></td>
 										</tr>
 										<tr th:each="item : ${weather}">
-											<td></td>
+											<td>10일</td>
 											<td th:text="${item.rnSt10}"></td>
 											<td></td>
 											<td th:text="${item.wf10}"></td>
 											<td></td>
 										</tr>
+									</tbody>
+								</table>
+								<table>
+									<thead>
+									<tr>
+										<th>예보구역코드</th>
+										<th>시간대</th>
+										<th>기온</th>
+									</tr>
+									</thead>
+									<tbody>
+									<!-- 중기 기온 예보 -->
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>4일 후</td>
+										<td th:text="${item.taMin4}"></td>
+										<td th:text="${item.taMax4}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>5일 후</td>
+										<td th:text="${item.taMin5}"></td>
+										<td th:text="${item.taMax5}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>6일 후</td>
+										<td th:text="${item.taMin6}"></td>
+										<td th:text="${item.taMax6}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>7일 후</td>
+										<td th:text="${item.taMin7}"></td>
+										<td th:text="${item.taMax7}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>8일 후</td>
+										<td th:text="${item.taMin8}"></td>
+										<td th:text="${item.taMax8}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>9일 후</td>
+										<td th:text="${item.taMin9}"></td>
+										<td th:text="${item.taMax9}"></td>
+									</tr>
+									<tr th:each="item : ${temperature}">
+										<td th:text="${item.regId}"></td>
+										<td>10일 후</td>
+										<td th:text="${item.taMin10}"></td>
+										<td th:text="${item.taMax10}"></td>
+									</tr>
 									</tbody>
 								</table>
 							</div>

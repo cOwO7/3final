@@ -1,9 +1,9 @@
 package com.springbootfinal.app.mapper;
 
-import java.util.List;
-
+import com.sun.tools.javac.Main;
 import org.apache.ibatis.annotations.Mapper;
-import org.jboss.jandex.Main;
+
+import java.util.List;
 
 @Mapper
 public interface MainMapper {

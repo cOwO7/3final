@@ -1,19 +1,10 @@
 
 package com.springbootfinal.app.service;
 
-import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.io.BufferedReader;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springbootfinal.app.domain.WeatherDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,12 +15,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springbootfinal.app.domain.LongWeatherDto;
-import com.springbootfinal.app.domain.WeatherDto;
-
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -94,13 +85,12 @@ public class WeatherService {
 	
 	// 여기까지
 
-	/**
+	/* *
 	 * 초단기실황조회
-	 * 
 	 * @param weatherDto
 	 * @return
 	 * @throws IOException
-	 */
+	 * */
 	public Map<String, String> getUltraSrtNcst(WeatherDto weatherDto) throws IOException {
 	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl + "/getUltraSrtNcst")
 	            .queryParam("serviceKey", apiKey)
@@ -141,13 +131,12 @@ public class WeatherService {
 
 
 
-	/**
+	/* *
 	 * 초단기예보조회
-	 * 
 	 * @param weatherDto
 	 * @return
 	 * @throws IOException
-	 */
+	 * */
 	public String getWeatherData(String url) {
 		// HttpHeaders 설정
 		HttpHeaders headers = new HttpHeaders();
@@ -210,13 +199,12 @@ public class WeatherService {
 	}
 
 	
-	/**
+	/* *
 	 * 단기예보조회
-	 * 
 	 * @param weatherDto
 	 * @return
 	 * @throws IOException
-	 */
+	 * */
 	// 추가 api호출 
 	public Map<String, Map<String, String>> getShortTermForecast(WeatherDto weatherDto) throws IOException {
 	    UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(apiUrl)
