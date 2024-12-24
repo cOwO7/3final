@@ -24,31 +24,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         this.delegate = delegate;
     }
 
-   /* @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) {
-        OAuth2User oAuth2User = delegate.loadUser(userRequest);  // 기본 OAuth2UserService 호출
-
-        // 네이버 사용자 정보를 NaverUserInfo로 변환
-        NaverUserInfo naverUserInfo = NaverUserInfo.fromOAuth2User(oAuth2User);
-
-        // 인증 객체 생성
-        Authentication authentication = new OAuth2AuthenticationToken(
-                naverUserInfo, 
-                naverUserInfo.getAuthorities(), 
-                userRequest.getClientRegistration().getClientId()
-        );
-
-        // SecurityContext에 인증 정보 저장
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // 세션에 로그인 상태 반영
-        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
-        session.setAttribute("isLogin", true);  // 소셜 로그인 시 로그인 상태 설정
-        session.setAttribute("social", naverUserInfo);  // 사용자 정보도 함께 세션에 저장
-
-        return oAuth2User;  // 원본 OAuth2User 반환
-    }*/
-    
+ 
     
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) {

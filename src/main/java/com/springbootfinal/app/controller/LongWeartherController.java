@@ -1,14 +1,106 @@
 package com.springbootfinal.app.controller;
 
-import org.springframework.stereotype.Controller;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.springbootfinal.app.domain.LongWeatherDto;
+import com.springbootfinal.app.service.LongWeatherService;
+
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Controller
 @Slf4j
 public class LongWeartherController {
 
+	@Autowired
+	private final LongWeatherService longWeatherService;
+	private final WeatherController weatherController;
+
+	public LongWeartherController(LongWeatherService longWeatherService,
+			WeatherController weatherController) {
+		this.longWeatherService = longWeatherService;
+		this.weatherController = weatherController;
+	}
+
+	/*@GetMapping("/longweather")
+	public String getLongWeatherPage() {
+		return "weather/longWeather"; // 템플릿 파일 경로 (src/main/resources/templates/views/longweather.html)
+	}*/
+
+	/*
+	  @GetMapping("/long") public ResponseEntity<String> getLongWeatherForecast(
+	  
+	  @RequestParam String regId,
+	  
+	  @RequestParam String tmFc) { String response =
+	  longWeatherService.getLongWeatherForecast(regId, tmFc); return
+	  ResponseEntity.ok(response); }
+	 */
+	
+	@GetMapping("/longWeather")
+	public String index(Model model) {
+		// 현재 시각
+		LocalDateTime now = LocalDateTime.now();
+
+		// 단기 예보의 Base_time 목록
+		int[] shortTermBaseHours = { 6, 18 };
+
+		// 현재 시간 기준으로 가장 가까운 발표 시간을 계산
+		String baseTime = getValidBaseTime(now, shortTermBaseHours);
+		
+		// 발표 시간에 맞는 날짜와 시간을 계산
+		String baseDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		
+		// 기존
+		//String baseTime = String.format("%02d00", baseTimeHour);
+		String fullBaseTime = baseDate + " " + baseTime; // baseDate와 baseTime을 합쳐서 전체 base_time 생성
+		// Thymeleaf 템플릿에 전달
+		model.addAttribute("baseDate", baseDate);
+		model.addAttribute("baseTime", baseTime);
+		model.addAttribute("fullBaseTime", fullBaseTime); // 전체 base_time을 추가
+		return "weather/longWeather"; // 
+	}
+	
+	
+	private String getValidBaseTime(LocalDateTime now, int[] shortTermBaseHours) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@GetMapping("/long")
+	public String getLongWeatherForecast(
+	        @RequestParam(name = "regId") String regId,
+	        @RequestParam(name = "tmFc") String tmFc,
+	        Model model) {
+	    log.info("Received regId: {}", regId);
+	    log.info("Received tmFc: {}", tmFc);
+	    
+	    LongWeatherDto response = longWeatherService.getLongWeatherForecast(regId, tmFc);
+
+	    // 디버깅 로그 추가
+	    if (response == null) {
+	        log.error("LongWeatherDto is null. Check the API response or the service logic.");
+	        throw new RuntimeException("API 호출 실패: LongWeatherDto is null.");
+	    }
+	    if (response.getResponse() == null) {
+	        log.error("Response object is null. Check the API response format.");
+	        throw new RuntimeException("API 호출 실패: Response object is null.");
+	    }
+	    if (response.getResponse().getBody() == null) {
+	        log.error("Body object is null. Check the API response structure.");
+	        throw new RuntimeException("API 호출 실패: Body object is null.");
+	    }
+
+	    // 정상 데이터 처리
+	    model.addAttribute("weather", response.getResponse().getBody().getItems().getItem());
+	    return "weather/longWeather";
+	}
 
 }
